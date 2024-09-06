@@ -1130,7 +1130,7 @@ var link;
   //let icshdrn = new THREE.Mesh(new THREE.IcosahedronGeometry(rad, 1), new THREE//.MeshBasicMaterial({color: 0x647f7f, wireframe: true}));
   //globe.add(icshdrn);
   // </ICOSAHEDRON>
-  /*const textureLoader = new THREE.TextureLoader();
+  const textureLoader = new THREE.TextureLoader();
   // Textures
   const texturesDay = [
     textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg", () => {
@@ -1166,8 +1166,8 @@ var link;
     ),
     bumpScale: 0.35,
     /*blending: THREE.AdditiveBlending,*/
-    //side: THREE.DoubleSide
-  );/*
+    //side: THREE.DoubleSide,
+  
   /*const sphereGeometry = new THREE.SphereGeometry(5.1, 32.1, 32.1);
   const globeMaterial = new THREE.ShaderMaterial({
     vertexShader: `
