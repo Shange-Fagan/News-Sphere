@@ -339,16 +339,19 @@ body {
       border: none;
       
     }
-   /* #idNum, #idNum2, #idNum3, #idNum4, #idNum5, #idNum6, #idNum7, #idNum8, #idNum9 iframe {
+   /*#idNum, #idNum2, #idNum3, #idNum4, #idNum5, #idNum6, #idNum7, #idNum8, #idNum9 iframe {
       -ms-overflow-style: none;
       scrollbar-width: none;
     }*/
     /* Apply custom styles to iframe content */
-    /*#idNum, #idNum2, #idNum3, #idNum4, #idNum5, #idNum6, #idNum7, #idNum8, #idNum9 iframe::-webkit-scrollbar {
-      display: none;
-    }*/
-    /*#idNum, #idNum2, #idNum3, #idNum4, #idNum5, #idNum6, #idNum7, #idNum8, #idNum9 iframe::-webkit-scrollbar-track {
-      background: none;
+    #idNum, #idNum2, #idNum3, #idNum4, #idNum5, #idNum6, #idNum7, #idNum8, #idNum9 iframe::-webkit-scrollbar {
+      /*display: none;*/
+       background-color: transparent;
+       background: none;
+    }
+    #idNum, #idNum2, #idNum3, #idNum4, #idNum5, #idNum6, #idNum7, #idNum8, #idNum9 iframe::-webkit-scrollbar-track {
+      background-color: transparent;
+       background: none;
       /* Hide the scrollbar track */
     }*/
     /*#idNum, #idNum2, #idNum3, #idNum4, #idNum5, #idNum6, #idNum7, #idNum8, #idNum9 iframe::-webkit-scrollbar-thumb {
