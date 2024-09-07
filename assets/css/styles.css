@@ -63,8 +63,8 @@ body {
 
 input,
 button {
+  border: none;
   outline: none;
-  pointer-events: auto;
 }
 
 ul {
