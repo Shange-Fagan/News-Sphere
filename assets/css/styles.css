@@ -538,6 +538,7 @@ body {
   color: var(--title-color);
   font-weight: var(--font-semi-bold);
   transition: color .4s;
+  size: 25px;
 }
 
 .nav__actions {
