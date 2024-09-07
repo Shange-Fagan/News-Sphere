@@ -537,7 +537,14 @@
 
          <i class="ri-close-line login__close" id="login-close"></i>
       </div>
-     <iframe
+     
+<!--=============== MAIN JS ===============-->
+      <script src="assets/js/main.js"></script>
+      <!--==================== MAIN ====================-->
+      <main class="main">
+         <script src="//unpkg.com/three"></script>
+<script src="//unpkg.com/globe.gl"></script>
+         <iframe
   id="info3"
   width="1200"
   height="60"
@@ -546,13 +553,7 @@
   src="https://rss.app/embed/v1/ticker/ye6DcnVZx4IHEsUK"
   frameborder="0"
 ></iframe>
-<!--=============== MAIN JS ===============-->
-      <script src="assets/js/main.js"></script>
-      <!--==================== MAIN ====================-->
-      
-         <script src="//unpkg.com/three"></script>
-<script src="//unpkg.com/globe.gl"></script>
-         <script type="module" href="assets/css/stylesforjs.css">
+         <script type="module">
             
   import * as THREE from "https://cdn.skypack.dev/three@0.136.0";
   import { OrbitControls } from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls";
