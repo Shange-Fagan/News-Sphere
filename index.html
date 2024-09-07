@@ -1030,7 +1030,7 @@ var link;
   {
     const loader = new THREE.TextureLoader();
     const texture = loader.load(
-      "./js/shutterstock_2498139181.jpg",
+      "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743",
       () => {
         const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
         rt.fromEquirectangularTexture(renderer, texture);
