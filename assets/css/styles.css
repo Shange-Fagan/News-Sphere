@@ -45,15 +45,16 @@
   margin: 0;
 }
 
-html {
+/*html {
   scroll-behavior: smooth;
-}
+}*/
 
 body,
 input,
 button {
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
+  pointer-events: auto;
 }
 
 body {
@@ -65,6 +66,7 @@ input,
 button {
   border: none;
   outline: none;
+  pointer-events: auto;
 }
 
 ul {
