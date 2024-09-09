@@ -355,8 +355,8 @@
       scrollbar-width: none;
     }*/
     /* Apply custom styles to iframe content */
-    #idNum, #idNum2, #idNum3, #idNum4, #idNum5, #idNum6, #idNum7, #idNum8, #idNum9 ::-webkit-scrollbar {
-      /*display: none;*/
+    /*#idNum, #idNum2, #idNum3, #idNum4, #idNum5, #idNum6, #idNum7, #idNum8, #idNum9 ::-webkit-scrollbar {
+      display: none;
        background-color: transparent;
        background: none;
     }
@@ -366,6 +366,13 @@
        display: none;
       /* Hide the scrollbar track */
     }*/
+     #idNum::-webkit-scrollbar, #idNum2::-webkit-scrollbar, #idNum3::-webkit-scrollbar, #idNum4::-webkit-scrollbar, #idNum5::-webkit-scrollbar, #idNum6::-webkit-scrollbar, #idNum7::-webkit-scrollbar, #idNum8::-webkit-scrollbar, #idNum9::-webkit-scrollbar {
+  background: transparent;
+}
+
+#idNum::-webkit-scrollbar-track, #idNum2::-webkit-scrollbar-track, #idNum3::-webkit-scrollbar-track, #idNum4::-webkit-scrollbar-track, #idNum5::-webkit-scrollbar-track, #idNum6::-webkit-scrollbar-track, #idNum7::-webkit-scrollbar-track, #idNum8::-webkit-scrollbar-track, #idNum9::-webkit-scrollbar-track {
+  background: transparent;
+}
    
     /*#idNum, #idNum2, #idNum3, #idNum4, #idNum5, #idNum6, #idNum7, #idNum8, #idNum9 iframe::-webkit-scrollbar-thumb {
       background-color: #888;
