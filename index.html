@@ -526,7 +526,7 @@ canvas.cloud{
     1,
     2000
   );
-  camera.position.set(20, 0.5, 15).setLength(17.5);
+  camera.position.set(20, 0.5, 15).setLength(17);
   //camera.position.z = 15;
   let renderer = new THREE.WebGLRenderer({
     antialias: true,
@@ -841,7 +841,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     map: textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"),
     specularMap: textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png"),
     bumpMap: textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png"), // Updated bump map
-    bumpScale: 0.35,
+    bumpScale: 0.5,
     blending: THREE.AdditiveBlending,
     //side: THREE.DoubleSide
 });
