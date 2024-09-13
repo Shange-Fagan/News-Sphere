@@ -877,13 +877,15 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     const material2 = new THREE.MeshPhongMaterial({
     specular: 0x111111,
     shininess: 5,
-    //map: dayTexture,  // Start with day texture
+    // Start with day texture
+    map: textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"),
     specularMap: textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png"),
-    bumpMap: dayBumpMap,  // Start with day bump map
+    bumpMap: textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png"), // Updated bump map
     bumpScale: 0.35,
     blending: THREE.AdditiveBlending,
     //side: THREE.DoubleSide
 });
+
 const themeButton = document.getElementById('theme-toggle');
 let isDay = true;
 
@@ -894,27 +896,34 @@ themeButton.addEventListener('click', () => {
 
     // Update the globe material
     scene.traverse((child) => {
-        if (child instanceof THREE.Mesh && child.material2 instanceof THREE.MeshPhongMaterial) {
+        if (child instanceof THREE.Mesh && child.material instanceof THREE.MeshPhongMaterial) {
             if (isDay) {
-                child.material2.map = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
+                child.material.map = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
             } else {
-                child.material2.map = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
+                child.material.map = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
             }
-            child.material2.needsUpdate = true;
+            child.material.needsUpdate = true;
         }
     });
 
     // Update RSS Ticker's style
-    const rssTicker = document.getElementById('rss-ticker'); // Ensure the correct ID or class
+    const rssTicker = document.getElementById('rss-ticker');
     if (rssTicker) {
-    if (isDay) {
-        rssTicker.style.backgroundColor = "rgba(225, 225, 225, 1)"; // Day theme color
-        rssTicker.style.color = "rgba(155, 155, 155, 1)";
-    } else {
-        rssTicker.style.backgroundColor = "rgba(74, 74, 74, 1)"; // Night theme color
-        rssTicker.style.color = "rgba(225, 225, 225, 1)";
+        if (isDay) {
+            rssTicker.style.backgroundColor = "rgba(225, 225, 225, 1)"; // Day theme color
+            rssTicker.style.color = "rgba(155, 155, 155, 1)";
+        } else {
+            rssTicker.style.backgroundColor = "rgba(74, 74, 74, 1)"; // Night theme color
+            rssTicker.style.color = "rgba(225, 225, 225, 1)";
+        }
     }
-}
+
+    // Update the button text
+    if (isDay) {
+        themeButton.textContent = "Switch to Night Theme";
+    } else {
+        themeButton.textContent = "Switch to Day Theme";
+    }
 });
 /*
 // Function to switch between day and night textures
