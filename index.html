@@ -650,6 +650,33 @@ canvas.cloud{
   /* Textures */
   
   /* Textures */
+		// Load day and night textures
+const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-day.jpg");
+const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
+
+// Set initial globe texture to day
+globe.material.map = dayTexture;
+globe.material.needsUpdate = true;
+
+let isDay = true; // Flag to track whether it's day or night
+
+// Create a button to toggle between day and night textures
+const button = document.createElement("button");
+button.innerHTML = "Switch to Night";
+document.body.appendChild(button);
+
+// Add event listener to toggle textures
+button.addEventListener("click", () => {
+    if (isDay) {
+        globe.material.map = nightTexture;
+        button.innerHTML = "Switch to Day";
+    } else {
+        globe.material.map = dayTexture;
+        button.innerHTML = "Switch to Night";
+    }
+    globe.material.needsUpdate = true;
+    isDay = !isDay;
+});
   const textureLoader = new THREE.TextureLoader();
 
   //const textureLoader = new THREE.TextureLoader();
