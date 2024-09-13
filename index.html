@@ -907,14 +907,18 @@ themeButton.addEventListener('click', () => {
     });
 
     // Update RSS Ticker's style
-    const rssTickerElements = document.querySelectorAll('#rss-ticker, #rss-ticker *');
-rssTickerElements.forEach((element) => {
-    if (isDay) {
-        element.style.backgroundColor = "rgba(225, 225, 225, 1)"; // Day theme color
-        element.style.color = "rgba(155, 155, 155, 1)";
+    const rssTicker = document.getElementById('rss-ticker');
+    if (rssTicker) {
+        console.log('RSS Ticker found');
+        if (isDay) {
+            rssTicker.style.backgroundColor = "rgba(225, 225, 225, 1)"; // Day theme color
+            rssTicker.style.color = "rgba(155, 155, 155, 1)";
+        } else {
+            rssTicker.style.backgroundColor = "rgba(74, 74, 74, 1)"; // Night theme color
+            rssTicker.style.color = "rgba(225, 225, 225, 1)";
+        }
     } else {
-        element.style.backgroundColor = "rgba(74, 74, 74, 1)"; // Night theme color
-        element.style.color = "rgba(225, 225, 225, 1)";
+        console.log('RSS Ticker not found');
     }
 });
 
