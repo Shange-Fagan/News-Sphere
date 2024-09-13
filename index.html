@@ -710,12 +710,19 @@ uniform sampler2D map;
 				//import * as BufferGeometryUtils from '//unpkg.com/three/examples/jsm/utils/BufferGeometryUtils.js';
 				
 				// Create the geometry for the plane
-				const plane = new THREE.PlaneGeometry(64, 64);
+				const planeGeometry = new THREE.PlaneGeometry(64, 64);
+				// Assuming you have an array to hold your geometries
+				const geometries = [];
 				
 				// Create a random scale for the plane
 				/*const scale = Math.random() * Math.random() * 1.5 + 0.5;
 				planeGeometry.scale(scale, scale, scale);*/
 				for ( var i = 0; i < 8000; i++ ) {
+					// Clone the plane geometry for each iteration
+  					const geometry2 = planeGeometry.clone();
+
+					// Create a mesh with the cloned geometry and material
+  					const plane = new THREE.Mesh(geometry2, material);
 
 					plane.position.x = Math.random() * 1000 - 500;
 					plane.position.y = - Math.random() * Math.random() * 200 - 15;
@@ -723,15 +730,11 @@ uniform sampler2D map;
 					plane.rotation.z = Math.random() * Math.PI;
 					plane.scale.x = plane.scale.y = Math.random() * Math.random() * 1.5 + 0.5;
 
-					THREE.GeometryUtils.merge( geometry, plane );
+					// Add the geometry to the array
+  					geometries.push(geometry2);
 
 				}
 				
-				// Assuming you have an array to hold your geometries
-				const geometries = [];
-				
-				// Add the plane geometry to the array
-				geometries.push(plane);
 				
 				// Merge geometries into a single geometry
 				const mergedGeometry = THREE.BufferGeometryUtils.mergeBufferGeometries(geometries, false);
