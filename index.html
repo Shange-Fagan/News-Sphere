@@ -354,7 +354,7 @@
     /*#idNum, #idNum2, #idNum3, #idNum4, #idNum5, #idNum6, #idNum7, #idNum8, iframe {
       width: 100%;
       height: 90%;
-      border: none;
+      border: none;x
       
     }
     /*#idNum, #idNum2, #idNum3, #idNum4, #idNum5, #idNum6, #idNum7, #idNum8, #idNum9 iframe {
@@ -626,7 +626,9 @@ var Detector;
 
 				let geometry = new THREE.BufferGeometry();
 
-				var texture = THREE.ImageUtils.loadTexture( 'https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png', null, animate );
+				//var texture = THREE.ImageUtils.loadTexture( 'https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png', null, animate );
+				var loader = new THREE.TextureLoader();
+				var texture = loader.load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png', null, animate);
 				texture.magFilter = THREE.LinearMipMapLinearFilter;
 				texture.minFilter = THREE.LinearMipMapLinearFilter;
 
