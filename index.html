@@ -681,8 +681,36 @@ uniform sampler2D map;
 
 				} );
 
-				var plane = new THREE.Mesh( new THREE.PlaneGeometry( 64, 64 ) );
+				//var plane = new THREE.Mesh( new THREE.PlaneGeometry( 64, 64 ) );
 
+				/*for ( var i = 0; i < 8000; i++ ) {
+
+					plane.position.x = Math.random() * 1000 - 500;
+					plane.position.y = - Math.random() * Math.random() * 200 - 15;
+					plane.position.z = i;
+					plane.rotation.z = Math.random() * Math.PI;
+					plane.scale.x = plane.scale.y = Math.random() * Math.random() * 1.5 + 0.5;
+
+					THREE.GeometryUtils.merge( geometry, plane );
+
+				}*/
+
+				/*mesh = new THREE.Mesh( geometry, material );
+				scene.add( mesh );*/
+
+				mesh = new THREE.Mesh( geometry, material );
+				mesh.position.z = - 8000;
+				scene.add( mesh );
+
+				// Import BufferGeometryUtils if using a module system
+				// import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils.js';
+				
+				// Create the geometry for the plane
+				const plane = new THREE.PlaneGeometry(64, 64);
+				
+				// Create a random scale for the plane
+				/*const scale = Math.random() * Math.random() * 1.5 + 0.5;
+				planeGeometry.scale(scale, scale, scale);*/
 				for ( var i = 0; i < 8000; i++ ) {
 
 					plane.position.x = Math.random() * 1000 - 500;
@@ -694,11 +722,22 @@ uniform sampler2D map;
 					THREE.GeometryUtils.merge( geometry, plane );
 
 				}
+				
+				// Assuming you have an array to hold your geometries
+				const geometries = [];
+				
+				// Add the plane geometry to the array
+				geometries.push(plane);
+				
+				// Merge geometries into a single geometry
+				const mergedGeometry = THREE.BufferGeometryUtils.mergeBufferGeometries(geometries, false);
+				
+				// Now use the merged geometry with a mesh
+				//const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+				let mesh = new THREE.Mesh(mergedGeometry, material);
+				scene.add(mesh);
 
-				mesh = new THREE.Mesh( geometry, material );
-				scene.add( mesh );
-
-				mesh = new THREE.Mesh( geometry, material );
+				let mesh = new THREE.Mesh(mergedGeometry, material );
 				mesh.position.z = - 8000;
 				scene.add( mesh );
 
