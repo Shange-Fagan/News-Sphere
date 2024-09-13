@@ -907,14 +907,14 @@ themeButton.addEventListener('click', () => {
     // Update RSS Ticker's style
     const rssTicker = document.getElementById('rss-ticker'); // Ensure the correct ID or class
     if (rssTicker) {
-        if (isDay) {
-            rssTicker.classList.remove('rss-ticker-night');
-            rssTicker.classList.add('rss-ticker-day');
-        } else {
-            rssTicker.classList.remove('rss-ticker-day');
-            rssTicker.classList.add('rss-ticker-night');
-        }
+    if (isDay) {
+        rssTicker.style.backgroundColor = "rgba(225, 225, 225, 1)"; // Day theme color
+        rssTicker.style.color = "rgba(155, 155, 155, 1)";
+    } else {
+        rssTicker.style.backgroundColor = "rgba(74, 74, 74, 1)"; // Night theme color
+        rssTicker.style.color = "rgba(225, 225, 225, 1)";
     }
+}
 });
 /*
 // Function to switch between day and night textures
