@@ -622,9 +622,9 @@ var Detector;
 				camera.position.set(20, 0.5, 15).setLength(17.5);
 				camera.position.z = 6000;
 
-				scene = new THREE.Scene();
+				let scene = new THREE.Scene();
 
-				geometry = new THREE.BufferGeometry();
+				let geometry = new THREE.BufferGeometry();
 
 				var texture = THREE.ImageUtils.loadTexture( 'https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png', null, animate );
 				texture.magFilter = THREE.LinearMipMapLinearFilter;
@@ -632,7 +632,7 @@ var Detector;
 
 				var fog = new THREE.Fog( 0x4584b4, - 100, 3000 );
 
-				material = new THREE.ShaderMaterial( {
+				let material = new THREE.ShaderMaterial( {
 
 					uniforms: {
 
