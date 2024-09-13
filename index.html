@@ -879,7 +879,7 @@ uniform sampler2D map;
   const sphereWidth = 5.1;
   const sphereHeight = 32.1;
   const sphereDepth = 32.1;
-  let geometry = new THREE.SphereGeometry(
+  let geometry2 = new THREE.SphereGeometry(
     sphereWidth,
     sphereHeight,
     sphereDepth
@@ -888,7 +888,7 @@ uniform sampler2D map;
   const sphereWidth2 = 5;
   const sphereHeight2 = 32.1;
   const sphereDepth2 = 32.1;
-  const geometry2 = new THREE.SphereGeometry(
+  const geometry3 = new THREE.SphereGeometry(
     sphereWidth2,
     sphereHeight2,
     sphereDepth2
@@ -1017,8 +1017,8 @@ uniform sampler2D map;
   //onst bumpTexture = new THREE.TextureLoader().load('//unpkg.com/three-globe/example/img/earth-topology.png')
   //material.bumpMap = bumpTexture
   //material.bumpScale = 0.015
-  let globe = new THREE.Mesh(geometry2, material);
-  let globe2 = new THREE.Mesh(geometry, material2);
+  let globe = new THREE.Mesh(geometry3, material);
+  let globe2 = new THREE.Mesh(geometry2, material2);
   scene.add(atmosphere);
   scene.add(globe);
   scene.add(globe2);
