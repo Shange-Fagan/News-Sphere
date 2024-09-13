@@ -384,6 +384,20 @@
         background: transparent;
      }
 	 /* RSS Ticker Day Theme */
+	  /* Add an overlay to simulate color changes */
+.rss-ticker-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 1200px;
+    height: 60px;
+    pointer-events: none; /* Ensure clicks pass through to iframe */
+    background-color: rgba(225, 225, 225, 0.5); /* Default to day theme */
+    transition: background-color 0.3s ease;
+}
+
+.rss-ticker-night .rss-ticker-overlay {
+    background-color: rgba(74, 74, 74, 0.5); /* Night theme */
+}
 	  #rss-ticker {
     position: fixed;
     top: 0;
@@ -532,6 +546,7 @@ canvas.cloud{
   <div class="text" id="idNum"></div>
 </div>
 <div id="hero-limiteur"><div class='cloud' style="background: rgba(0, 0, 0, 0) url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAOQCAYAAABYWHMcAAAEoklEQVR4nO3Oa18IBhjG4eeTlA5oK2oSw1LJfj+MLMsywyxDzWk20/mcyDml5BwRKazt+937GPfz4v/ien9FwZ5OOQUBAgQK9nTJKQr2dsmJgD9QuLdLTgSicF+3nAgQIBCF+3rkFGu+65ETAQIEYs3+XjkRIBBF+3vllCHQJ6coOtAnJwIECETRgX45RVFTv5yiuKlfTgQIRHHTgJyi+OCAnAgQiJKDA3LKEBiUU5R8PygnAgQyBIbkFCXNQ3LyB0qbh+REgECUNg/LKUoPDcuJAAF/YO2hETklCPwwIicCBDIERuUUa1tG5UQg1rWMyolArGsZk1OCwOExOREg4A+sP3xNTrH+x2tyIkAgQ2BcTgkCreNyIhBlreNyIhBlrdfllCBw5LqcCBCIsiM35OQPfPHTDTkRIJAhMCGnBIGjE3IiEF8enZBThsBNOSUI/HxTTgQIZAjckpM/UH7slpwIEIjyY7flRCDKj9+WEwF/oOL4HTkRiIoTd+REgEBUnLgrJwKx4Ze7ciKQIXBPTgRiw8l7ciJAIDaevC8nArHx1/tyIpAhMCknAgkCbZNyisq2STkRiMq2B3IiEJWnHsiJQIbAlJyi6tSUnAhE1W9TciKQITAtJwJRdXpaTv7AV6en5ZQh8FBOBBIEzjyUE4EMgRk5+QObzszIKUHg7IycCMSms7NyIpAg0D4rJwJR3T4rp6hufyQnAgkCHY/kRCCqO+bkRCA2d8zJKTb/PicnAhkCj+VEIEHg3GM5EYiac0/kRIBA1Jx/IicCUXP+qZwI+ANbLjyVE4HYcuGZnAgQiC0Xn8mJQGy9+FxOBBIELj2XE4HYeumFnAgQiK//eCGnDIGXciJAIEHg8ks5ZQjMy8kf2HZ5Xk4EYtuf83LKEHglJwIE/IHtf72SU4bAazkRIBDbr7yWU4bAgpwIxI4rC3IiEDv+XpBThsAbOREgkCBw9Y2c4purb+VEgECCQOdbOWUILMqJQNR2LsqJQNR2LcoparveyYkAgQSB7ndy8gd2dr+XEwECCQI97+UUO3uW5ESAQNT1LMkpQaB3SU5R1/tBTgQIJAj0fZBT1PUty8kfqO9blhMBAlHfvyynqO9fkRMBAtHQvyKnaBhYkVM0DHyUEwECBKJh8KOcomHwk5z8gV2Dn+REgEDsGvosJwIECETj8Gc5RePwP3IiQIBANI6syolA7B5ZlROBBIHRVTnF7tF/5USAAIH4duw/OREgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQMAe+B+vPiII18LWiwAAAABJRU5ErkJggg==&quot;)"><canvas style="width: 0px; height: 0px;" class='cloud'></canvas></div></div>
+<div id="rss-ticker-container" style="position: relative; width: 1200px; height: 60px;">
 <iframe
   id="rss-ticker"
   width="1200"
@@ -542,6 +557,8 @@ canvas.cloud{
   frameborder="0"
                      >
 ></iframe>
+<div class="rss-ticker-overlay"></div>
+</div>
 	<!-- Button to Toggle Theme -->
 <button id="theme-toggle" style="position: absolute; top: 55px; right: 0px; z-index: 1000;">Switch to Night Theme</button>
 <script src="//unpkg.com/globe.gl"></script>
@@ -926,6 +943,8 @@ themeButton.addEventListener('click', () => {
     // Update RSS Ticker's style
     // Update RSS Ticker's style
     // Update RSS Ticker's style
+	const rssTickerContainer = document.getElementById('rss-ticker-container');
+const overlay = rssTickerContainer.querySelector('.rss-ticker-overlay');
     const rssTicker = document.getElementById('rss-ticker');
     if (rssTicker) {
         console.log('RSS Ticker found');
@@ -944,6 +963,12 @@ themeButton.addEventListener('click', () => {
         console.log('Applied Text Color:', rssTicker.style.color);
     } else {
         console.log('RSS Ticker not found');
+    }
+	// Update RSS Ticker's overlay style
+    if (isDay) {
+        overlay.classList.remove('rss-ticker-night');
+    } else {
+        overlay.classList.add('rss-ticker-night');
     }
 
     // Update the button text
