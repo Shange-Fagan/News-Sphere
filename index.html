@@ -936,69 +936,8 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     //side: THREE.DoubleSide
 });
 
-const themeButton = document.getElementById('theme-toggle');
-let isDay = true;
 
-// Function to toggle RSS ticker and globe theme
-themeButton.addEventListener('click', () => {
-    // Toggle Day/Night Theme
-    isDay = !isDay;
-
-    // Update the globe material
-    scene.traverse((child) => {
-        if (child instanceof THREE.Mesh && child.material instanceof THREE.MeshPhongMaterial) {
-            if (isDay) {
-                child.material.map = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
-            } else {
-                child.material.map = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
-            }
-            child.material.needsUpdate = true;
-        }
-    });
-
-    // Update RSS Ticker's style
-    // Update RSS Ticker's style
-    // Update RSS Ticker's style
-	const rssTickerContainer = document.getElementById('rss-ticker-container');
-const overlay = rssTickerContainer.querySelector('.rss-ticker-overlay');
-    const rssTicker = document.getElementById('rss-ticker');
-    if (rssTicker) {
-        console.log('RSS Ticker found');
-        
-        // Set background color and text color based on the theme
-        if (isDay) {
-            rssTicker.style.backgroundColor = "rgba(225, 225, 225, 1) !important"; // Day theme color
-            rssTicker.style.color = "rgba(155, 155, 155, 1) !important";
-        } else {
-            rssTicker.style.backgroundColor = "rgba(74, 74, 74, 1) !important"; // Night theme color
-            rssTicker.style.color = "rgba(225, 225, 225, 1) !important";
-        }
-        
-        // Log the styles applied to verify
-        console.log('Applied Background Color:', rssTicker.style.backgroundColor);
-        console.log('Applied Text Color:', rssTicker.style.color);
-    } else {
-        console.log('RSS Ticker not found');
-    }
-	// Update RSS Ticker's overlay style
-    if (isDay) {
-        overlay.classList.remove('rss-ticker-night');
-    } else {
-        overlay.classList.add('rss-ticker-night');
-    }
-
-    // Update the button text
-    themeButton.textContent = isDay ? "Switch to Night Theme" : "Switch to Day Theme";
-});
-
-    // Update the button text
-    if (isDay) {
-        themeButton.textContent = "Switch to Night Theme";
-    } else {
-        themeButton.textContent = "Switch to Day Theme";
-    }
-;
-/*
+		 
 // Function to switch between day and night textures
 function switchGlobeTexture(isDay) {
     if (isDay) {
@@ -1045,7 +984,7 @@ button.addEventListener("click", () => {
     switchGlobeTexture(isDay); // Switch the texture
     button.innerHTML = isDay ? "Switch to night theme" : "Switch to day theme";
 	console.log("Button clicked!");
-});*/
+});
 
   //onst bumpTexture = new THREE.TextureLoader().load('//unpkg.com/three-globe/example/img/earth-topology.png')
   //material.bumpMap = bumpTexture
