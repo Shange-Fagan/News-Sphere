@@ -385,8 +385,8 @@
      }
 	 /* RSS Ticker Day Theme */
 .rss-ticker-day {
-  background-color: rgba(225, 225, 225, 1);  /* White background */
-  color: rgba(155, 155, 155, 1);  /* Grey text */
+  background-color: rgba(225, 225, 225, 1) !important;  /* White background */
+  color: rgba(155, 155, 155, 1) !important;  /* Grey text */
   pointer-events: auto;
   position: fixed;
   top: 0vh;
@@ -398,8 +398,8 @@
 
 /* RSS Ticker Night Theme */
 .rss-ticker-night {
-  background-color: rgba(74, 74, 74, 1);  /* Dark grey background */
-  color: rgba(225, 225, 225, 1);  /* White text */
+  background-color: rgba(74, 74, 74, 1) !important;  /* Dark grey background */
+  color: rgba(225, 225, 225, 1) !important;  /* White text */
   pointer-events: auto;
   position: fixed;
   top: 0vh;
@@ -908,23 +908,23 @@ themeButton.addEventListener('click', () => {
 
     // Update RSS Ticker's style
     // Update RSS Ticker's style
+    // Update RSS Ticker's style
     const rssTicker = document.getElementById('rss-ticker');
     if (rssTicker) {
         console.log('RSS Ticker found');
-        console.log('Current Display:', window.getComputedStyle(rssTicker).display);
-        console.log('Current Visibility:', window.getComputedStyle(rssTicker).visibility);
-
+        
+        // Set background color and text color based on the theme
         if (isDay) {
             rssTicker.style.backgroundColor = "rgba(225, 225, 225, 1)"; // Day theme color
             rssTicker.style.color = "rgba(155, 155, 155, 1)";
-            rssTicker.style.display = "block"; // Ensure it is visible
-            rssTicker.style.visibility = "visible"; // Ensure it is not hidden
         } else {
             rssTicker.style.backgroundColor = "rgba(74, 74, 74, 1)"; // Night theme color
             rssTicker.style.color = "rgba(225, 225, 225, 1)";
-            rssTicker.style.display = "block"; // Ensure it is visible
-            rssTicker.style.visibility = "visible"; // Ensure it is not hidden
         }
+        
+        // Log the styles applied to verify
+        console.log('Applied Background Color:', rssTicker.style.backgroundColor);
+        console.log('Applied Text Color:', rssTicker.style.color);
     } else {
         console.log('RSS Ticker not found');
     }
