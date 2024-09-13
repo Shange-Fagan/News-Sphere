@@ -896,7 +896,7 @@ themeButton.addEventListener('click', () => {
     scene.traverse((child) => {
         if (child instanceof THREE.Mesh && child.material2 instanceof THREE.MeshPhongMaterial) {
             if (isDay) {
-                child.material2.map = textureLoader.load("//unpkg.com/three-globe/example/img/earth-day.jpg");
+                child.material2.map = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
             } else {
                 child.material2.map = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
             }
