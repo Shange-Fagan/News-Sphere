@@ -867,8 +867,8 @@ document.body.appendChild(button);
 button.style.position = "absolute";  // Use absolute positioning
 button.style.right = "0px";         // Set distance from the right side of the page
 button.style.top = "55px";           // Adjust this to position below the iframe
-button.style.padding = "7.5px 12.5px";  // Padding for better appearance
-button.style.fontSize = "16px";      // Font size for readability
+button.style.padding = "4.5px 9.5px";  // Padding for better appearance
+button.style.fontSize = "12px";      // Font size for readability
 button.style.backgroundColor = "rgba(225, 225, 225, 0.25)";  // Light background, semi-transparent
 button.style.border = "1px solid rgba(225, 225, 225, 0.25)"; // Light border, semi-transparent
 button.style.borderRadius = "8px";   // Rounded corners
@@ -887,7 +887,7 @@ button.onmouseout = () => {
 button.addEventListener("click", () => {
     isDay = !isDay; // Toggle the state
     switchGlobeTexture(isDay); // Switch the texture
-    button.innerHTML = isDay ? "Switch to Night" : "Switch to Day";
+    button.innerHTML = isDay ? "Toggle Globe Texture" : "Toggle Globe Texture";
 	console.log("Button clicked!");
 });
 
