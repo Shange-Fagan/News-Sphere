@@ -872,6 +872,7 @@ button.addEventListener("click", () => {
     isDay = !isDay; // Toggle the state
     switchGlobeTexture(isDay); // Switch the texture
     button.innerHTML = isDay ? "Switch to Night" : "Switch to Day";
+	console.log("Button clicked!");
 });
 
   //onst bumpTexture = new THREE.TextureLoader().load('//unpkg.com/three-globe/example/img/earth-topology.png')
