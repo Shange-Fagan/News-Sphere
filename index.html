@@ -863,9 +863,17 @@ const button = document.createElement("button");
 button.innerHTML = "Switch to Night";
 document.body.appendChild(button);
      button.style.position = "absolute";
-  button.style.top = "10px";
-  button.style.left = "10px";
-  button.style.zIndex = "9999";
+  // Style the button
+button.style.position = "absolute";  // Use absolute positioning
+button.style.right = "20px";         // Set distance from the right side of the page
+button.style.top = "80px";           // Adjust this to position below the iframe
+button.style.padding = "10px 20px";  // Padding for better appearance
+button.style.fontSize = "16px";      // Font size for readability
+button.style.backgroundColor = "rgba(255, 255, 255, 0.5)";  // Light background, semi-transparent
+button.style.border = "1px solid rgba(255, 255, 255, 0.5)"; // Light border, semi-transparent
+button.style.borderRadius = "8px";   // Rounded corners
+button.style.color = "#000";         // Text color (dark text on light button)
+button.style.zIndex = "9999";        // Make sure it's on top of other elements
 
 // Toggle texture on button click
 button.addEventListener("click", () => {
