@@ -595,166 +595,112 @@ var Detector;
 			var windowHalfX = window.innerWidth / 2;
 			var windowHalfY = window.innerHeight / 2;
 
-			init();
-
 			function init() {
+      const container = document.createElement('div');
+      document.body.appendChild(container);
 
-				container = document.createElement( 'div' );
-				document.body.appendChild( container );
+      // Background gradient
+      const canvas = document.createElement('canvas');
+      canvas.width = 32;
+      canvas.height = window.innerHeight;
+      const context = canvas.getContext('2d');
+      const gradient = context.createLinearGradient(0, 0, 0, canvas.height);
+      gradient.addColorStop(0, "#1e4877");
+      gradient.addColorStop(0.5, "#4584b4");
+      context.fillStyle = gradient;
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      container.style.background = 'url(' + canvas.toDataURL('image/png') + ')';
+      container.style.backgroundSize = '32px 100%';
 
-				// Bg gradient
+      // Camera, scene, and renderer
+      const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 3000);
+      camera.position.set(20, 0.5, 15).setLength(17.5);
+      camera.position.z = 6000;
 
-				var canvas = document.createElement( 'canvas' );
-				canvas.width = 32;
-				canvas.height = window.innerHeight;
+      const scene = new THREE.Scene();
+      const loader = new THREE.TextureLoader();
+      const texture = loader.load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png');
+      texture.magFilter = THREE.LinearMipMapLinearFilter;
+      texture.minFilter = THREE.LinearMipMapLinearFilter;
 
-				var context = canvas.getContext( '2d' );
+      const fog = new THREE.Fog(0x4584b4, -100, 3000);
 
-				var gradient = context.createLinearGradient( 0, 0, 0, canvas.height );
-				gradient.addColorStop(0, "#1e4877");
-				gradient.addColorStop(0.5, "#4584b4");
+      const material = new THREE.ShaderMaterial({
+        uniforms: {
+          "map": { value: texture },
+          "fogColor": { value: fog.color },
+          "fogNear": { value: fog.near },
+          "fogFar": { value: fog.far }
+        },
+        vertexShader: `
+          varying vec2 vUv;
+          void main() {
+            vUv = uv;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          }
+        `,
+        fragmentShader: `
+          uniform sampler2D map;
+          uniform vec3 fogColor;
+          uniform float fogNear;
+          uniform float fogFar;
+          varying vec2 vUv;
+          void main() {
+            float depth = gl_FragCoord.z / gl_FragCoord.w;
+            float fogFactor = smoothstep(fogNear, fogFar, depth);
+            vec4 color = texture2D(map, vUv);
+            color.w *= pow(gl_FragCoord.z, 20.0);
+            gl_FragColor = mix(color, vec4(fogColor, color.w), fogFactor);
+          }
+        `,
+        depthWrite: false,
+        depthTest: false,
+        transparent: true
+      });
 
-				context.fillStyle = gradient;
-				context.fillRect(0, 0, canvas.width, canvas.height);
+      // Create and merge geometries
+      const planeGeometry = new THREE.PlaneGeometry(64, 64);
+      const geometries = [];
+      for (let i = 0; i < 8000; i++) {
+        const geometry = planeGeometry.clone();
+        const plane = new THREE.Mesh(geometry, material);
+        plane.position.set(Math.random() * 1000 - 500, -Math.random() * Math.random() * 200 - 15, i);
+        plane.rotation.z = Math.random() * Math.PI;
+        plane.scale.set(Math.random() * Math.random() * 1.5 + 0.5, Math.random() * Math.random() * 1.5 + 0.5, 1);
+        geometries.push(geometry);
+      }
 
-				container.style.background = 'url(' + canvas.toDataURL('image/png') + ')';
-				container.style.backgroundSize = '32px 100%';
+      // Merge geometries
+      const mergedGeometry = BufferGeometryUtils.mergeBufferGeometries(geometries, false);
+      const mesh = new THREE.Mesh(mergedGeometry, material);
+      scene.add(mesh);
 
-				//
+      const renderer = new THREE.WebGLRenderer({ antialias: false });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      container.appendChild(renderer.domElement);
 
-				let camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 3000 );
-				camera.position.set(20, 0.5, 15).setLength(17.5);
-				camera.position.z = 6000;
+      // Animation loop
+      function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+      animate();
 
-				let scene = new THREE.Scene();
+      // Event listeners
+      document.addEventListener('mousemove', onDocumentMouseMove, false);
+      window.addEventListener('resize', onWindowResize, false);
+    }
 
-				//let geometry = new THREE.BufferGeometry();
+    function onDocumentMouseMove(event) {
+      // Handle mouse move events
+    }
 
-				//var texture = THREE.ImageUtils.loadTexture( 'https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png', null, animate );
-				var loader = new THREE.TextureLoader();
-				var texture = loader.load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png', null, animate);
-				texture.magFilter = THREE.LinearMipMapLinearFilter;
-				texture.minFilter = THREE.LinearMipMapLinearFilter;
+    function onWindowResize() {
+      // Handle window resize events
+    }
 
-				var fog = new THREE.Fog( 0x4584b4, - 100, 3000 );
-
-				let material = new THREE.ShaderMaterial( {
-
-					uniforms: {
-
-						"map": { type: "t", value: texture },
-						"fogColor" : { type: "c", value: fog.color },
-						"fogNear" : { type: "f", value: fog.near },
-						"fogFar" : { type: "f", value: fog.far },
-
-					},
-					vertexShader: `
-			varying vec2 vUv;
-
-			void main() {
-
-				vUv = uv;
-				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-
-			}
-`,
-
-					fragmentShader: `
-uniform sampler2D map;
-
-			uniform vec3 fogColor;
-			uniform float fogNear;
-			uniform float fogFar;
-
-			varying vec2 vUv;
-
-			void main() {
-
-				float depth = gl_FragCoord.z / gl_FragCoord.w;
-				float fogFactor = smoothstep( fogNear, fogFar, depth );
-
-				gl_FragColor = texture2D( map, vUv );
-				gl_FragColor.w *= pow( gl_FragCoord.z, 20.0 );
-				gl_FragColor = mix( gl_FragColor, vec4( fogColor, gl_FragColor.w ), fogFactor );
-
-			}
-`,
-					depthWrite: false,
-					depthTest: false,
-					transparent: true
-
-				} );
-
-				//var plane = new THREE.Mesh( new THREE.PlaneGeometry( 64, 64 ) );
-
-				/*for ( var i = 0; i < 8000; i++ ) {
-
-					plane.position.x = Math.random() * 1000 - 500;
-					plane.position.y = - Math.random() * Math.random() * 200 - 15;
-					plane.position.z = i;
-					plane.rotation.z = Math.random() * Math.PI;
-					plane.scale.x = plane.scale.y = Math.random() * Math.random() * 1.5 + 0.5;
-
-					THREE.GeometryUtils.merge( geometry, plane );
-
-				}*/
-
-				/*mesh = new THREE.Mesh( geometry, material );
-				scene.add( mesh );*/
-
-				/*mesh = new THREE.Mesh( geometry, material );
-				mesh.position.z = - 8000;
-				scene.add( mesh );*/
-
-				// Import BufferGeometryUtils if using a module system
-				//import * as BufferGeometryUtils from '//unpkg.com/three/examples/jsm/utils/BufferGeometryUtils.js';
-				
-				// Create the geometry for the plane
-				const planeGeometry = new THREE.PlaneGeometry(64, 64);
-				// Assuming you have an array to hold your geometries
-				const geometries = [];
-				
-				// Create a random scale for the plane
-				/*const scale = Math.random() * Math.random() * 1.5 + 0.5;
-				planeGeometry.scale(scale, scale, scale);*/
-				for ( var i = 0; i < 8000; i++ ) {
-					// Clone the plane geometry for each iteration
-  					const geometry = planeGeometry.clone();
-
-					// Create a mesh with the cloned geometry and material
-  					const plane = new THREE.Mesh(geometry, material);
-
-					plane.position.x = Math.random() * 1000 - 500;
-					plane.position.y = - Math.random() * Math.random() * 200 - 15;
-					plane.position.z = i;
-					plane.rotation.z = Math.random() * Math.PI;
-					plane.scale.x = plane.scale.y = Math.random() * Math.random() * 1.5 + 0.5;
-
-					// Add the geometry to the array
-  					geometries.push(geometry);
-
-				}
-				
-				
-				// Merge geometries into a single geometry
-				const mergedGeometry = THREE.BufferGeometryUtils.mergeBufferGeometries(geometries, false);
-				
-				// Now use the merged geometry with a mesh
-				//const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
-				let mesh = new THREE.Mesh(mergedGeometry, material);
-				scene.add(mesh);
-
-				let mesh2 = new THREE.Mesh(mergedGeometry, material );
-				mesh.position.z = - 8000;
-				scene.add( mesh2 );
-
-				renderer = new THREE.WebGLRenderer( { antialias: false } );
-				renderer.setSize( window.innerWidth, window.innerHeight );
-				container.appendChild( renderer.domElement );
-
-				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-				window.addEventListener( 'resize', onWindowResize, false );
-
+    // Initialize
+    init();
 			
   /*let scene = new THREE.Scene();*/
   /*let camera = new THREE.PerspectiveCamera(
