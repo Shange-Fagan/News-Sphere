@@ -740,9 +740,9 @@ uniform sampler2D map;
 				let mesh = new THREE.Mesh(mergedGeometry, material);
 				scene.add(mesh);
 
-				let mesh = new THREE.Mesh(mergedGeometry, material );
+				let mesh2 = new THREE.Mesh(mergedGeometry, material );
 				mesh.position.z = - 8000;
-				scene.add( mesh );
+				scene.add( mesh2 );
 
 				renderer = new THREE.WebGLRenderer( { antialias: false } );
 				renderer.setSize( window.innerWidth, window.innerHeight );
