@@ -519,6 +519,9 @@ canvas.cloud{
     "src",
     "https://rss.app/embed/v1/ticker/tRj0yIAl7HEk9RzX"
   );
+		 import { GUI } from "./js/dat.gui.module.js";
+  // GUI
+  //const gui = new GUI();
 var Detector;
             Detector = {
 
@@ -714,9 +717,9 @@ uniform sampler2D map;
   );*/
   //camera.position.set(20, 0.5, 15).setLength(17.5);
   //camera.position.z = 15;
-  let renderer = new THREE.WebGLRenderer({
+  /*let renderer = new THREE.WebGLRenderer({
     antialias: true,
-  });
+  });*/
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(innerWidth, innerHeight);
   /*renderer.setClearColor(0xaaffaa);*/
@@ -826,9 +829,9 @@ uniform sampler2D map;
   });*/
   //let globe = new THREE.Points(g, m);
   //scene.add(globe);
-  import { GUI } from "./js/dat.gui.module.js";
+  /*import { GUI } from "./js/dat.gui.module.js";
   // GUI
-  //const gui = new GUI();
+  //const gui = new GUI();*/
 
   /* Textures */
   const textureLoader = new THREE.TextureLoader();
