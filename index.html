@@ -691,13 +691,13 @@ var Detector;
       window.addEventListener('resize', onWindowResize, false);
     
 
-    function onDocumentMouseMove(event) {
+    /*function onDocumentMouseMove(event) {
       // Handle mouse move events
     }
 
     function onWindowResize() {
       // Handle window resize events
-    }
+    }*/
 
     /*// Initialize
     init();*/
@@ -2938,6 +2938,16 @@ scene.add(pointLightHelper);*/
     }
   });
 			}
+		 // Append globe to the container or other setup
+      document.body.appendChild(globe);
+    }
+	function onDocumentMouseMove(event) {
+      // Handle mouse move events
+    }
+
+    	function onWindowResize() {
+      // Handle window resize events
+    }
   /*let clock = new THREE.Clock();
 
   renderer.setAnimationLoop(() => {
@@ -3006,7 +3016,7 @@ scene.add(pointLightHelper);*/
 
 				renderer.render( scene, camera );
 
-			}
+			} init();
 
 		
 </script>
