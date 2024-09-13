@@ -650,7 +650,10 @@ canvas.cloud{
   /* Textures */
   
   /* Textures */
-		// Load day and night textures
+  const textureLoader = new THREE.TextureLoader();
+
+
+		 // Load day and night textures
 const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-day.jpg");
 const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
 
@@ -677,8 +680,6 @@ button.addEventListener("click", () => {
     globe.material.needsUpdate = true;
     isDay = !isDay;
 });
-  const textureLoader = new THREE.TextureLoader();
-
   //const textureLoader = new THREE.TextureLoader();
   const myTexture = [
     textureLoader.load(
