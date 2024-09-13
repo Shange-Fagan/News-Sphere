@@ -395,11 +395,19 @@
     background-color: rgba(225, 225, 225, 0.5); /* Default to day theme */
     transition: background-color 0.3s ease;
 }
+	  #rss-ticker-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    z-index: 9999; /* Ensure it's high enough */
+}
+
 
 .rss-ticker-night .rss-ticker-overlay {
     background-color: rgba(74, 74, 74, 0.5); /* Night theme */
 }
-	  #rss-ticker {
+	  /*#rss-ticker {
     position: fixed;
     top: 0;
     left: 0;
@@ -407,6 +415,12 @@
     z-index: 9998;
     background-color: rgba(225, 225, 225, 1); /* Default day color */
     color: rgba(155, 155, 155, 1); /* Default day text color */
+}*/
+	  #rss-ticker {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: none;
 }
 	  #rss-ticker {
     pointer-events: auto;
@@ -562,7 +576,8 @@ canvas.cloud{
 </div>
 	<!-- Button to Toggle Theme -->
 <button id="theme-toggle" style="position: absolute; top: 55px; right: 0px; z-index: 1000;">Switch to Night Theme</button>
-<script src="//unpkg.com/globe.gl"></script>
+	<canvas id="globeCanvas"></canvas>
+	<script src="//unpkg.com/globe.gl"></script>
          
          <script type="module">          
   import * as THREE from "https://cdn.skypack.dev/three@0.136.0";
