@@ -693,7 +693,7 @@ canvas.cloud{
   const sphereWidth = 5.1;
   const sphereHeight = 32.1;
   const sphereDepth = 32.1;
-  let geometry2 = new THREE.SphereGeometry(
+  let geometry = new THREE.SphereGeometry(
     sphereWidth,
     sphereHeight,
     sphereDepth
@@ -702,7 +702,7 @@ canvas.cloud{
   const sphereWidth2 = 5;
   const sphereHeight2 = 32.1;
   const sphereDepth2 = 32.1;
-  const geometry3 = new THREE.SphereGeometry(
+  const geometry2 = new THREE.SphereGeometry(
     sphereWidth2,
     sphereHeight2,
     sphereDepth2
@@ -710,7 +710,7 @@ canvas.cloud{
   //const textureLoader = new THREE.TextureLoader();
   const shaderMaterial = new THREE.ShaderMaterial({});
 
-  const material2 = new THREE.ShaderMaterial({
+  const material = new THREE.ShaderMaterial({
     vertexShader: `
                 varying vec2 vertexUV;
                 varying vec3 vertexNormal;
@@ -809,7 +809,7 @@ canvas.cloud{
   }*/
   atmosphere.scale.set(1.1, 1.1, 1.1);
 
-  const material3 = new THREE.MeshPhongMaterial({
+  const material2 = new THREE.MeshPhongMaterial({
     specular: 0x111111,
     shininess: 5,
     map: textureLoader.load(
@@ -831,8 +831,8 @@ canvas.cloud{
   //onst bumpTexture = new THREE.TextureLoader().load('//unpkg.com/three-globe/example/img/earth-topology.png')
   //material.bumpMap = bumpTexture
   //material.bumpScale = 0.015
-  let globe = new THREE.Mesh(geometry3, material2);
-  let globe2 = new THREE.Mesh(geometry2, material3);
+  let globe = new THREE.Mesh(geometry2, material);
+  let globe2 = new THREE.Mesh(geometry, material2);
   scene.add(atmosphere);
   scene.add(globe);
   scene.add(globe2);
