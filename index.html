@@ -383,6 +383,31 @@
      iframe ::-webkit-scrollbar, ::-webkit-scrollbar-track {
         background: transparent;
      }
+	  /* RSS Ticker Day Theme */
+  .rss-ticker-day {
+    background-color: "rgba(225, 225, 225, 100)";  /* White background */
+    color: "rgba(155, 155, 155, 100)";             /* Black text */
+  }
+
+  /* RSS Ticker Night Theme */
+  .rss-ticker-night {
+    background-color: "rgba(74, 74, 74, 100)";  /* Black background */
+    color: "rgba(225, 225, 225, 100)";             /* White text */
+  }
+
+  /* Button Style */
+  #theme-toggle {
+    padding: 4.5px 9.5px;
+    font-size: 12px;
+    background-color: "rgba(225, 225, 225, 0.25)";
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  #theme-toggle:hover {
+    background-color: "rgba(225, 225, 225, 0.35)";
+  }
    
     /*#idNum, #idNum2, #idNum3, #idNum4, #idNum5, #idNum6, #idNum7, #idNum8, #idNum9 iframe::-webkit-scrollbar-thumb {
       background-color: #888;
@@ -485,6 +510,8 @@ canvas.cloud{
   frameborder="0"
                      >
 ></iframe>
+	<!-- Button to Toggle Theme -->
+<button id="theme-toggle" style="position: absolute; top: 55px; right: 0px;">Switch to Night Theme</button>
 <script src="//unpkg.com/globe.gl"></script>
          
          <script type="module">          
@@ -842,7 +869,42 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     blending: THREE.AdditiveBlending,
     //side: THREE.DoubleSide
 });
+// Get the iframe element for the RSS ticker
+const rssTicker = document.getElementById('rss-ticker');
 
+// Get the button to toggle themes
+const themeToggleButton = document.getElementById('theme-toggle');
+
+// Set the initial theme (default to day)
+let isDayTheme = true;
+rssTicker.classList.add('rss-ticker-day');
+
+// Add event listener to the button to switch themes
+themeToggleButton.addEventListener('click', function() {
+  if (isDayTheme) {
+    // Switch to night theme for RSS ticker
+    rssTicker.classList.remove('rss-ticker-day');
+    rssTicker.classList.add('rss-ticker-night');
+
+    // Update globe texture to night theme
+    globe.material2.map = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
+    
+    themeToggleButton.innerHTML = "Switch to Day Theme";
+  } else {
+    // Switch to day theme for RSS ticker
+    rssTicker.classList.remove('rss-ticker-night');
+    rssTicker.classList.add('rss-ticker-day');
+
+    // Update globe texture to day theme
+    globe.material2.map = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
+    
+    themeToggleButton.innerHTML = "Switch to Night Theme";
+  }
+
+  // Toggle the theme state
+  isDayTheme = !isDayTheme;
+});
+/*
 // Function to switch between day and night textures
 function switchGlobeTexture(isDay) {
     if (isDay) {
@@ -889,7 +951,7 @@ button.addEventListener("click", () => {
     switchGlobeTexture(isDay); // Switch the texture
     button.innerHTML = isDay ? "Switch to night theme" : "Switch to day theme";
 	console.log("Button clicked!");
-});
+});*/
 
   //onst bumpTexture = new THREE.TextureLoader().load('//unpkg.com/three-globe/example/img/earth-topology.png')
   //material.bumpMap = bumpTexture
