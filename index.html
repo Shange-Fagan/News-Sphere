@@ -907,19 +907,30 @@ themeButton.addEventListener('click', () => {
     });
 
     // Update RSS Ticker's style
+    // Update RSS Ticker's style
     const rssTicker = document.getElementById('rss-ticker');
     if (rssTicker) {
         console.log('RSS Ticker found');
+        console.log('Current Display:', window.getComputedStyle(rssTicker).display);
+        console.log('Current Visibility:', window.getComputedStyle(rssTicker).visibility);
+
         if (isDay) {
             rssTicker.style.backgroundColor = "rgba(225, 225, 225, 1)"; // Day theme color
             rssTicker.style.color = "rgba(155, 155, 155, 1)";
+            rssTicker.style.display = "block"; // Ensure it is visible
+            rssTicker.style.visibility = "visible"; // Ensure it is not hidden
         } else {
             rssTicker.style.backgroundColor = "rgba(74, 74, 74, 1)"; // Night theme color
             rssTicker.style.color = "rgba(225, 225, 225, 1)";
+            rssTicker.style.display = "block"; // Ensure it is visible
+            rssTicker.style.visibility = "visible"; // Ensure it is not hidden
         }
     } else {
         console.log('RSS Ticker not found');
     }
+
+    // Update the button text
+    themeButton.textContent = isDay ? "Switch to Night Theme" : "Switch to Day Theme";
 });
 
     // Update the button text
