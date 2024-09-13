@@ -867,20 +867,20 @@ document.body.appendChild(button);
 button.style.position = "absolute";  // Use absolute positioning
 button.style.right = "0px";         // Set distance from the right side of the page
 button.style.top = "50px";           // Adjust this to position below the iframe
-button.style.padding = "7px 12px";  // Padding for better appearance
+button.style.padding = "7.5px 12.5px";  // Padding for better appearance
 button.style.fontSize = "16px";      // Font size for readability
-button.style.backgroundColor = "rgba(255, 255, 255, 0.25)";  // Light background, semi-transparent
-button.style.border = "1px solid rgba(255, 255, 255, 0.25)"; // Light border, semi-transparent
-button.style.borderRadius = "4px";   // Rounded corners
-button.style.color = "#000";         // Text color (dark text on light button)
+button.style.backgroundColor = "rgba(225, 225, 225, 0.25)";  // Light background, semi-transparent
+button.style.border = "1px solid rgba(225, 225, 225, 0.25)"; // Light border, semi-transparent
+button.style.borderRadius = "8px";   // Rounded corners
+button.style.color = "rgba(155, 155, 155, 0.5)";         // Text color (dark text on light button)
 button.style.zIndex = "9999";        // Make sure it's on top of other elements
 		 
 		
 button.onmouseover = () => {
-  button.style.backgroundColor = "rgba(255, 255, 255, 0.5)";  // More opaque on hover
+  button.style.backgroundColor = "rgba(225, 225, 225, 0.5)";  // More opaque on hover
 };
 button.onmouseout = () => {
-  button.style.backgroundColor = "rgba(255, 255, 255, 0.25)";  // Back to semi-transparent when not hovering
+  button.style.backgroundColor = "rgba(225, 225, 225, 0.25)";  // Back to semi-transparent when not hovering
 };
 
 // Toggle texture on button click
