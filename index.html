@@ -529,7 +529,7 @@ canvas.cloud{
     1,
     2000
   );
-  //camera.position.set(20, 0.5, 15).setLength(17.5);
+  camera.position.set(20, 0.5, 15).setLength(20);
   //camera.position.z = 15;
   let renderer = new THREE.WebGLRenderer({
     antialias: true,
@@ -643,253 +643,7 @@ canvas.cloud{
   });*/
   //let globe = new THREE.Points(g, m);
   //scene.add(globe);
-  /*import { GUI } from "./js/dat.gui.module.js";
-  // GUI
-  //const gui = new GUI();*/
-
-  /* Textures */
-  const textureLoader = new THREE.TextureLoader();
-
-  //const textureLoader = new THREE.TextureLoader();
-  const myTexture = [
-    textureLoader.load(
-      "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
-    ),
-    textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg"),
-    textureLoader.load("//unpkg.com/three-globe/example/img/earth-day.jpg"),
-    textureLoader.load("//unpkg.com/three-globe/example/img/earth-dark.jpg"),
-  ];
-
-  //const parameters = {
-  //GlobeTheme: 0,
-  //};
-
-  const updateAllMaterials = () => {
-    scene.traverse((child) => {
-      if (
-        child instanceof THREE.Mesh &&
-        child.material instanceof THREE.MeshPhongMaterial
-      ) {
-        //child.material = myTexture[parameters.GlobeTheme];
-        child.material.needsUpdate = true;
-        //child.material.map = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
-      }
-    });
-  };
-
-  //gui
-  // .add(parameters, "GlobeTheme", {
-  //  day: 0,
-  // night: 1,
-  // basic: 2,
-  // dark: 3,
-  //})
-  // .onFinishChange(() => {
-  //   updateAllMaterials();
-  //});
-
-  //gui.open();
-
-  const sphereWidth = 5.1;
-  const sphereHeight = 32.1;
-  const sphereDepth = 32.1;
-  let geometry = new THREE.SphereGeometry(
-    sphereWidth,
-    sphereHeight,
-    sphereDepth
-  );
-
-  const sphereWidth2 = 5;
-  const sphereHeight2 = 32.1;
-  const sphereDepth2 = 32.1;
-  const geometry2 = new THREE.SphereGeometry(
-    sphereWidth2,
-    sphereHeight2,
-    sphereDepth2
-  );
-  //const textureLoader = new THREE.TextureLoader();
-  const shaderMaterial = new THREE.ShaderMaterial({});
-
-  const material = new THREE.ShaderMaterial({
-    vertexShader: `
-                varying vec2 vertexUV;
-                varying vec3 vertexNormal;
-                   void main() {
-                        vertexUV = uv;
-                        vertexNormal = normalize(normalMatrix * normal);
-                       gl_Position = projectionMatrix
-                       * modelViewMatrix
-                       * vec4(position, 1);
-                     }
-                    `,
-    fragmentShader: `
-                    uniform sampler2D globeTexture;
-                    uniform sampler2D bumpMap;
-                    uniform sampler2D bumpScale;
-                    uniform sampler2D specularMap;
-                    uniform sampler2D specular;
-                    uniform sampler2D shininess;
-                    varying vec2 vertexUV;
-                    varying vec3 vertexNormal;
-                     void main() {
-                     float intensity = 1.05 - dot(
-                     vertexNormal, vec3(0, 0, 1.0));
-                     vec3 atmosphere = (vec3(0.3, 0.6, 1.0))
-                     * pow(intensity, 1.5);
-                        gl_FragColor = vec4(atmosphere +texture2D(globeTexture, vertexUV).xyz, 1.0),
-                         vec4(atmosphere +texture2D(bumpMap, vertexUV).xyz, 2.0);
-                     }
-                    `,
-
-    uniforms: {
-      /*"color": { value: new THREE.Color( 0xffffff ) },
-  			"diffuse": { value: new THREE.Color( 0xffffff ) },*/
-      specular: { value: new THREE.Color("grey") },
-      /*"emissive": { value: new THREE.Color( 0x000000 ) },
-  			"opacity": { value: 1 },*/
-      shininess: { value: 15 },
-      bumpMap: {
-        value: new THREE.TextureLoader().load(
-          "//unpkg.com/three-globe/example/img/earth-topology.png"
-        ),
-      },
-
-      bumpScale: {
-        value: 10,
-      },
-
-      specularMap: {
-        value: new THREE.TextureLoader().load(
-          "//unpkg.com/three-globe/example/img/earth-water.png"
-        ),
-      },
-      globeTexture: {
-        value: "",
-      },
-      /*bump: {
-                          value: new THREE.TextureLoader().load("//unpkg.com/three-globe/example/img/earth-topology.png")
-                          }*/
-    },
-  });
-
-  const atmosphere = new THREE.Mesh(
-    new THREE.SphereGeometry(5.1, 32.1, 32.1),
-    new THREE.ShaderMaterial({
-      vertexShader: `
-                varying vec3 vertexNormal;
-                   void main() {
-                        vertexNormal = normalize(normalMatrix * normal);
-                       gl_Position = projectionMatrix
-                       * modelViewMatrix
-                       * vec4(position, 1);
-                     }
-                    `,
-      fragmentShader: `
-                varying vec3 vertexNormal;
-                    void main() {
-                    float intensity = pow(0.6 - dot(
-                     vertexNormal, vec3(0, 0, 1.0)), 2.0);
-                     gl_FragColor = vec4(0.3, 0.6, 1.0, 1.0) * intensity;
-                    }
-                    `,
-      blending: THREE.AdditiveBlending,
-      side: THREE.BackSide,
-    })
-  );
-  /*{
-    const loader = new THREE.TextureLoader();
-    const texture = loader.load(
-      "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743",
-      () => {
-        const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
-        rt.fromEquirectangularTexture(renderer, texture);
-        scene.background = rt.texture;
-      }
-    );
-  }*/
-  atmosphere.scale.set(1.1, 1.1, 1.1);
-
-  const material2 = new THREE.MeshPhongMaterial({
-    specular: 0x111111,
-    shininess: 5,
-    map: textureLoader.load(
-      "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
-    ),
-    specularMap: textureLoader.load(
-      "//unpkg.com/three-globe/example/img/earth-water.png"
-    ),
-    //normalMap: textureLoader.load( '//unpkg.com/three-globe/example/img/earth-blue-marble.jpg' ),
-    //normalScale: new THREE.Vector2( 0.85, 0.85 ),
-    bumpMap: textureLoader.load(
-      "//unpkg.com/three-globe/example/img/earth-topology.png"
-    ),
-    bumpScale: 0.35,
-    blending: THREE.AdditiveBlending,
-    //side: THREE.DoubleSide
-  });
-
-  //onst bumpTexture = new THREE.TextureLoader().load('//unpkg.com/three-globe/example/img/earth-topology.png')
-  //material.bumpMap = bumpTexture
-  //material.bumpScale = 0.015
-  /*let globe = new THREE.Mesh(geometry2, material);
-  let globe2 = new THREE.Mesh(geometry, material2);
-  scene.add(atmosphere);
-  scene.add(globe);
-  scene.add(globe2);
-  // custom globe material
-  const globeMaterial = globe.material;
-  material.bumpScale = 10;
-  new THREE.TextureLoader().load(
-    "//unpkg.com/three-globe/example/img/earth-water.png",
-    (texture) => {
-      globeMaterial.specularMap = texture;
-      globeMaterial.specular = new THREE.Color("grey");
-      globeMaterial.shininess = 15;
-    }
-  );*/
-
-/*
-  setTimeout(() => {
-    // wait for scene to be populated (asynchronously)
-    var dl = new THREE.DirectionalLight(0xffffff, 1);
-    dl.position.set(1, 1, 1);
-    //scene.add(dl); // change light position to see the specularMap's effect
-  });
-  // White directional light at half intensity shining from the top.
-  const directionalLight = new THREE.DirectionalLight(0x909090, 1);
-  directionalLight.position.set(-1, -1, -1);
-  scene.add(directionalLight);
-  var dl2 = new THREE.DirectionalLight(0xffffff, 1);
-  dl2.position.set(0, 1, 1);
-  //scene.add(dl2); // change light position to see the specularMap's effect
-  var dl3 = new THREE.DirectionalLight(0xffffff, 1);
-  dl3.position.set(3, 2, 1);
-  //scene.add(dl3);
-  const light2 = new THREE.AmbientLight(0x808080); // soft white light
-  scene.add(light2);
-
-  var light = new THREE.DirectionalLight(0xf0f0f0, 1);
-  light.position.set(5, 3, 5);
-  scene.add(light);*/
-  // custom globe material
-  /* const globeMaterial = globe.material();
-      globeMaterial.bumpScale = 10;
-      new THREE.TextureLoader().load(
-        "//unpkg.com/three-globe/example/img/earth-water.png",
-        (texture) => {
-          globeMaterial.specularMap = texture;
-          globeMaterial.specular = new THREE.Color("grey");
-          globeMaterial.shininess = 15;
-        }
-      );*/
-  // <ICOSAHEDRON>
-  //let icshdrn = new THREE.Mesh(new THREE.IcosahedronGeometry(rad, 1), new THREE//.MeshBasicMaterial({color: 0x647f7f, wireframe: true}));
-  //globe.add(icshdrn);
-  // </ICOSAHEDRON>
-
-  // </GLOBE>
-
-  /*import { GUI } from "./js/dat.gui.module.js";
+  import { GUI } from "./js/dat.gui.module.js";
   // GUI
   //const gui = new GUI();
 
@@ -1084,10 +838,10 @@ var link;
         scene.background = rt.texture;
       }
     );
-  }
+  }/*
   atmosphere.scale.set(1.1, 1.1, 1.1);
 
-  /*const material2 = new THREE.MeshPhongMaterial({
+  const material2 = new THREE.MeshPhongMaterial({
     specular: 0x111111,
     shininess: 5,
     map: textureLoader.load(
@@ -1104,7 +858,7 @@ var link;
     bumpScale: 0.35,
     blending: THREE.AdditiveBlending,
     //side: THREE.DoubleSide
-  });*/
+  });
 
   //onst bumpTexture = new THREE.TextureLoader().load('//unpkg.com/three-globe/example/img/earth-topology.png')
   //material.bumpMap = bumpTexture
@@ -1172,7 +926,7 @@ var link;
           globeMaterial.specular = new THREE.Color("grey");
           globeMaterial.shininess = 15;
         }
-      );
+      );*/
   // <ICOSAHEDRON>
   //let icshdrn = new THREE.Mesh(new THREE.IcosahedronGeometry(rad, 1), new THREE//.MeshBasicMaterial({color: 0x647f7f, wireframe: true}));
   //globe.add(icshdrn);
@@ -1213,9 +967,9 @@ var link;
     ),
     bumpScale: 0.35,
     /*blending: THREE.AdditiveBlending,*/
-    //side: THREE.DoubleSide,
-  
-  /*const sphereGeometry = new THREE.SphereGeometry(5.1, 32.1, 32.1);
+    //side: THREE.DoubleSide
+  });
+  const sphereGeometry = new THREE.SphereGeometry(5.1, 32.1, 32.1);
   const globeMaterial = new THREE.ShaderMaterial({
     vertexShader: `
     varying vec2 vertexUV;
@@ -1287,7 +1041,7 @@ var link;
     console.log("Texture toggled", currentTextures[0].image.src);
   }*/
   // Example of toggling textures every 12 hours
-  /*const intervalDuration = 6 * 60 * 60 * 1000; // 12 hours in milliseconds
+  const intervalDuration = 6 * 60 * 60 * 1000; // 12 hours in milliseconds
   setInterval(toggleTexture, intervalDuration);
   function toggleTexture() {
     isDay = !isDay;
@@ -1299,7 +1053,7 @@ var link;
   /*setInterval(toggleTexture, 30000);*/
   
   // Setting link to true after 2 seconds (simulating async loading)
-  /*setTimeout(() => {
+  setTimeout(() => {
     link = true;
     console.log("link is now true");
     }, 2000);
@@ -1332,7 +1086,7 @@ var link;
   light.position.set(5, 3, 5);
   scene.add(light);*/
   // Lighting setup // Directional light simulating the sun
-  /*const directionalLight = new THREE.DirectionalLight(0xffffff, 1); 
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 1); 
 directionalLight.position.set(5, 5, 5).normalize(); scene.add(directionalLight);
 // Ambient light to provide a base level of illumination
 const ambientLight = new THREE.AmbientLight(0x404040, 1.5); 
@@ -1348,7 +1102,7 @@ scene.add(hemisphereLight);
 // Optional: Add a helper to visualize the point light position
 /*const pointLightHelper = new THREE.PointLightHelper(pointLight, 1);
 scene.add(pointLightHelper);*/
-  // </GLOBE> */
+  // </GLOBE>
 
   // <Markers>
   const markerCount = 1;
