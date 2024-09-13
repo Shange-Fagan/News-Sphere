@@ -862,6 +862,10 @@ let isDay = true;
 const button = document.createElement("button");
 button.innerHTML = "Switch to Night";
 document.body.appendChild(button);
+     button.style.position = "absolute";
+  button.style.top = "10px";
+  button.style.left = "10px";
+  button.style.zIndex = "9999";
 
 // Toggle texture on button click
 button.addEventListener("click", () => {
