@@ -653,33 +653,7 @@ canvas.cloud{
   const textureLoader = new THREE.TextureLoader();
 
 
-		 // Load day and night textures
-const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-day.jpg");
-const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
-
-// Set initial globe texture to day
-globe.material.map = dayTexture;
-globe.material.needsUpdate = true;
-
-let isDay = true; // Flag to track whether it's day or night
-
-// Create a button to toggle between day and night textures
-const button = document.createElement("button");
-button.innerHTML = "Switch to Night";
-document.body.appendChild(button);
-
-// Add event listener to toggle textures
-button.addEventListener("click", () => {
-    if (isDay) {
-        globe.material.map = nightTexture;
-        button.innerHTML = "Switch to Day";
-    } else {
-        globe.material.map = dayTexture;
-        button.innerHTML = "Switch to Night";
-    }
-    globe.material.needsUpdate = true;
-    isDay = !isDay;
-});
+		 
   //const textureLoader = new THREE.TextureLoader();
   const myTexture = [
     textureLoader.load(
@@ -839,7 +813,7 @@ button.addEventListener("click", () => {
   }
   atmosphere.scale.set(1.1, 1.1, 1.1);
 
-  const material2 = new THREE.MeshPhongMaterial({
+  /*const material2 = new THREE.MeshPhongMaterial({
     specular: 0x111111,
     shininess: 5,
     map: textureLoader.load(
@@ -856,7 +830,50 @@ button.addEventListener("click", () => {
     bumpScale: 0.35,
     blending: THREE.AdditiveBlending,
     //side: THREE.DoubleSide
-  });
+  });*/
+const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
+const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
+
+const dayBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
+const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/night-bump-map.jpg"); // Example of night bump map
+
+    const material2 = new THREE.MeshPhongMaterial({
+    specular: 0x111111,
+    shininess: 5,
+    map: dayTexture,  // Start with day texture
+    specularMap: textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png"),
+    bumpMap: dayBumpMap,  // Start with day bump map
+    bumpScale: 0.35,
+    blending: THREE.AdditiveBlending,
+    //side: THREE.DoubleSide
+});
+
+// Function to switch between day and night textures
+function switchGlobeTexture(isDay) {
+    if (isDay) {
+        material2.map = dayTexture;        // Switch to day texture
+        material2.bumpMap = dayBumpMap;    // Switch to day bump map
+    } else {
+        material2.map = nightTexture;      // Switch to night texture
+        material2.bumpMap = nightBumpMap;  // Switch to night bump map
+    }
+    material2.needsUpdate = true;          // Ensure material updates
+}
+
+// Initially, start with the day texture
+let isDay = true;
+
+// Button to switch textures
+const button = document.createElement("button");
+button.innerHTML = "Switch to Night";
+document.body.appendChild(button);
+
+// Toggle texture on button click
+button.addEventListener("click", () => {
+    isDay = !isDay; // Toggle the state
+    switchGlobeTexture(isDay); // Switch the texture
+    button.innerHTML = isDay ? "Switch to Night" : "Switch to Day";
+});
 
   //onst bumpTexture = new THREE.TextureLoader().load('//unpkg.com/three-globe/example/img/earth-topology.png')
   //material.bumpMap = bumpTexture
