@@ -2971,13 +2971,13 @@ uniform sampler2D map;
     labelRenderer.render(scene, camera);
   });
 
-  function onWindowResize() {
+  /*function onWindowResize() {
     camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
 
     renderer.setSize(innerWidth, innerHeight);
     labelRenderer.setSize(innerWidth, innerHeight);
-  }
+  }*/
 
 			/*function onDocumentMouseMove( event ) {
 
@@ -2986,15 +2986,15 @@ uniform sampler2D map;
 
 			}*/
 
-			/*function onWindowResize( event ) {
+			function onWindowResize( event ) {
 
 				camera.aspect = window.innerWidth / window.innerHeight;
 				camera.updateProjectionMatrix();
 
 				renderer.setSize( window.innerWidth, window.innerHeight );
-
-			}*/
-            		let position;
+				labelRenderer.setSize(innerWidth, innerHeight);
+			}
+            		
 			function animate() {
 
 				requestAnimationFrame( animate );
