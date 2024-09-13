@@ -8,6 +8,7 @@
      body {
       overflow: hidden;
       margin: 0;
+    z-index: 1000;
     }a, button, input, select,iframe {
         pointer-events: auto;
     }
@@ -403,7 +404,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 9998;
     background-color: rgba(225, 225, 225, 1); /* Default day color */
     color: rgba(155, 155, 155, 1); /* Default day text color */
 }
@@ -448,7 +449,7 @@
   border: 1px solid rgba(225, 225, 225, 0.25);
   border-radius: 5px;
   cursor: pointer;
-  z-index: 9999;
+  z-index: 9997;
 }
 
 #theme-toggle:hover {
