@@ -874,6 +874,14 @@ button.style.border = "1px solid rgba(255, 255, 255, 0.5)"; // Light border, sem
 button.style.borderRadius = "8px";   // Rounded corners
 button.style.color = "#000";         // Text color (dark text on light button)
 button.style.zIndex = "9999";        // Make sure it's on top of other elements
+		 
+		
+button.onmouseover = () => {
+  button.style.backgroundColor = "rgba(255, 255, 255, 0.8)";  // More opaque on hover
+};
+button.onmouseout = () => {
+  button.style.backgroundColor = "rgba(255, 255, 255, 0.5)";  // Back to semi-transparent when not hovering
+};
 
 // Toggle texture on button click
 button.addEventListener("click", () => {
