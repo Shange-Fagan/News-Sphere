@@ -860,7 +860,7 @@ let isDay = true;
 
 // Button to switch textures
 const button = document.createElement("button");
-button.innerHTML = "Toggle Globe Texture";
+button.innerHTML = "Switch to night theme";
 document.body.appendChild(button);
      button.style.position = "absolute";
   // Style the button
@@ -887,7 +887,7 @@ button.onmouseout = () => {
 button.addEventListener("click", () => {
     isDay = !isDay; // Toggle the state
     switchGlobeTexture(isDay); // Switch the texture
-    button.innerHTML = isDay ? "Toggle Globe Texture" : "Toggle Globe Texture";
+    button.innerHTML = isDay ? "Switch to night theme" : "Switch to day theme";
 	console.log("Button clicked!");
 });
 
