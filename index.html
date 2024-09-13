@@ -480,7 +480,6 @@ canvas.cloud{
 
          
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/jsm/utils/BufferGeometryUtils.js"></script>
 <script src="//unpkg.com/globe.gl"></script>
          <iframe
   id="info3"
@@ -524,6 +523,7 @@ canvas.cloud{
 		 import { GUI } from "./js/dat.gui.module.js";
   // GUI
   //const gui = new GUI();
+		 import { BufferGeometryUtils } from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/jsm/utils/BufferGeometryUtils.js';
 		 //import { BufferGeometryUtils } from '//unpkg.com/three/examples/jsm/utils/BufferGeometryUtils';
 var Detector;
             Detector = {
@@ -689,7 +689,7 @@ var Detector;
       // Event listeners
       document.addEventListener('mousemove', onDocumentMouseMove, false);
       window.addEventListener('resize', onWindowResize, false);
-    }
+    
 
     function onDocumentMouseMove(event) {
       // Handle mouse move events
@@ -699,8 +699,8 @@ var Detector;
       // Handle window resize events
     }
 
-    // Initialize
-    init();
+    /*// Initialize
+    init();*/
 			
   /*let scene = new THREE.Scene();*/
   /*let camera = new THREE.PerspectiveCamera(
