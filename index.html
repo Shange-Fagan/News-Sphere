@@ -884,40 +884,37 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     blending: THREE.AdditiveBlending,
     //side: THREE.DoubleSide
 });
-// Get the iframe element for the RSS ticker
-const rssTicker = document.getElementById('rss-ticker');
+const themeButton = document.getElementById('theme-toggle');
+let isDay = true;
 
-// Get the button to toggle themes
-const themeToggleButton = document.getElementById('theme-toggle');
+// Function to toggle RSS ticker and globe theme
+themeButton.addEventListener('click', () => {
+    // Toggle Day/Night Theme
+    isDay = !isDay;
 
-// Set the initial theme (default to day)
-let isDayTheme = true;
-rssTicker.classList.add('rss-ticker-day');
+    // Update the globe material
+    scene.traverse((child) => {
+        if (child instanceof THREE.Mesh && child.material2 instanceof THREE.MeshPhongMaterial) {
+            if (isDay) {
+                child.material2.map = textureLoader.load("//unpkg.com/three-globe/example/img/earth-day.jpg");
+            } else {
+                child.material2.map = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
+            }
+            child.material2.needsUpdate = true;
+        }
+    });
 
-// Add event listener to the button to switch themes
-themeToggleButton.addEventListener('click', function() {
-  if (isDayTheme) {
-    // Switch to night theme for RSS ticker
-    rssTicker.classList.remove('rss-ticker-day');
-    rssTicker.classList.add('rss-ticker-night');
-
-    // Update globe texture to night theme
-    globe.material2.map = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
-    
-    themeToggleButton.innerHTML = "Switch to Day Theme";
-  } else {
-    // Switch to day theme for RSS ticker
-    rssTicker.classList.remove('rss-ticker-night');
-    rssTicker.classList.add('rss-ticker-day');
-
-    // Update globe texture to day theme
-    globe.material2.map = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
-    
-    themeToggleButton.innerHTML = "Switch to Night Theme";
-  }
-
-  // Toggle the theme state
-  isDayTheme = !isDayTheme;
+    // Update RSS Ticker's style
+    const rssTicker = document.getElementById('rss-ticker'); // Ensure the correct ID or class
+    if (rssTicker) {
+        if (isDay) {
+            rssTicker.classList.remove('rss-ticker-night');
+            rssTicker.classList.add('rss-ticker-day');
+        } else {
+            rssTicker.classList.remove('rss-ticker-day');
+            rssTicker.classList.add('rss-ticker-night');
+        }
+    }
 });
 /*
 // Function to switch between day and night textures
