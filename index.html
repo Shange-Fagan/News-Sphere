@@ -907,16 +907,16 @@ themeButton.addEventListener('click', () => {
     });
 
     // Update RSS Ticker's style
-    const rssTicker = document.getElementById('rss-ticker');
-    if (rssTicker) {
-        if (isDay) {
-            rssTicker.style.backgroundColor = "rgba(225, 225, 225, 1)"; // Day theme color
-            rssTicker.style.color = "rgba(155, 155, 155, 1)";
-        } else {
-            rssTicker.style.backgroundColor = "rgba(74, 74, 74, 1)"; // Night theme color
-            rssTicker.style.color = "rgba(225, 225, 225, 1)";
-        }
+    const rssTickerElements = document.querySelectorAll('#rss-ticker, #rss-ticker *');
+rssTickerElements.forEach((element) => {
+    if (isDay) {
+        element.style.backgroundColor = "rgba(225, 225, 225, 1)"; // Day theme color
+        element.style.color = "rgba(155, 155, 155, 1)";
+    } else {
+        element.style.backgroundColor = "rgba(74, 74, 74, 1)"; // Night theme color
+        element.style.color = "rgba(225, 225, 225, 1)";
     }
+});
 
     // Update the button text
     if (isDay) {
