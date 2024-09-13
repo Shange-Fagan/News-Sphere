@@ -628,7 +628,7 @@ var Detector;
 
 				let scene = new THREE.Scene();
 
-				let geometry = new THREE.BufferGeometry();
+				//let geometry = new THREE.BufferGeometry();
 
 				//var texture = THREE.ImageUtils.loadTexture( 'https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png', null, animate );
 				var loader = new THREE.TextureLoader();
@@ -719,10 +719,10 @@ uniform sampler2D map;
 				planeGeometry.scale(scale, scale, scale);*/
 				for ( var i = 0; i < 8000; i++ ) {
 					// Clone the plane geometry for each iteration
-  					const geometry2 = planeGeometry.clone();
+  					const geometry = planeGeometry.clone();
 
 					// Create a mesh with the cloned geometry and material
-  					const plane = new THREE.Mesh(geometry2, material);
+  					const plane = new THREE.Mesh(geometry, material);
 
 					plane.position.x = Math.random() * 1000 - 500;
 					plane.position.y = - Math.random() * Math.random() * 200 - 15;
@@ -731,7 +731,7 @@ uniform sampler2D map;
 					plane.scale.x = plane.scale.y = Math.random() * Math.random() * 1.5 + 0.5;
 
 					// Add the geometry to the array
-  					geometries.push(geometry2);
+  					geometries.push(geometry);
 
 				}
 				
