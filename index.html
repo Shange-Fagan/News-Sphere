@@ -530,8 +530,15 @@ canvas.cloud{
   );
   camera.position.set(20, 0.5, 15).setLength(17);*/
   //camera.position.z = 15;
-	const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
-    camera.position.z = 15;
+	/*const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+    camera.position.z = 15;*/
+		const camera = new THREE.PerspectiveCamera(
+    30,
+    window.innerWidth / window.innerHeight,
+    1,
+    3000
+);
+camera.position.z = 6000;
 	/*const camera = new THREE.PerspectiveCamera(
 	50, window.innerWidth / window.innerHeight, 1,
     3000
