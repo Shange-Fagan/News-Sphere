@@ -1051,20 +1051,22 @@ button.addEventListener("click", () => {
     }
   );
 		 const geometry3 = new THREE.Geometry();
-		 
-var texture2 = THREE.ImageUtils.loadTexture(
+		 // Cloud texture and material
+    const cloudTextureLoader = new THREE.TextureLoader();
+    const cloudTexture = cloudTextureLoader.load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png');
+/*var texture2 = THREE.ImageUtils.loadTexture(
     "https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png",
     null,
     animate
-);
+);*/
 texture2.magFilter = THREE.LinearMipMapLinearFilter;
 texture2.minFilter = THREE.LinearMipMapLinearFilter;
 
 var fog = new THREE.Fog(0x4584b4, -100, 200);
 
-const material = new THREE.ShaderMaterial({
+const material3 = new THREE.ShaderMaterial({
     uniforms: {
-        map: { type: "t", value: texture2 },
+        map: { type: "t", value: cloudTexture },
         fogColor: { type: "c", value: fog.color },
         fogNear: { type: "f", value: fog.near },
         fogFar: { type: "f", value: fog.far }
@@ -1114,12 +1116,12 @@ for (var i = 0; i < 8000; i++) {
     THREE.GeometryUtils.merge(geometry, plane);
 }
 
-mesh = new THREE.Mesh(geometry, material);
+mesh = new THREE.Mesh(geometry3, material3);
 scene.add(mesh);
 
-mesh = new THREE.Mesh(geometry, material);
-mesh.position.z = -8000;
-scene.add(mesh);
+mesh2 = new THREE.Mesh(geometry3, material3);
+mesh2.position.z = -8000;
+scene.add(mesh2);
 
   /*setTimeout(() => {
     // wait for scene to be populated (asynchronously)
