@@ -2549,11 +2549,11 @@ button.addEventListener("click", () => {
 		 function animate() {
     requestAnimationFrame(animate);
 
-    const delta = clock.getDelta();
-    cloudMesh.position.x -= delta * 10;  // Move clouds to the left
+    //const delta = clock.getDelta();
+    /*cloudMesh.position.x -= delta * 10;  // Move clouds to the left
     if (cloudMesh.position.x < -100) {
             cloudMesh.position.x = 100;
-    }
+    }*/
 let t = clock.getElapsedTime();
     globalUniforms.time.value = t;
     label.userData.trackVisibility();
@@ -2562,7 +2562,7 @@ let t = clock.getElapsedTime();
     renderer.render(scene, camera);
     labelRenderer.render(scene, camera);
     renderer.render(scene, camera);
-		cloudMesh.position.z += 0.05;
+		//cloudMesh.position.z += 0.05;
 }
 
 animate();
