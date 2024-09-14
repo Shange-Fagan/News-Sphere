@@ -763,7 +763,7 @@ function renderClouds() {
 
   //gui.open();
 
-  const sphereWidth = 1000.1;
+  const sphereWidth = 5.1;
   const sphereHeight = 32.1;
   const sphereDepth = 32.1;
   const geometry = new THREE.SphereGeometry(
@@ -772,7 +772,7 @@ function renderClouds() {
     sphereDepth
   );
 
-  const sphereWidth2 = 1000;
+  const sphereWidth2 = 5;
   const sphereHeight2 = 32.1;
   const sphereDepth2 = 32.1;
   const geometry2 = new THREE.SphereGeometry(
@@ -846,7 +846,7 @@ function renderClouds() {
   });
 
   const atmosphere = new THREE.Mesh(
-    new THREE.SphereGeometry(1000.1, 32.1, 32.1),
+    new THREE.SphereGeometry(5.1, 32.1, 32.1),
     new THREE.ShaderMaterial({
       vertexShader: `
                 varying vec3 vertexNormal;
