@@ -839,6 +839,12 @@ canvas.cloud{
 	atmosphere.scale.set(1.1, 1.1, 1.1);	
 
 // Daytime shader
+		 // Debug function to log sky meshes and scene setup
+function debugSkyMeshes() {
+    console.log("Day Sky Mesh:", daySkyMesh);
+    console.log("Night Sky Mesh:", nightSkyMesh);
+    console.log("Scene Background:", scene.background);
+}
 const dayVertexShader = `
     varying vec3 vPosition;
     
@@ -1006,7 +1012,7 @@ const material2 = new THREE.MeshPhongMaterial({
 		scene.background = nightSkyMesh;
         }
         material2.needsUpdate = true;
-					
+				debugSkyMeshes(); // Log information for debugging	
     }
 		 
 
