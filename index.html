@@ -386,6 +386,28 @@
      iframe ::-webkit-scrollbar, ::-webkit-scrollbar-track {
         background: transparent;
      }
+	  #dayTicker {
+            display: block; /* Show day ticker by default */
+		pointer-events: auto;
+      position: fixed;
+      top: 0vh;
+      color: teal;
+      width: 100%;
+      font-family: Monospace;
+      text-align: center;
+    
+        }
+        #nightTicker {
+            display: none; /* Hide night ticker initially */
+		pointer-events: auto;
+      position: fixed;
+      top: 0vh;
+      color: teal;
+      width: 100%;
+      font-family: Monospace;
+      text-align: center;
+    
+        }
 	
    
     /*#idNum, #idNum2, #idNum3, #idNum4, #idNum5, #idNum6, #idNum7, #idNum8, #idNum9 iframe::-webkit-scrollbar-thumb {
@@ -479,7 +501,16 @@ canvas.cloud{
   <div class="text" id="idNum"></div>
 </div>
 <iframe
-  id="info3"
+  id="dayTicker"
+  width="1200"
+  height="60"
+  style="display: flex, bottom: 0px, object-fit: contain, margin: 0, padding: 0, border:none, position:absolute;"
+  sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"
+  src="https://rss.app/embed/v1/ticker/ye6DcnVZx4IHEsUK"
+  frameborder="0"
+                     >
+></iframe><iframe
+  id="nightTicker"
   width="1200"
   height="60"
   style="display: flex, bottom: 0px, object-fit: contain, margin: 0, padding: 0, border:none, position:absolute;"
