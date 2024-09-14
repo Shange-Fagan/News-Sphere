@@ -853,7 +853,25 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 */
 
 atmosphere.scale.set(1.1, 1.1, 1.1);
+// Load the cloud texture
+const cloudTexture = textureLoader.load("https://unpkg.com/three-globe/example/img/earth-clouds.png");
 
+// Create cloud material
+const cloudMaterial = new THREE.MeshPhongMaterial({
+    map: cloudTexture,
+    transparent: true,  // Clouds should be partially transparent
+    opacity: 0.6,
+});
+
+// Create a sphere for clouds, slightly larger than the earth
+const cloudGeometry = new THREE.SphereGeometry(1.02, 32, 32); // Sphere just a bit bigger than Earth
+const cloudMesh = new THREE.Mesh(cloudGeometry, cloudMaterial);
+
+// Initially, clouds are invisible
+cloudMesh.visible = false;
+
+// Add clouds to the scene
+scene.add(cloudMesh);
 // Load textures
 const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
 const dayMapTexture = "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743";
@@ -890,17 +908,21 @@ function switchGlobeTexture(theme) {
   if (theme === 'day') {
     material2.map = dayTexture;
     material2.bumpMap = dayBumpMap;
-    updateBackgroundTexture(dayMapTexture); // Update background to day map
+    texture = dayMapTexture;
+    cloudMesh.visible = false; // Hide clouds during the day
   } else if (theme === 'midday') {
     material2.map = dayTexture;
     material2.bumpMap = dayBumpMap;
-    updateBackgroundTexture(middayMapTexture); // Update background to midday map
+    texture = middayMapTexture;
+    cloudMesh.visible = true; // Show clouds at midday
   } else {
     material2.map = nightTexture;
     material2.bumpMap = nightBumpMap;
-    updateBackgroundTexture(nightMapTexture); // Update background to night map
+    texture = nightMapTexture;
+    cloudMesh.visible = false; // Hide clouds at night
   }
   material2.needsUpdate = true;
+  texture.needsUpdate = true;
 }
 
 // Initially, start with the day texture
