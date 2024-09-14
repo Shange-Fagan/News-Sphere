@@ -921,24 +921,19 @@ function updateBackgroundTexture(textureURL) {
 }
 
 // Function to switch between day, midday, and night textures and toggle clouds
-function switchGlobeTexture(theme) {
-    if (theme === 'day') {
-        material2.map = dayTexture;
-        scene.background = new THREE.Color(0x87CEFA); // Blue sky background
-        //cloudScene.visible = false; // Hide clouds
-    } /*else if (theme === 'midday') {
-        material2.map = dayTexture; // Optionally use a different texture
-        scene.background = new THREE.Color(0x87CEFA); // Light blue for midday
-        cloudScene.visible = true; // Show clouds
-    }*/ else {
-        material2.map = nightTexture;
-        scene.background = new THREE.Color(0x326696); // Dark background for night
-        //cloudScene.visible = false; // Hide clouds
+function switchGlobeTexture(isDay) {
+    if (isDay) {
+        material2.map = dayTexture;        // Switch to day texture
+	//texture = dayMapTexture;
+        material2.bumpMap = dayBumpMap;    // Switch to day bump map
+    } else {
+        material2.map = nightTexture;      // Switch to night texture
+	//texture = nightMapTexture;
+        material2.bumpMap = nightBumpMap;  // Switch to night bump map
     }
-    material2.needsUpdate = true;
-    //renderClouds(); // Start rendering clouds
+    material2.needsUpdate = true;          // Ensure material updates
+     //texture.needsUpdate = true;
 }
-
 
 // Initially, start with the day texture
 let themeState = 'day'; // Possible states: 'day', 'night'
@@ -970,13 +965,12 @@ button.onmouseout = () => {
 
 // Toggle texture on button click
 button.addEventListener("click", () => {
-  if (themeState === 'day') {
-    themeState = 'day';
-    button.innerHTML = "Switch to night theme";
-  } else (themeState === 'night') {
-    themeState = 'night';
-    button.innerHTML = "Switch to day theme";
-  }
+    isDay = !isDay; // Toggle the state
+    switchGlobeTexture(isDay); // Switch the texture
+    switchTexture(isDay); // Switch the texture
+    button.innerHTML = isDay ? "Switch to night theme" : "Switch to day theme";
+	console.log("Button clicked!");
+});
 
   switchGlobeTexture(themeState); // Switch texture based on the new state
   console.log("Theme switched to:", themeState);
