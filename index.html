@@ -1050,78 +1050,50 @@ button.addEventListener("click", () => {
       globeMaterial.shininess = 15;
     }
   );
-		 const geometry3 = new THREE.Geometry();
-		 // Cloud texture and material
+		// Cloud texture and material
     const cloudTextureLoader = new THREE.TextureLoader();
     const cloudTexture = cloudTextureLoader.load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png');
-/*var texture2 = THREE.ImageUtils.loadTexture(
-    "https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png",
-    null,
-    animate
-);*/
-texture2.magFilter = THREE.LinearMipMapLinearFilter;
-texture2.minFilter = THREE.LinearMipMapLinearFilter;
 
-var fog = new THREE.Fog(0x4584b4, -100, 200);
+    const cloudMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+            map: { type: "t", value: cloudTexture },
+            fogColor: { type: "c", value: new THREE.Color(0x4584b4) },
+            fogNear: { type: "f", value: -100 },
+            fogFar: { type: "f", value: 200 }
+        },
+        vertexShader: `
+            varying vec2 vUv;
 
-const material3 = new THREE.ShaderMaterial({
-    uniforms: {
-        map: { type: "t", value: cloudTexture },
-        fogColor: { type: "c", value: fog.color },
-        fogNear: { type: "f", value: fog.near },
-        fogFar: { type: "f", value: fog.far }
-    },
-    vertexShader: `
-                    varying vec2 vUv;
+            void main() {
+                vUv = uv;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }`,
+        fragmentShader: `
+            uniform sampler2D map;
+            uniform vec3 fogColor;
+            uniform float fogNear;
+            uniform float fogFar;
 
-                    void main() {
+            varying vec2 vUv;
 
-                        vUv = uv;
-                        gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+            void main() {
+                float depth = gl_FragCoord.z / gl_FragCoord.w;
+                float fogFactor = smoothstep(fogNear, fogFar, depth);
 
-                    }`,
-    fragmentShader: `
-                    uniform sampler2D map;
+                vec4 color = texture2D(map, vUv);
+                color.w *= pow(gl_FragCoord.z, 20.0);
+                gl_FragColor = mix(color, vec4(fogColor, color.w), fogFactor);
+            }`,
+        depthWrite: false,
+        depthTest: false,
+        transparent: true
+    });
 
-                    uniform vec3 fogColor;
-                    uniform float fogNear;
-                    uniform float fogFar;
-
-                    varying vec2 vUv;
-
-                    void main() {
-
-                        float depth = gl_FragCoord.z / gl_FragCoord.w;
-                        float fogFactor = smoothstep( fogNear, fogFar, depth );
-
-                        gl_FragColor = texture2D( map, vUv );
-                        gl_FragColor.w *= pow( gl_FragCoord.z, 20.0 );
-                        gl_FragColor = mix( gl_FragColor, vec4( fogColor, gl_FragColor.w ), fogFactor );
-
-                    }`,
-    depthWrite: false,
-    depthTest: false,
-    transparent: true
-});
-
-var plane = new THREE.Mesh(new THREE.PlaneGeometry(64, 64));
-
-for (var i = 0; i < 8000; i++) {
-    plane.position.x = Math.random() * 1000 - 500;
-    plane.position.y = -Math.random() * Math.random() * 200 - 15;
-    plane.position.z = i;
-    plane.rotation.z = Math.random() * Math.PI;
-    plane.scale.x = plane.scale.y = Math.random() * Math.random() * 1.5 + 0.5;
-
-    THREE.GeometryUtils.merge(geometry, plane);
-}
-
-mesh = new THREE.Mesh(geometry3, material3);
-scene.add(mesh);
-
-mesh2 = new THREE.Mesh(geometry3, material3);
-mesh2.position.z = -8000;
-scene.add(mesh2);
+    // Create a large plane to simulate clouds
+    const cloudGeometry = new THREE.PlaneGeometry(200, 200);
+    const cloudMesh = new THREE.Mesh(cloudGeometry, cloudMaterial);
+    cloudMesh.position.z = -2; // Place clouds behind the globe
+    scene.add(cloudMesh);
 
   /*setTimeout(() => {
     // wait for scene to be populated (asynchronously)
@@ -2592,6 +2564,11 @@ animate();
     renderer.setSize(innerWidth, innerHeight);
     labelRenderer.setSize(innerWidth, innerHeight);
   }	
+		 // Optional: Add mouse control
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.25;
+    controls.enableZoom = true;
 		 
 </script>
 <script>
