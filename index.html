@@ -836,7 +836,7 @@ canvas.cloud{
       side: THREE.BackSide,
     })
   );
-		
+	atmosphere.scale.set(1.1, 1.1, 1.1);	
 
 // Daytime shader
 const dayVertexShader = `
@@ -924,7 +924,7 @@ nightSkyMesh.visible = false;
       }
     );
   }*/
-  atmosphere.scale.set(1.1, 1.1, 1.1);
+//atmosphere.scale.set(1.1, 1.1, 1.1);
   //atmosphere.scale.set(1.0, 1.0, 1.0);
 
   /*const material2 = new THREE.MeshPhongMaterial({
