@@ -855,7 +855,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 atmosphere.scale.set(1.1, 1.1, 1.1);
 
 // Load textures
-const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg""//unpkg.com/three-globe/example/img/earth-day.jpg");
+const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
 const dayTexture2 = textureLoader.load("//unpkg.com/three-globe/example/img/earth-day.jpg");
 const dayMapTexture = "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743";
 const middayMapTexture = "js/shutterstock_2457311289.jpg";
@@ -875,33 +875,33 @@ const material2 = new THREE.MeshPhongMaterial({
   bumpScale: 0.35,
   blending: THREE.AdditiveBlending,
 });
-const loader = new THREE.TextureLoader();
-const texture = loader.load(
-  dayMapTexture,
-  () => {
+
+// Function to update the background texture
+function updateBackgroundTexture(textureURL) {
+  const loader = new THREE.TextureLoader();
+  loader.load(textureURL, (texture) => {
     const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
     rt.fromEquirectangularTexture(renderer, texture);
     scene.background = rt.texture;
-  }
-);
+  });
+}
 
 // Function to switch between day, midday, and night textures
 function switchGlobeTexture(theme) {
   if (theme === 'day') {
     material2.map = dayTexture;
     material2.bumpMap = dayBumpMap;
-    texture = dayMapTexture;
+    updateBackgroundTexture(dayMapTexture); // Update background to day map
   } else if (theme === 'midday') {
     material2.map = dayTexture2;
     material2.bumpMap = dayBumpMap;
-    texture = middayMapTexture;
+    updateBackgroundTexture(middayMapTexture); // Update background to midday map
   } else {
     material2.map = nightTexture;
     material2.bumpMap = nightBumpMap;
-    texture = nightMapTexture;
+    updateBackgroundTexture(nightMapTexture); // Update background to night map
   }
   material2.needsUpdate = true;
-  texture.needsUpdate = true;
 }
 
 // Initially, start with the day texture
@@ -948,7 +948,6 @@ button.addEventListener("click", () => {
   switchGlobeTexture(themeState); // Switch texture based on the new state
   console.log("Theme switched to:", themeState);
 });
-		 
 /*// Function to switch between day and night textures
 function switchGlobeTexture(isDay) {
     if (isDay) {
