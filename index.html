@@ -880,7 +880,7 @@ const nightFragmentShader = `
 
 // Create geometry for the sky
 const skyGeometry = new THREE.SphereGeometry(10000, 32, 32);
-skyGeometry.scale(1, 1, 1); // Invert geometry to make it inside-out
+skyGeometry.scale(-1, 1, 1); // Invert geometry to make it inside-out
 
 // Create daytime material
 const dayMaterial = new THREE.ShaderMaterial({
