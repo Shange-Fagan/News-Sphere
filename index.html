@@ -919,6 +919,26 @@ console.log("Night Sky Mesh Geometry:", nightSkyMesh.geometry)
 // Initially set the day sky mesh to be visible
 daySkyMesh.visible = true;
 nightSkyMesh.visible = false;
+		 const basicVertexShader = `
+    void main() {
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+`;
+
+const basicFragmentShader = `
+    void main() {
+        gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); // Red color
+    }
+`;
+
+const basicMaterial = new THREE.ShaderMaterial({
+    vertexShader: basicVertexShader,
+    fragmentShader: basicFragmentShader,
+    side: THREE.BackSide
+});
+
+const basicSkyMesh = new THREE.Mesh(skyGeometry, basicMaterial);
+scene.add(basicSkyMesh);
   /*{
     const loader = new THREE.TextureLoader();
     const texture = loader.load(
