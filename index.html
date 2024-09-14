@@ -851,15 +851,6 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     //side: THREE.DoubleSide
 });
 */
-const loader = new THREE.TextureLoader();
-const texture = loader.load(
-  dayMapTexture,
-  () => {
-    const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
-    rt.fromEquirectangularTexture(renderer, texture);
-    scene.background = rt.texture;
-  }
-);
 
 atmosphere.scale.set(1.1, 1.1, 1.1);
 
@@ -883,6 +874,15 @@ const material2 = new THREE.MeshPhongMaterial({
   bumpScale: 0.35,
   blending: THREE.AdditiveBlending,
 });
+const loader = new THREE.TextureLoader();
+const texture = loader.load(
+  dayMapTexture,
+  () => {
+    const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+    rt.fromEquirectangularTexture(renderer, texture);
+    scene.background = rt.texture;
+  }
+);
 
 // Function to switch between day, midday, and night textures
 function switchGlobeTexture(theme) {
