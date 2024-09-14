@@ -1068,14 +1068,14 @@ const material2 = new THREE.MeshPhongMaterial({
 // Set the initial scene background to day HDRI
 let dayHdrTextureCube;
 		 let nightHdrTextureCube;
-scene.background = dayHdrTextureCube;
-		 function switchBackgroundTexture(isDay) {
+//scene.background = dayHdrTextureCube;
+		 /*function switchBackgroundTexture(isDay) {
   if (isDay) {
     scene.background = dayHdrTextureCube;
   } else {
     scene.background = nightHdrTextureCube;
   }
-}
+}*/
     function switchGlobeTexture(isDay) {
         if (isDay) {
             material2.map = dayTexture;
@@ -1134,7 +1134,7 @@ scene.background = dayHdrTextureCube;
 button.addEventListener("click", () => {
   isDay = !isDay; // Toggle the state
   switchGlobeTexture(isDay); // Switch the globe texture
-  switchBackgroundTexture(isDay); // Switch the background HDRI
+  //switchBackgroundTexture(isDay); // Switch the background HDRI
   switchSkyColor(isDay); // Switch the sky color
   button.innerHTML = isDay ? "Switch to night theme" : "Switch to day theme";
   
@@ -1143,7 +1143,7 @@ button.addEventListener("click", () => {
 
     // Initially, start with the day texture
     switchGlobeTexture(isDay);
-		 switchBackgroundTexture(isDay);
+		 
     console.log("Theme switched to:", isDay ? 'day' : 'night');
 		
 
