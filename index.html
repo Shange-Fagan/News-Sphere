@@ -530,13 +530,8 @@ canvas.cloud{
   );
   camera.position.set(20, 0.5, 15).setLength(17);*/
   //camera.position.z = 15;
-	const camera = new THREE.PerspectiveCamera(
-    30,
-    window.innerWidth / window.innerHeight,
-    1,
-    10000
-);
-camera.position.z = 10;
+	const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+    camera.position.z = 15;
 	/*const camera = new THREE.PerspectiveCamera(
 	50, window.innerWidth / window.innerHeight, 1,
     3000
@@ -721,7 +716,12 @@ function renderClouds() {
     camera.position.z = -position + 8000;
     cloudRenderer.render(cloudScene, camera);
 }
-
+// Light setup
+    const ambientLight = new THREE.AmbientLight(0x404040);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(1, 1, 1).normalize();
+    scene.add(ambientLight);
+    scene.add(directionalLight);
 
 
   /* Textures */
