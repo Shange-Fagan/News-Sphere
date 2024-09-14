@@ -855,7 +855,8 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 atmosphere.scale.set(1.1, 1.1, 1.1);
 
 // Load textures
-const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
+const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg""//unpkg.com/three-globe/example/img/earth-day.jpg");
+const dayTexture2 = textureLoader.load("//unpkg.com/three-globe/example/img/earth-day.jpg");
 const dayMapTexture = "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743";
 const middayMapTexture = "js/shutterstock_2457311289.jpg";
 const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
@@ -891,7 +892,7 @@ function switchGlobeTexture(theme) {
     material2.bumpMap = dayBumpMap;
     texture = dayMapTexture;
   } else if (theme === 'midday') {
-    material2.map = dayTexture;
+    material2.map = dayTexture2;
     material2.bumpMap = dayBumpMap;
     texture = middayMapTexture;
   } else {
