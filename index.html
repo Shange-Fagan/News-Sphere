@@ -677,11 +677,11 @@ var start_time = Date.now(); // Ensure start_time is initialized
 	const textureLoader = new THREE.TextureLoader();
 		 
 // Light setup
-    const ambientLight = new THREE.AmbientLight(0x404040);
+    /*const ambientLight = new THREE.AmbientLight(0x404040);
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(1, 1, 1).normalize();
     scene.add(ambientLight);
-    scene.add(directionalLight);
+    scene.add(directionalLight);*/
 
 
   /* Textures */
@@ -1085,7 +1085,7 @@ button.addEventListener("click", () => {
     cloudMesh.position.z = -2; // Place clouds behind the globe
     scene.add(cloudMesh);
 
-  /*setTimeout(() => {
+  setTimeout(() => {
     // wait for scene to be populated (asynchronously)
     var dl = new THREE.DirectionalLight(0xffffff, 1);
     dl.position.set(1, 1, 1);
@@ -1106,7 +1106,7 @@ button.addEventListener("click", () => {
 
   var light = new THREE.DirectionalLight(0xf0f0f0, 1);
   light.position.set(5, 3, 5);
-  scene.add(light);*/
+  scene.add(light);
 
   // <Markers>
   const markerCount = 1;
