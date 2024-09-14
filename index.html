@@ -1056,9 +1056,26 @@ button.addEventListener("click", () => {
 
     // Create a large plane for clouds
     const cloudGeometry = new THREE.PlaneGeometry(200, 200);
-    const cloudMesh = new THREE.Mesh(cloudGeometry, cloudMaterial);
-    cloudMesh.position.z = -2; // Place clouds behind the globe
-    scene.add(cloudMesh);
+    var cloudMaterial = new THREE.MeshBasicMaterial({
+    map: cloudTexture, // Ensure this is your cloud texture
+    transparent: true
+});
+
+for (var i = 0; i < 8000; i++) {
+    var cloud = new THREE.Mesh(cloudGeometry, cloudMaterial);
+
+    // Randomly position clouds in front of or behind the globe
+    cloud.position.x = Math.random() * 1000 - 500;
+    cloud.position.y = Math.random() * 1000 - 500;
+    
+    // Control Z position to make some clouds appear in front of the globe
+    cloud.position.z = Math.random() < 0.5 ? Math.random() * 200 : Math.random() * -200;
+
+    cloud.rotation.z = Math.random() * Math.PI;
+    cloud.scale.x = cloud.scale.y = Math.random() * 1.5 + 0.5;
+
+    scene.add(cloud);
+}
 		/*// Cloud texture and material
     const cloudTextureLoader = new THREE.TextureLoader();
     const cloudTexture = cloudTextureLoader.load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png');
