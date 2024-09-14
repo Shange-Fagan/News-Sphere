@@ -974,7 +974,7 @@ function switchSkyColor(isDay) {
 		 const hdrLoader = new THREE.TextureLoader(); // Ensure you have included RGBELoader for HDRIs
 
 // Load HDRI textures
-const dayHdrTexture = hdrLoader.load(
+/*const dayHdrTexture = hdrLoader.load(
   "js/shutterstock_2457311289.jpg",
   function (texture) {
     const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
@@ -995,7 +995,7 @@ const dayHdrTexture = hdrLoader.load(
       scene.background = nightHdrTextureCube;
     }
   }
-);
+);*/
 //atmosphere.scale.set(1.1, 1.1, 1.1);
   //atmosphere.scale.set(1.0, 1.0, 1.0);
 
@@ -1068,7 +1068,7 @@ const material2 = new THREE.MeshPhongMaterial({
 // Set the initial scene background to day HDRI
 let dayHdrTextureCube;
 		 let nightHdrTextureCube;
-//scene.background = dayHdrTextureCube;
+scene.background = skyMesh;
 		 /*function switchBackgroundTexture(isDay) {
   if (isDay) {
     scene.background = dayHdrTextureCube;
