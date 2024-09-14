@@ -2548,8 +2548,8 @@ button.addEventListener("click", () => {
 
     const delta = clock.getDelta();
     cloudMesh.position.x -= delta * 10;  // Move clouds to the left
-    if (cloudMesh.position.x < -1000) {
-        cloudMesh.position.x = 0;  // Reset position
+    if (cloudMesh.position.x < -100) {
+            cloudMesh.position.x = 100;  // Reset position
     }
 let t = clock.getElapsedTime();
     globalUniforms.time.value = t;
