@@ -992,12 +992,15 @@ const material2 = new THREE.MeshPhongMaterial({
             material2.map = dayTexture;
             material2.bumpMap = dayBumpMap;
 	//scene.background = new THREE.Color(0x87CEFA);
+		scene.background = daySkyMesh;
         } else {
             material2.map = nightTexture;
             material2.bumpMap = nightBumpMap;
 	//scene.background = new THREE.Color(0x326696);
+		scene.background = nightSkyMesh;
         }
         material2.needsUpdate = true;
+	    scene.background.needsUpdate = true;
     }
 
     // Button to switch textures
