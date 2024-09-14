@@ -2271,7 +2271,15 @@ button.addEventListener("click", () => {
       let iid = intersections[0].instanceId;
       let mi = markerInfo[iid];
       divID.innerHTML = `<div class="iframe-container"> <iframe width="250" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"  src="https://rss.app/embed/v1/carousel/dIqCIlIGNRu8C6sq"    frameborder="0"></iframe></div>`;
-          
+       // Prevent OrbitControls from being affected when clicking the button
+	divID.addEventListener("mousedown", (event) => {
+    event.stopPropagation(); // Prevents click from affecting OrbitControls
+});
+
+// Similarly, for other events like mousemove or touchstart
+divID.addEventListener("touchstart", (event) => {
+    event.stopPropagation();
+});   
            
       /*<link rel="stylesheet" href="style.css"> <!--Copy this line of code-->*/
       /*divMag.innerHTML = `Mag: <b>${mi.mag}</b>`;
@@ -2316,6 +2324,14 @@ button.addEventListener("click", () => {
       let iid2 = intersections2[0].instanceId;
       let mi2 = markerInfo2[iid2];
       divID2.innerHTML = `<div class="iframe-container"> <iframe width="250" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"  src="https://rss.app/embed/v1/carousel/nHzl6hU0p8ZLsVMY"    frameborder="0"></iframe></div>`;
+	    divID2.addEventListener("mousedown", (event) => {
+    event.stopPropagation(); // Prevents click from affecting OrbitControls
+});
+
+// Similarly, for other events like mousemove or touchstart
+divID2.addEventListener("touchstart", (event) => {
+    event.stopPropagation();
+});   
       /*divMag.innerHTML = `Mag: <b>${mi.mag}</b>`;
       divCrd.innerHTML = `X: <b>${mi.crd.x.toFixed(2)}</b>; Y: <b>${mi.crd.y.toFixed(2)}</b>; Z: <b>${mi.crd.z.toFixed(2)}</b>`;*/
       label2.position.copy(mi2.crd2);
@@ -2357,6 +2373,14 @@ button.addEventListener("click", () => {
       let iid3 = intersections3[0].instanceId;
       let mi3 = markerInfo3[iid3];
       divID3.innerHTML = `<div class="iframe-container"> <iframe width="250" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"  src="https://rss.app/embed/v1/carousel/j4Lz0RvN9tozg8ti"     frameborder="0"></iframe></div>`;
+	    divID3.addEventListener("mousedown", (event) => {
+    event.stopPropagation(); // Prevents click from affecting OrbitControls
+});
+
+// Similarly, for other events like mousemove or touchstart
+divID3.addEventListener("touchstart", (event) => {
+    event.stopPropagation();
+});   
       /*divMag.innerHTML = `Mag: <b>${mi.mag}</b>`;
       divCrd.innerHTML = `X: <b>${mi.crd.x.toFixed(2)}</b>; Y: <b>${mi.crd.y.toFixed(2)}</b>; Z: <b>${mi.crd.z.toFixed(2)}</b>`;*/
       label3.position.copy(mi3.crd3);
@@ -2398,6 +2422,14 @@ button.addEventListener("click", () => {
       let iid4 = intersections4[0].instanceId;
       let mi4 = markerInfo4[iid4];
       divID4.innerHTML = `<div class="iframe-container"> <iframe width="250" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"  src="https://rss.app/embed/v1/carousel/egKZAx1vbuN40QJ5"     frameborder="0"></iframe></div>`;
+	    divID4.addEventListener("mousedown", (event) => {
+    event.stopPropagation(); // Prevents click from affecting OrbitControls
+});
+
+// Similarly, for other events like mousemove or touchstart
+divID4.addEventListener("touchstart", (event) => {
+    event.stopPropagation();
+});   
       /*divMag.innerHTML = `Mag: <b>${mi.mag}</b>`;
       divCrd.innerHTML = `X: <b>${mi.crd.x.toFixed(2)}</b>; Y: <b>${mi.crd.y.toFixed(2)}</b>; Z: <b>${mi.crd.z.toFixed(2)}</b>`;*/
       label4.position.copy(mi4.crd4);
@@ -2439,6 +2471,14 @@ button.addEventListener("click", () => {
       let iid5 = intersections5[0].instanceId;
       let mi5 = markerInfo5[iid5];
       divID5.innerHTML = `<div class="iframe-container"> <iframe width="250" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"  src="https://rss.app/embed/v1/carousel/zTDTwzKLAC10n4Hx"    frameborder="0"></iframe></div>`;
+	    divID5.addEventListener("mousedown", (event) => {
+    event.stopPropagation(); // Prevents click from affecting OrbitControls
+});
+
+// Similarly, for other events like mousemove or touchstart
+divID5.addEventListener("touchstart", (event) => {
+    event.stopPropagation();
+});   
       /*divMag.innerHTML = `Mag: <b>${mi.mag}</b>`;
       divCrd.innerHTML = `X: <b>${mi.crd.x.toFixed(2)}</b>; Y: <b>${mi.crd.y.toFixed(2)}</b>; Z: <b>${mi.crd.z.toFixed(2)}</b>`;*/
       label5.position.copy(mi5.crd5);
@@ -2480,6 +2520,14 @@ button.addEventListener("click", () => {
       let iid6 = intersections6[0].instanceId;
       let mi6 = markerInfo6[iid6];
       divID6.innerHTML = `<div class="iframe-container"> <iframe width="250" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"  src="https://rss.app/embed/v1/carousel/dwbg7NploOubDAzi"   frameborder="0"></iframe></div>`;
+	    divID6.addEventListener("mousedown", (event) => {
+    event.stopPropagation(); // Prevents click from affecting OrbitControls
+});
+
+// Similarly, for other events like mousemove or touchstart
+divID6.addEventListener("touchstart", (event) => {
+    event.stopPropagation();
+});   
       /*divMag.innerHTML = `Mag: <b>${mi.mag}</b>`;
       /*divMag.innerHTML = `Mag: <b>${mi.mag}</b>`;
       divCrd.innerHTML = `X: <b>${mi.crd.x.toFixed(2)}</b>; Y: <b>${mi.crd.y.toFixed(2)}</b>; Z: <b>${mi.crd.z.toFixed(2)}</b>`;*/
@@ -2522,6 +2570,14 @@ button.addEventListener("click", () => {
       let iid7 = intersections7[0].instanceId;
       let mi7 = markerInfo7[iid7];
       divID7.innerHTML = `<div class="iframe-container"> <iframe width="250" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"  src="https://rss.app/embed/v1/carousel/H7fYbpNYSCQC0Kob"  frameborder="0"></iframe></div>`;
+	    divID7.addEventListener("mousedown", (event) => {
+    event.stopPropagation(); // Prevents click from affecting OrbitControls
+});
+
+// Similarly, for other events like mousemove or touchstart
+divID7.addEventListener("touchstart", (event) => {
+    event.stopPropagation();
+});   
       /*divMag.innerHTML = `Mag: <b>${mi.mag}</b>`;
       divCrd.innerHTML = `X: <b>${mi.crd.x.toFixed(2)}</b>; Y: <b>${mi.crd.y.toFixed(2)}</b>; Z: <b>${mi.crd.z.toFixed(2)}</b>`;*/
       label7.position.copy(mi7.crd7);
@@ -2563,6 +2619,14 @@ button.addEventListener("click", () => {
       let iid8 = intersections8[0].instanceId;
       let mi8 = markerInfo8[iid8];
       divID8.innerHTML = `<div class="iframe-container"> <iframe width="250" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"  src="https://rss.app/embed/v1/carousel/t8w4T1GZ8wZ4bHWQ" frameborder="0"></iframe></div>`;
+	    divID8.addEventListener("mousedown", (event) => {
+    event.stopPropagation(); // Prevents click from affecting OrbitControls
+});
+
+// Similarly, for other events like mousemove or touchstart
+divID8.addEventListener("touchstart", (event) => {
+    event.stopPropagation();
+});   
       /*divMag.innerHTML = `Mag: <b>${mi.mag}</b>`;
       divCrd.innerHTML = `X: <b>${mi.crd.x.toFixed(2)}</b>; Y: <b>${mi.crd.y.toFixed(2)}</b>; Z: <b>${mi.crd.z.toFixed(2)}</b>`;*/
       label8.position.copy(mi8.crd8);
@@ -2604,6 +2668,14 @@ button.addEventListener("click", () => {
       let iid9 = intersections9[0].instanceId;
       let mi9 = markerInfo9[iid9];
       divID9.innerHTML = `<div class="iframe-container"> <iframe width="250" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"  src="https://rss.app/embed/v1/carousel/1OFmElxxIikoarNg" frameborder="0"></iframe></div>`;
+	    divID9.addEventListener("mousedown", (event) => {
+    event.stopPropagation(); // Prevents click from affecting OrbitControls
+});
+
+// Similarly, for other events like mousemove or touchstart
+divID9.addEventListener("touchstart", (event) => {
+    event.stopPropagation();
+});   
       /*divMag.innerHTML = `Mag: <b>${mi.mag}</b>`;
       divCrd.innerHTML = `X: <b>${mi.crd.x.toFixed(2)}</b>; Y: <b>${mi.crd.y.toFixed(2)}</b>; Z: <b>${mi.crd.z.toFixed(2)}</b>`;*/
       label9.position.copy(mi9.crd9);
