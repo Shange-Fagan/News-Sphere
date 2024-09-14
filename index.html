@@ -836,6 +836,77 @@ canvas.cloud{
       side: THREE.BackSide,
     })
   );
+		
+
+// Daytime shader
+const dayVertexShader = `
+    varying vec3 vPosition;
+    
+    void main() {
+        vPosition = position;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+`;
+
+const dayFragmentShader = `
+    varying vec3 vPosition;
+    
+    void main() {
+        float intensity = max(0.0, dot(normalize(vPosition), vec3(0.0, 0.0, 1.0)));
+        vec3 color = mix(vec3(0.5, 0.7, 1.0), vec3(0.1, 0.2, 0.5), intensity);
+        gl_FragColor = vec4(color, 1.0);
+    }
+`;
+
+// Nighttime shader
+const nightVertexShader = `
+    varying vec3 vPosition;
+    
+    void main() {
+        vPosition = position;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+`;
+
+const nightFragmentShader = `
+    varying vec3 vPosition;
+    
+    void main() {
+        float stars = smoothstep(0.1, 0.5, abs(vPosition.z));
+        vec3 color = mix(vec3(0.0, 0.0, 0.2), vec3(1.0, 1.0, 1.0), stars);
+        gl_FragColor = vec4(color, 1.0);
+    }
+`;
+
+// Create geometry for the sky
+const skyGeometry = new THREE.SphereGeometry(10000, 32, 32);
+skyGeometry.scale(-1, 1, 1); // Invert geometry to make it inside-out
+
+// Create daytime material
+const dayMaterial = new THREE.ShaderMaterial({
+    vertexShader: dayVertexShader,
+    fragmentShader: dayFragmentShader,
+    side: THREE.BackSide
+});
+
+// Create nighttime material
+const nightMaterial = new THREE.ShaderMaterial({
+    vertexShader: nightVertexShader,
+    fragmentShader: nightFragmentShader,
+    side: THREE.BackSide
+});
+
+// Create daytime and nighttime meshes
+const daySkyMesh = new THREE.Mesh(skyGeometry, dayMaterial);
+const nightSkyMesh = new THREE.Mesh(skyGeometry, nightMaterial);
+
+// Add to the scene
+scene.add(daySkyMesh);
+scene.add(nightSkyMesh);
+
+// Initially set the day sky mesh to be visible
+daySkyMesh.visible = true;
+nightSkyMesh.visible = false;
   /*{
     const loader = new THREE.TextureLoader();
     const texture = loader.load(
@@ -920,11 +991,11 @@ const material2 = new THREE.MeshPhongMaterial({
         if (isDay) {
             material2.map = dayTexture;
             material2.bumpMap = dayBumpMap;
-	scene.background = new THREE.Color(0x87CEFA);
+	//scene.background = new THREE.Color(0x87CEFA);
         } else {
             material2.map = nightTexture;
             material2.bumpMap = nightBumpMap;
-	scene.background = new THREE.Color(0x326696);
+	//scene.background = new THREE.Color(0x326696);
         }
         material2.needsUpdate = true;
     }
@@ -959,6 +1030,9 @@ const material2 = new THREE.MeshPhongMaterial({
         isDay = !isDay; // Toggle the state
         switchGlobeTexture(isDay); // Switch the texture
         button.innerHTML = isDay ? "Switch to night theme" : "Switch to day theme";
+	// Show the appropriate sky mesh
+    	daySkyMesh.visible = isDay;
+    nightSkyMesh.visible = !isDay;
         console.log("Button clicked!");
     });
 
