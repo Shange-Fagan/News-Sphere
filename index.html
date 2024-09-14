@@ -679,7 +679,7 @@ canvas.cloud{
 	//scene.add(globeMesh);
 	
 	// Create the clouds layer (a slightly bigger sphere)
-	const cloudsGeometry = new THREE.SphereGeometry(0.52, 32, 32);
+	const cloudsGeometry = new THREE.SphereGeometry(5.2, 32, 32);
 	const cloudsMaterial = new THREE.MeshPhongMaterial({
 	  map: cloudsTexture,
 	  transparent: true,
@@ -688,12 +688,12 @@ canvas.cloud{
 	const cloudsMesh = new THREE.Mesh(cloudsGeometry, cloudsMaterial);
 	scene.add(cloudsMesh);
 	
-	/*// Lighting for the scene
+	// Lighting for the scene
 	const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
 	scene.add(ambientLight);
 	const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 	directionalLight.position.set(5, 3, 5);
-	scene.add(directionalLight);*/
+	scene.add(directionalLight);
 	
 	// Animation loop to rotate the clouds
 	//function animate() {
@@ -1095,7 +1095,7 @@ button.addEventListener("click", () => {
     }
   );
 
-  setTimeout(() => {
+  /*setTimeout(() => {
     // wait for scene to be populated (asynchronously)
     var dl = new THREE.DirectionalLight(0xffffff, 1);
     dl.position.set(1, 1, 1);
@@ -1116,7 +1116,7 @@ button.addEventListener("click", () => {
 
   var light = new THREE.DirectionalLight(0xf0f0f0, 1);
   light.position.set(5, 3, 5);
-  scene.add(light);
+  scene.add(light);*/
 
   // <Markers>
   const markerCount = 1;
