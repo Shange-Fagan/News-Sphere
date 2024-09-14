@@ -831,7 +831,10 @@ canvas.cloud{
     //side: THREE.DoubleSide
   });*/
 const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
+const dayMapTexture = textureLoader.load("https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743");
+const middayMapTexture = textureLoader.load("js/shutterstock_2457311289.jpg");
 const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
+const nightMapTexture = textureLoader.load("https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743");
 
 const dayBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
 const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png"); // Example of night bump map
@@ -848,18 +851,121 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     //side: THREE.DoubleSide
 });
 
+const loader = new THREE.TextureLoader();
+const texture = loader.load(
+  "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743",
+  () => {
+    const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+    rt.fromEquirectangularTexture(renderer, texture);
+    scene.background = rt.texture;
+  }
+);
 
+atmosphere.scale.set(1.1, 1.1, 1.1);
+
+// Load textures
+const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
+const dayMapTexture = textureLoader.load("https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743");
+const middayMapTexture = textureLoader.load("js/shutterstock_2457311289.jpg");
+const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
+const nightMapTexture = textureLoader.load("https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743");
+
+const dayBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
+const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
+
+// Create the material
+const material2 = new THREE.MeshPhongMaterial({
+  specular: 0x111111,
+  shininess: 5,
+  map: dayTexture, // Start with day texture
+  specularMap: textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png"),
+  bumpMap: dayBumpMap, // Start with day bump map
+  bumpScale: 0.35,
+  blending: THREE.AdditiveBlending,
+});
+
+// Function to switch between day, midday, and night textures
+function switchGlobeTexture(theme) {
+  if (theme === 'day') {
+    material2.map = dayTexture;
+    material2.bumpMap = dayBumpMap;
+    texture = dayMapTexture;
+  } else if (theme === 'midday') {
+    material2.map = dayTexture;
+    material2.bumpMap = dayBumpMap;
+    texture = middayMapTexture;
+  } else {
+    material2.map = nightTexture;
+    material2.bumpMap = nightBumpMap;
+    texture = nightMapTexture;
+  }
+  material2.needsUpdate = true;
+  texture.needsUpdate = true;
+}
+
+// Initially, start with the day texture
+let themeState = 'day'; // Possible states: 'day', 'midday', 'night'
+
+// Button to switch textures
+const button = document.createElement("button");
+button.innerHTML = "Switch to midday theme";
+document.body.appendChild(button);
+
+// Style the button
+button.style.position = "absolute";
+button.style.right = "0px";
+button.style.top = "55px";
+button.style.padding = "4.5px 9.5px";
+button.style.fontSize = "12px";
+button.style.backgroundColor = "rgba(225, 225, 225, 0.25)";
+button.style.border = "1px solid rgba(225, 225, 225, 0.25)";
+button.style.borderRadius = "8px";
+button.style.color = "rgba(155, 155, 155, 0.5)";
+button.style.zIndex = "9999";
+
+// Hover effects
+button.onmouseover = () => {
+  button.style.backgroundColor = "rgba(225, 225, 225, 0.35)";
+};
+button.onmouseout = () => {
+  button.style.backgroundColor = "rgba(225, 225, 225, 0.25)";
+};
+
+// Toggle texture on button click
+button.addEventListener("click", () => {
+  if (themeState === 'day') {
+    themeState = 'midday';
+    button.innerHTML = "Switch to night theme";
+  } else if (themeState === 'midday') {
+    themeState = 'night';
+    button.innerHTML = "Switch to day theme";
+  } else {
+    themeState = 'day';
+    button.innerHTML = "Switch to midday theme";
+  }
+
+  switchGlobeTexture(themeState); // Switch texture based on the new state
+  console.log("Theme switched to:", themeState);
+});
 		 
-// Function to switch between day and night textures
+/*// Function to switch between day and night textures
 function switchGlobeTexture(isDay) {
     if (isDay) {
         material2.map = dayTexture;        // Switch to day texture
+	texture = dayMapTexture;
         material2.bumpMap = dayBumpMap;    // Switch to day bump map
-    } else {
+    } else (isMidDay) {
+        material2.map = nightTexture;      // Switch to midday texture
+	texture = middayMapTexture;
+        material2.bumpMap = nightBumpMap;  // Switch to night bump map
+    }
+     else {
         material2.map = nightTexture;      // Switch to night texture
+	texture = nightMapTexture;
         material2.bumpMap = nightBumpMap;  // Switch to night bump map
     }
     material2.needsUpdate = true;          // Ensure material updates
+     texture.needsUpdate = true;
 }
 
 // Initially, start with the day texture
@@ -894,9 +1000,10 @@ button.onmouseout = () => {
 button.addEventListener("click", () => {
     isDay = !isDay; // Toggle the state
     switchGlobeTexture(isDay); // Switch the texture
-    button.innerHTML = isDay ? "Switch to night theme" : "Switch to day theme";
+    switchTexture(isDay); // Switch the texture
+    button.innerHTML = isDay ? "Switch to night theme" : "Switch to day theme": "Switch to midday theme";
 	console.log("Button clicked!");
-});
+});*/
 
   //onst bumpTexture = new THREE.TextureLoader().load('//unpkg.com/three-globe/example/img/earth-topology.png')
   //material.bumpMap = bumpTexture
