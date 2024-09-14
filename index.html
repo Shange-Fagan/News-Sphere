@@ -799,7 +799,7 @@ canvas.cloud{
       side: THREE.BackSide,
     })
   );
-  {
+  /*{
     const loader = new THREE.TextureLoader();
     const texture = loader.load(
       "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743",
@@ -809,7 +809,7 @@ canvas.cloud{
         scene.background = rt.texture;
       }
     );
-  }
+  }*/
   atmosphere.scale.set(1.1, 1.1, 1.1);
 
   /*const material2 = new THREE.MeshPhongMaterial({
@@ -850,10 +850,10 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     blending: THREE.AdditiveBlending,
     //side: THREE.DoubleSide
 });
-
+*/
 const loader = new THREE.TextureLoader();
 const texture = loader.load(
-  "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743",
+  dayMapTexture,
   () => {
     const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
     rt.fromEquirectangularTexture(renderer, texture);
@@ -865,10 +865,10 @@ atmosphere.scale.set(1.1, 1.1, 1.1);
 
 // Load textures
 const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
-const dayMapTexture = textureLoader.load("https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743");
-const middayMapTexture = textureLoader.load("js/shutterstock_2457311289.jpg");
+const dayMapTexture = "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743";
+const middayMapTexture = "js/shutterstock_2457311289.jpg";
 const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
-const nightMapTexture = textureLoader.load("https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743");
+const nightMapTexture = "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743";
 
 const dayBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
 const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
