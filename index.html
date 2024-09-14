@@ -661,8 +661,11 @@ canvas.cloud{
 
 		 
 	const textureLoader = new THREE.TextureLoader();
+		 // Cloud setup
+	const cloudTexture = textureLoader.load("https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png");
+
 	
-		 const fog = new THREE.Fog(0x4584b4, -100, 3000);
+		  const fog = new THREE.Fog(0x4584b4, -100, 3000);
 
 const cloudMaterial = new THREE.ShaderMaterial({
     uniforms: {
