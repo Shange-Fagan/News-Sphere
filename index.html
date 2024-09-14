@@ -981,7 +981,7 @@ const dayHdrTexture = hdrLoader.load(
     rt.fromEquirectangularTexture(renderer, texture);
     dayHdrTextureCube = rt.texture;
     if (isDay) {
-      /*scene.background = dayHdrTextureCube;*/
+      scene.background = dayHdrTextureCube;
     }
   }
 );
@@ -1068,10 +1068,10 @@ const material2 = new THREE.MeshPhongMaterial({
 // Set the initial scene background to day HDRI
 let dayHdrTextureCube;
 		 let nightHdrTextureCube;
-scene.background = skyMesh;
+scene.background = scene.background = dayHdrTextureCube;;
 		 function switchBackgroundTexture(isDay) {
   if (isDay) {
-    scene.background = skyMesh;
+    scene.background = dayHdrTextureCube;;
   } else {
     scene.background = nightHdrTextureCube;
   }
