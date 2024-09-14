@@ -702,9 +702,9 @@ const cloudMaterial = new THREE.ShaderMaterial({
 });
 
 // Create cloud geometry
-const cloudGeometry = new THREE.PlaneGeometry(1000, 1000);
+const cloudGeometry = new THREE.PlaneGeometry(200, 200);
 const cloudMesh = new THREE.Mesh(cloudGeometry, cloudMaterial);
-cloudMesh.position.z = -5;  // Slightly behind the globe
+cloudMesh.position.z = -2;  // Slightly behind the globe
 scene.add(cloudMesh);
 const cloudRenderer = new THREE.WebGLRenderer({ antialias: false });
 cloudRenderer.setSize(window.innerWidth, window.innerHeight);
