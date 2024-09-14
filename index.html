@@ -951,7 +951,7 @@ const dayHdrTexture = hdrLoader.load(
     const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
     rt.fromEquirectangularTexture(renderer, texture);
     nightHdrTextureCube = rt.texture;
-    if (isNight) {
+    if (!isDay) {
       scene.background = nightHdrTextureCube;
     }
   }
