@@ -521,24 +521,24 @@ canvas.cloud{
     "https://rss.app/embed/v1/ticker/tRj0yIAl7HEk9RzX"
   );
 
-  //let scene = new THREE.Scene();
-  /*let camera = new THREE.PerspectiveCamera(
+  let scene = new THREE.Scene();
+  let camera = new THREE.PerspectiveCamera(
     45,
     innerWidth / innerHeight,
     1,
     2000
   );
-  camera.position.set(20, 0.5, 15).setLength(17);*/
+  camera.position.set(20, 0.5, 15).setLength(17);
   //camera.position.z = 15;
 	/*const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
     camera.position.z = 15;*/
-		const camera = new THREE.PerspectiveCamera(
+		/*const camera = new THREE.PerspectiveCamera(
     30,
     window.innerWidth / window.innerHeight,
     1,
     3000
-);
-camera.position.z = 3000;
+);*/
+//camera.position.z = 3000;*/
 	/*const camera = new THREE.PerspectiveCamera(
 	50, window.innerWidth / window.innerHeight, 1,
     3000
@@ -1042,7 +1042,7 @@ button.addEventListener("click", () => {
       globeMaterial.shininess = 15;
     }
   );
-		 // Cloud texture setup
+		/* // Cloud texture setup
     const cloudTextureLoader = new THREE.TextureLoader();
     const cloudTexture = cloudTextureLoader.load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png');
     cloudTexture.wrapS = cloudTexture.wrapT = THREE.RepeatWrapping;
@@ -1058,7 +1058,7 @@ button.addEventListener("click", () => {
     const cloudGeometry = new THREE.PlaneGeometry(200, 200);
     const cloudMesh = new THREE.Mesh(cloudGeometry, cloudMaterial);
     cloudMesh.position.z = -2; // Place clouds behind the globe
-    scene.add(cloudMesh);
+    scene.add(cloudMesh);*/
 		/*// Cloud texture and material
     const cloudTextureLoader = new THREE.TextureLoader();
     const cloudTexture = cloudTextureLoader.load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png');
