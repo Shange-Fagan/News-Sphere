@@ -935,7 +935,7 @@ nightSkyMesh.visible = false;
 
 // Load HDRI textures
 const dayHdrTexture = hdrLoader.load(
-  "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743",
+  "js/AdobeStock_299834872-768x328.jpg",
   function (texture) {
     const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
     rt.fromEquirectangularTexture(renderer, texture);
