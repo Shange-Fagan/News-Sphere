@@ -891,10 +891,10 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 atmosphere.scale.set(1.1, 1.1, 1.1);
 // Load textures
 const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
-const dayMapTexture = "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743";
+//const dayMapTexture = "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743";
 //const middayMapTexture = "js/loc00184-17-watermark.jpg";
 const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
-const nightMapTexture = "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743";
+//const nightMapTexture = "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743";
 
 const dayBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
 const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
@@ -911,69 +911,56 @@ const material2 = new THREE.MeshPhongMaterial({
 });
 
 // Function to update the background texture
-function updateBackgroundTexture(textureURL) {
-  const loader = new THREE.TextureLoader();
-  loader.load(textureURL, (texture) => {
-    const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
-    rt.fromEquirectangularTexture(renderer, texture);
-    scene.background = rt.texture;
-  });
-}
+// Toggle textures
+    let isDay = true;
 
-// Function to switch between day, midday, and night textures and toggle clouds
-function switchGlobeTexture(isDay) {
-    if (isDay) {
-        material2.map = dayTexture;        // Switch to day texture
-	//texture = dayMapTexture;
-        material2.bumpMap = dayBumpMap;    // Switch to day bump map
-    } else {
-        material2.map = nightTexture;      // Switch to night texture
-	//texture = nightMapTexture;
-        material2.bumpMap = nightBumpMap;  // Switch to night bump map
+    function switchGlobeTexture(isDay) {
+        if (isDay) {
+            material2.map = dayTexture;
+            material2.bumpMap = dayBumpMap;
+        } else {
+            material2.map = nightTexture;
+            material2.bumpMap = nightBumpMap;
+        }
+        material2.needsUpdate = true;
     }
-    material2.needsUpdate = true;          // Ensure material updates
-     //texture.needsUpdate = true;
-}
 
-// Initially, start with the day texture
-let themeState = 'day'; // Possible states: 'day', 'night'
+    // Button to switch textures
+    const button = document.createElement("button");
+    button.innerHTML = "Switch to night theme";
+    document.body.appendChild(button);
 
-// Button to switch textures
-const button = document.createElement("button");
-button.innerHTML = "Switch to night theme";
-document.body.appendChild(button);
+    // Style the button
+    button.style.position = "absolute";
+    button.style.right = "0px";
+    button.style.top = "55px";
+    button.style.padding = "4.5px 9.5px";
+    button.style.fontSize = "12px";
+    button.style.backgroundColor = "rgba(225, 225, 225, 0.25)";
+    button.style.border = "1px solid rgba(225, 225, 225, 0.25)";
+    button.style.borderRadius = "8px";
+    button.style.color = "rgba(155, 155, 155, 0.5)";
+    button.style.zIndex = "9999";
 
-// Style the button
-button.style.position = "absolute";
-button.style.right = "0px";
-button.style.top = "55px";
-button.style.padding = "4.5px 9.5px";
-button.style.fontSize = "12px";
-button.style.backgroundColor = "rgba(225, 225, 225, 0.25)";
-button.style.border = "1px solid rgba(225, 225, 225, 0.25)";
-button.style.borderRadius = "8px";
-button.style.color = "rgba(155, 155, 155, 0.5)";
-button.style.zIndex = "9999";
+    // Hover effects
+    button.onmouseover = () => {
+        button.style.backgroundColor = "rgba(225, 225, 225, 0.35)";
+    };
+    button.onmouseout = () => {
+        button.style.backgroundColor = "rgba(225, 225, 225, 0.25)";
+    };
 
-// Hover effects
-button.onmouseover = () => {
-  button.style.backgroundColor = "rgba(225, 225, 225, 0.35)";
-};
-button.onmouseout = () => {
-  button.style.backgroundColor = "rgba(225, 225, 225, 0.25)";
-};
+    // Toggle texture on button click
+    button.addEventListener("click", () => {
+        isDay = !isDay; // Toggle the state
+        switchGlobeTexture(isDay); // Switch the texture
+        button.innerHTML = isDay ? "Switch to night theme" : "Switch to day theme";
+        console.log("Button clicked!");
+    });
 
-// Toggle texture on button click
-button.addEventListener("click", () => {
-    isDay = !isDay; // Toggle the state
-    switchGlobeTexture(isDay); // Switch the texture
-    switchTexture(isDay); // Switch the texture
-    button.innerHTML = isDay ? "Switch to night theme" : "Switch to day theme";
-	console.log("Button clicked!");
-});
-
-  switchGlobeTexture(themeState); // Switch texture based on the new state
-  console.log("Theme switched to:", themeState);
+    // Initially, start with the day texture
+    switchGlobeTexture(isDay);
+    console.log("Theme switched to:", isDay ? 'day' : 'night');
 ;
 /*// Function to switch between day and night textures
 function switchGlobeTexture(isDay) {
