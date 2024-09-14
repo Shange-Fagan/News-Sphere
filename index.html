@@ -522,14 +522,21 @@ canvas.cloud{
   );
 
   //let scene = new THREE.Scene();
-  let camera = new THREE.PerspectiveCamera(
+  /*let camera = new THREE.PerspectiveCamera(
     45,
     innerWidth / innerHeight,
     1,
     2000
   );
-  camera.position.set(20, 0.5, 15).setLength(17);
+  camera.position.set(20, 0.5, 15).setLength(17);*/
   //camera.position.z = 15;
+	const camera = new THREE.PerspectiveCamera(
+    30,
+    window.innerWidth / window.innerHeight,
+    1,
+    10000
+);
+camera.position.z = 10;
 	/*const camera = new THREE.PerspectiveCamera(
 	50, window.innerWidth / window.innerHeight, 1,
     3000
