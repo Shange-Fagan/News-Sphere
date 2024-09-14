@@ -840,7 +840,7 @@ canvas.cloud{
 
 // Daytime shader
 		 // Debug function to log sky meshes and scene setup
-function debugSkyMeshes() {
+/*function debugSkyMeshes() {
     console.log("Day Sky Mesh:", daySkyMesh);
     console.log("Night Sky Mesh:", nightSkyMesh);
     console.log("Scene Background:", scene.background);
@@ -919,26 +919,7 @@ console.log("Night Sky Mesh Geometry:", nightSkyMesh.geometry)
 // Initially set the day sky mesh to be visible
 daySkyMesh.visible = true;
 nightSkyMesh.visible = false;
-		 const basicVertexShader = `
-    void main() {
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-`;
-
-const basicFragmentShader = `
-    void main() {
-        gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); // Red color
-    }
-`;
-
-const basicMaterial = new THREE.ShaderMaterial({
-    vertexShader: basicVertexShader,
-    fragmentShader: basicFragmentShader,
-    side: THREE.BackSide
-});
-
-const basicSkyMesh = new THREE.Mesh(skyGeometry, basicMaterial);
-scene.add(basicSkyMesh);
+		 */
   /*{
     const loader = new THREE.TextureLoader();
     const texture = loader.load(
@@ -1023,16 +1004,16 @@ const material2 = new THREE.MeshPhongMaterial({
         if (isDay) {
             material2.map = dayTexture;
             material2.bumpMap = dayBumpMap;
-	//scene.background = new THREE.Color(0x87CEFA);
-		scene.background = daySkyMesh;
+	scene.background = new THREE.Color(0x87CEFA);
+		
         } else {
             material2.map = nightTexture;
             material2.bumpMap = nightBumpMap;
-	//scene.background = new THREE.Color(0x326696);
-		scene.background = nightSkyMesh;
+	scene.background = new THREE.Color(0x326696);
+		
         }
         material2.needsUpdate = true;
-				debugSkyMeshes(); // Log information for debugging	
+					
     }
 		 
 
@@ -1066,17 +1047,14 @@ const material2 = new THREE.MeshPhongMaterial({
         isDay = !isDay; // Toggle the state
         switchGlobeTexture(isDay); // Switch the texture
         button.innerHTML = isDay ? "Switch to night theme" : "Switch to day theme";
-	// Show the appropriate sky mesh
-    	daySkyMesh.visible = isDay;
-    nightSkyMesh.visible = !isDay;
+	
         console.log("Button clicked!");
     });
 
     // Initially, start with the day texture
     switchGlobeTexture(isDay);
     console.log("Theme switched to:", isDay ? 'day' : 'night');
-		console.log("Day Sky Mesh:", daySkyMesh);
-console.log("Night Sky Mesh:", nightSkyMesh);
+		
 
 /*// Function to switch between day and night textures
 function switchGlobeTexture(isDay) {
