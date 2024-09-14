@@ -920,7 +920,7 @@ console.log("Night Sky Mesh Geometry:", nightSkyMesh.geometry)
 daySkyMesh.visible = true;
 nightSkyMesh.visible = false;
 		 */
-  {
+  /*{
     const loader = new THREE.TextureLoader();
     const texture = loader.load(
       "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743",
@@ -930,8 +930,8 @@ nightSkyMesh.visible = false;
         scene.background = rt.texture;
       }
     );
-  }
-		 const hdrLoader = new THREE.RGBELoader(); // Ensure you have included RGBELoader for HDRIs
+  }*/
+		 const hdrLoader = new THREE.TextureLoader(); // Ensure you have included RGBELoader for HDRIs
 
 // Load HDRI textures
 const dayHdrTexture = hdrLoader.load(
