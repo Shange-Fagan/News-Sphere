@@ -892,7 +892,7 @@ atmosphere.scale.set(1.1, 1.1, 1.1);
 // Load textures
 const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
 const dayMapTexture = "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743";
-const middayMapTexture = "js/loc00184-17-watermark.jpg";
+//const middayMapTexture = "js/loc00184-17-watermark.jpg";
 const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
 const nightMapTexture = "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743";
 
@@ -924,28 +924,28 @@ function updateBackgroundTexture(textureURL) {
 function switchGlobeTexture(theme) {
     if (theme === 'day') {
         material2.map = dayTexture;
-        scene.background = new THREE.Color(0x326696); // Blue sky background
-        cloudScene.visible = false; // Hide clouds
-    } else if (theme === 'midday') {
+        scene.background = new THREE.Color(0x87CEFA); // Blue sky background
+        //cloudScene.visible = false; // Hide clouds
+    } /*else if (theme === 'midday') {
         material2.map = dayTexture; // Optionally use a different texture
         scene.background = new THREE.Color(0x87CEFA); // Light blue for midday
         cloudScene.visible = true; // Show clouds
-    } else {
+    }*/ else {
         material2.map = nightTexture;
-        scene.background = new THREE.Color(0x000000); // Dark background for night
-        cloudScene.visible = false; // Hide clouds
+        scene.background = new THREE.Color(0x326696); // Dark background for night
+        //cloudScene.visible = false; // Hide clouds
     }
     material2.needsUpdate = true;
-    renderClouds(); // Start rendering clouds
+    //renderClouds(); // Start rendering clouds
 }
 
 
 // Initially, start with the day texture
-let themeState = 'day'; // Possible states: 'day', 'midday', 'night'
+let themeState = 'day'; // Possible states: 'day', 'night'
 
 // Button to switch textures
 const button = document.createElement("button");
-button.innerHTML = "Switch to midday theme";
+button.innerHTML = "Switch to night theme";
 document.body.appendChild(button);
 
 // Style the button
@@ -971,14 +971,11 @@ button.onmouseout = () => {
 // Toggle texture on button click
 button.addEventListener("click", () => {
   if (themeState === 'day') {
-    themeState = 'midday';
+    themeState = 'day';
     button.innerHTML = "Switch to night theme";
-  } else if (themeState === 'midday') {
+  } else (themeState === 'night') {
     themeState = 'night';
     button.innerHTML = "Switch to day theme";
-  } else {
-    themeState = 'day';
-    button.innerHTML = "Switch to midday theme";
   }
 
   switchGlobeTexture(themeState); // Switch texture based on the new state
