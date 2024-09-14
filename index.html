@@ -896,6 +896,9 @@ const nightMaterial = new THREE.ShaderMaterial({
     side: THREE.BackSide
 });
 
+		 console.log("Day Material:", dayMaterial);
+console.log("Night Material:", nightMaterial);
+
 // Create daytime and nighttime meshes
 const daySkyMesh = new THREE.Mesh(skyGeometry, dayMaterial);
 const nightSkyMesh = new THREE.Mesh(skyGeometry, nightMaterial);
@@ -903,6 +906,9 @@ const nightSkyMesh = new THREE.Mesh(skyGeometry, nightMaterial);
 // Add to the scene
 scene.add(daySkyMesh);
 scene.add(nightSkyMesh);
+
+		 console.log("Day Sky Mesh Geometry:", daySkyMesh.geometry);
+console.log("Night Sky Mesh Geometry:", nightSkyMesh.geometry)
 
 // Initially set the day sky mesh to be visible
 daySkyMesh.visible = true;
@@ -1043,6 +1049,8 @@ const material2 = new THREE.MeshPhongMaterial({
     // Initially, start with the day texture
     switchGlobeTexture(isDay);
     console.log("Theme switched to:", isDay ? 'day' : 'night');
+		console.log("Day Sky Mesh:", daySkyMesh);
+console.log("Night Sky Mesh:", nightSkyMesh);
 
 /*// Function to switch between day and night textures
 function switchGlobeTexture(isDay) {
