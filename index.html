@@ -669,7 +669,7 @@ camera.position.z = 6000;
 	document.body.appendChild(container);
 	// Set up the scene, camera, and renderer
 	const scene = new THREE.Scene();
-	scene.background = new THREE.Color(0x326696); // Sky color
+	//scene.background = new THREE.Color(0x326696); // Sky color
 		 var mesh;
 var start_time = Date.now(); // Ensure start_time is initialized
 
@@ -918,9 +918,11 @@ const material2 = new THREE.MeshPhongMaterial({
         if (isDay) {
             material2.map = dayTexture;
             material2.bumpMap = dayBumpMap;
+	scene.background = new THREE.Color(0x87CEFA);
         } else {
             material2.map = nightTexture;
             material2.bumpMap = nightBumpMap;
+	scene.background = new THREE.Color(0x326696);
         }
         material2.needsUpdate = true;
     }
