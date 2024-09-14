@@ -522,19 +522,19 @@ canvas.cloud{
   );
 
   //let scene = new THREE.Scene();
-  /*let camera = new THREE.PerspectiveCamera(
+  let camera = new THREE.PerspectiveCamera(
     45,
     innerWidth / innerHeight,
     1,
     2000
   );
   camera.position.set(20, 0.5, 15).setLength(17);
-  //camera.position.z = 15;*/
-	const camera = new THREE.PerspectiveCamera(
+  //camera.position.z = 15;
+	/*const camera = new THREE.PerspectiveCamera(
 	50, window.innerWidth / window.innerHeight, 1,
     3000
 	);
-	camera.position.z = 6000;
+	camera.position.z = 6000;*/
   let renderer = new THREE.WebGLRenderer({
     antialias: true,
   });
@@ -846,7 +846,7 @@ function renderClouds() {
   });
 
   const atmosphere = new THREE.Mesh(
-    new THREE.SphereGeometry(5.1, 32.1, 32.1),
+    new THREE.SphereGeometry(1000.1, 32.1, 32.1),
     new THREE.ShaderMaterial({
       vertexShader: `
                 varying vec3 vertexNormal;
