@@ -2562,6 +2562,7 @@ let t = clock.getElapsedTime();
     renderer.render(scene, camera);
     labelRenderer.render(scene, camera);
     renderer.render(scene, camera);
+		cloudMesh.position.z += 0.05;
 }
 
 animate();
