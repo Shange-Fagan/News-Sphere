@@ -664,47 +664,46 @@ var start_time = Date.now(); // Ensure start_time is initialized
 		 
 	const textureLoader = new THREE.TextureLoader();
 		 // Cloud setup
-	const cloudTexture = textureLoader.load("https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png");
-
-	
-		  const fog = new THREE.Fog(0x4584b4, -100, 3000);
+	// Cloud texture
+const cloudTextureURL = 'https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png';
+const cloudTextureLoader = new THREE.TextureLoader();
+const cloudTexture = cloudTextureLoader.load(cloudTextureURL);
 
 const cloudMaterial = new THREE.ShaderMaterial({
     uniforms: {
-        map: { type: "t", value: cloudTexture },
-        fogColor: { type: "c", value: fog.color },
-        fogNear: { type: "f", value: fog.near },
-        fogFar: { type: "f", value: fog.far }
+        map: { value: cloudTexture },
+        fogColor: { value: new THREE.Color(0x326696) },
+        fogNear: { value: 10 },
+        fogFar: { value: 50 }
     },
     vertexShader: `
-                    varying vec2 vUv;
-                    void main() {
-                        vUv = uv;
-                        gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-                    }`,
+        varying vec2 vUv;
+        void main() {
+            vUv = uv;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }`,
     fragmentShader: `
-                    uniform sampler2D map;
-                    uniform vec3 fogColor;
-                    uniform float fogNear;
-                    uniform float fogFar;
-                    varying vec2 vUv;
-                    void main() {
-                        float depth = gl_FragCoord.z / gl_FragCoord.w;
-                        float fogFactor = smoothstep( fogNear, fogFar, depth );
-                        gl_FragColor = texture2D( map, vUv );
-                        gl_FragColor.w *= pow( gl_FragCoord.z, 20.0 );
-                        gl_FragColor = mix( gl_FragColor, vec4( fogColor, gl_FragColor.w ), fogFactor );
-                    }`,
+        uniform sampler2D map;
+        uniform vec3 fogColor;
+        uniform float fogNear;
+        uniform float fogFar;
+        varying vec2 vUv;
+        void main() {
+            float depth = gl_FragCoord.z / gl_FragCoord.w;
+            float fogFactor = smoothstep(fogNear, fogFar, depth);
+            vec4 cloudColor = texture2D(map, vUv);
+            gl_FragColor = mix(cloudColor, vec4(fogColor, cloudColor.w), fogFactor);
+        }`,
+    transparent: true,
     depthWrite: false,
-    depthTest: false,
-    transparent: true
+    depthTest: false
 });
 
-const cloudGeometry = new THREE.PlaneGeometry(64, 64);
+// Create cloud geometry
+const cloudGeometry = new THREE.PlaneGeometry(1000, 1000);
 const cloudMesh = new THREE.Mesh(cloudGeometry, cloudMaterial);
-const cloudScene = new THREE.Scene();
-cloudScene.add(cloudMesh);
-
+cloudMesh.position.z = -5;  // Slightly behind the globe
+scene.add(cloudMesh);
 const cloudRenderer = new THREE.WebGLRenderer({ antialias: false });
 cloudRenderer.setSize(window.innerWidth, window.innerHeight);
 
