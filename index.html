@@ -1028,18 +1028,24 @@ const material2 = new THREE.MeshPhongMaterial({
 // Set the initial scene background to day HDRI
 let dayHdrTextureCube;
 scene.background = dayHdrTextureCube;
-		 
+		 function switchBackgroundTexture(isDay) {
+  if (isDay) {
+    scene.background = dayHdrTextureCube;
+  } else {
+    scene.background = nightTexture;
+  }
+}
     function switchGlobeTexture(isDay) {
         if (isDay) {
             material2.map = dayTexture;
             material2.bumpMap = dayBumpMap;
-		scene.background = dayHdrTextureCube;
+		//scene.background = dayHdrTextureCube;
 	//scene.background = new THREE.Color(0x87CEFA);
 		
         } else {
             material2.map = nightTexture;
             material2.bumpMap = nightBumpMap;
-		scene.background = nightHdrTextureCube;
+		//scene.background = nightHdrTextureCube;
 	//scene.background = new THREE.Color(0x326696);
 		
         }
