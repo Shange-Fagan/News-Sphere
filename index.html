@@ -974,14 +974,14 @@ function switchSkyColor(isDay) {
 		 const hdrLoader = new THREE.TextureLoader(); // Ensure you have included RGBELoader for HDRIs
 
 // Load HDRI textures
-/*const dayHdrTexture = hdrLoader.load(
+const dayHdrTexture = hdrLoader.load(
   "js/shutterstock_2457311289.jpg",
   function (texture) {
     const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
     rt.fromEquirectangularTexture(renderer, texture);
     dayHdrTextureCube = rt.texture;
     if (isDay) {
-      scene.background = dayHdrTextureCube;
+      /*scene.background = dayHdrTextureCube;*/
     }
   }
 );
@@ -995,7 +995,7 @@ function switchSkyColor(isDay) {
       scene.background = nightHdrTextureCube;
     }
   }
-);*/
+);
 //atmosphere.scale.set(1.1, 1.1, 1.1);
   //atmosphere.scale.set(1.0, 1.0, 1.0);
 
@@ -1069,13 +1069,13 @@ const material2 = new THREE.MeshPhongMaterial({
 let dayHdrTextureCube;
 		 let nightHdrTextureCube;
 scene.background = skyMesh;
-		 /*function switchBackgroundTexture(isDay) {
+		 function switchBackgroundTexture(isDay) {
   if (isDay) {
-    scene.background = dayHdrTextureCube;
+    scene.background = skyMesh;
   } else {
     scene.background = nightHdrTextureCube;
   }
-}*/
+}
     function switchGlobeTexture(isDay) {
         if (isDay) {
             material2.map = dayTexture;
@@ -1134,7 +1134,7 @@ scene.background = skyMesh;
 button.addEventListener("click", () => {
   isDay = !isDay; // Toggle the state
   switchGlobeTexture(isDay); // Switch the globe texture
-  //switchBackgroundTexture(isDay); // Switch the background HDRI
+  switchBackgroundTexture(isDay); // Switch the background HDRI
   switchSkyColor(isDay); // Switch the sky color
   button.innerHTML = isDay ? "Switch to night theme" : "Switch to day theme";
   
