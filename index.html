@@ -831,6 +831,7 @@ var start_time = Date.now(); // Ensure start_time is initialized
                      gl_FragColor = vec4(0.3, 0.6, 1.0, 1.0) * intensity;
                     }
                     `,
+	    transparent: true, 
       blending: THREE.AdditiveBlending,
       side: THREE.BackSide,
     })
@@ -846,7 +847,8 @@ var start_time = Date.now(); // Ensure start_time is initialized
       }
     );
   }*/
-  atmosphere.scale.set(1.1, 1.1, 1.1);
+  //atmosphere.scale.set(1.1, 1.1, 1.1);
+  atmosphere.scale.set(1.02, 1.02, 1.02);
 
   /*const material2 = new THREE.MeshPhongMaterial({
     specular: 0x111111,
