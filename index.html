@@ -931,6 +931,46 @@ nightSkyMesh.visible = false;
       }
     );
   }*/
+		 
+const vertexShader = `
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+attribute vec3 position;
+void main() {
+  vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+  gl_Position = projectionMatrix * mvPosition;
+}
+`;
+
+const fragmentShader = `
+uniform vec3 color;
+void main() {
+  gl_FragColor = vec4(color, 1.0);
+}
+`;
+
+// Create a shader material
+const skyMaterial = new THREE.ShaderMaterial({
+  vertexShader: vertexShader,
+  fragmentShader: fragmentShader,
+  uniforms: {
+    color: { value: new THREE.Color(0x87CEFA) } // Daytime color
+  }
+});
+let isDay = true;
+// Create a sphere geometry for the sky
+const skyGeometry = new THREE.SphereGeometry(500, 60, 40);
+const skyMesh = new THREE.Mesh(skyGeometry, skyMaterial);
+skyMesh.material.side = THREE.BackSide; // Render from inside
+scene.add(skyMesh);
+
+// Function to update the sky color
+function switchSkyColor(isDay) {
+  skyMaterial.uniforms.color.value = isDay ? new THREE.Color(0x87CEFA) : new THREE.Color(0x001F3F); // Example colors
+}
+
+		 
+
 		 const hdrLoader = new THREE.TextureLoader(); // Ensure you have included RGBELoader for HDRIs
 
 // Load HDRI textures
@@ -1023,7 +1063,7 @@ const material2 = new THREE.MeshPhongMaterial({
 
 // Function to update the background texture
 // Toggle textures
-    let isDay = true;
+    //let isDay = true;
 		 
 // Set the initial scene background to day HDRI
 let dayHdrTextureCube;
@@ -1082,14 +1122,24 @@ scene.background = dayHdrTextureCube;
     };
 
     // Toggle texture on button click
-    button.addEventListener("click", () => {
+    /*button.addEventListener("click", () => {
         isDay = !isDay; // Toggle the state
         switchGlobeTexture(isDay); // Switch the texture
 	    switchBackgroundTexture(isDay);
         button.innerHTML = isDay ? "Switch to night theme" : "Switch to day theme";
 	
         console.log("Button clicked!");
-    });
+    });*/
+		 // Toggle sky color on button click
+button.addEventListener("click", () => {
+  isDay = !isDay; // Toggle the state
+  switchGlobeTexture(isDay); // Switch the globe texture
+  switchBackgroundTexture(isDay); // Switch the background HDRI
+  switchSkyColor(isDay); // Switch the sky color
+  button.innerHTML = isDay ? "Switch to night theme" : "Switch to day theme";
+  
+  console.log("Button clicked! Theme switched to:", isDay ? 'day' : 'night');
+});
 
     // Initially, start with the day texture
     switchGlobeTexture(isDay);
