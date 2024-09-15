@@ -1073,7 +1073,7 @@ let texturesLoaded = false; // Track if all textures are loaded
 
 // Button to toggle between day, midday, and night themes
 const button = document.createElement("button");
-button.innerHTML = "Switch to night theme";
+button.innerHTML = "Switch to midday theme";
 document.body.appendChild(button);
 
 // Disable the button initially (until textures load)
@@ -1128,11 +1128,11 @@ button.addEventListener("click", () => {
 
   // Update button label
   if (isDay) {
-    button.innerHTML = "Switch to night theme";
-  } else if (isMidday) {
-    button.innerHTML = "Switch to day theme";
-  } else {
     button.innerHTML = "Switch to midday theme";
+  } else if (isMidday) {
+    button.innerHTML = "Switch to night theme";
+  } else {
+    button.innerHTML = "Switch to day theme";
   }
 
   console.log("Theme switched to:", isDay ? 'day' : (isMidday ? 'midday' : 'night'));
