@@ -1000,51 +1000,6 @@ scene.add(skyMesh);
 		 const hdrLoader = new THREE.TextureLoader(); // Ensure you have included RGBELoader for HDRIs
 
 // Load HDRI textures
-// Load HDRI textures asynchronously
-function loadHdriTextures() {
-  hdrLoader.load(
-    "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743",
-    function (texture) {
-      const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
-      rt.fromEquirectangularTexture(renderer, texture);
-      dayHdrTextureCube = rt.texture;
-      console.log("Day HDRI Loaded");
-      checkTexturesLoaded();
-    }
-  );
-
-  hdrLoader.load(
-    "js/kloppenheim_06_puresky.jpg",
-    function (texture) {
-      const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
-      rt.fromEquirectangularTexture(renderer, texture);
-      middayHdrTextureCube = rt.texture;
-      console.log("Midday HDRI Loaded");
-      checkTexturesLoaded();
-    }
-  );
-
-  hdrLoader.load(
-    "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743",
-    function (texture) {
-      const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
-      rt.fromEquirectangularTexture(renderer, texture);
-      nightHdrTextureCube = rt.texture;
-      console.log("Night HDRI Loaded");
-      checkTexturesLoaded();
-    }
-  );
-}
-
-// Check if all textures are loaded
-function checkTexturesLoaded() {
-  if (dayHdrTextureCube && middayHdrTextureCube && nightHdrTextureCube) {
-    texturesLoaded = true;
-    console.log("All HDRI textures loaded.");
-    // Set the initial background to day HDRI once all textures are loaded
-    scene.background = dayHdrTextureCube;
-  }
-}
 
 //atmosphere.scale.set(1.1, 1.1, 1.1);
   //atmosphere.scale.set(1.0, 1.0, 1.0);
@@ -1115,55 +1070,15 @@ const material2 = new THREE.MeshPhongMaterial({
 // Toggle textures
     //let isDay = true;
 		 
-
-		 // Function to update the background texture
-// Function to update the background texture
-function switchBackgroundTexture() {
-  if (!texturesLoaded) {
-    console.log("Textures not loaded yet.");
-    return;
-  }
-
-  if (isDay) {
-    scene.background = dayHdrTextureCube;
-  } else if (isMidday) {
-    scene.background = middayHdrTextureCube;
-  } else {
-    scene.background = nightHdrTextureCube;
-  }
-}
-    // Function to switch globe textures between day, midday, and night
-function switchGlobeTexture() {
-  if (isDay) {
-    material2.map = dayTexture;
-    material2.bumpMap = dayBumpMap;
-  } else if (isMidday) {
-    material2.map = dayTexture;  // Optionally replace with midday texture if available
-    material2.bumpMap = dayBumpMap;
-  } else {
-    material2.map = nightTexture;
-    material2.bumpMap = nightBumpMap;
-  }
-        material2.needsUpdate = true;
-	    //texture.needsUpdate = true;
-					
-    }
-		 // Function to switch sky color
-function switchSkyColor() {
-  if (isDay) {
-    skyMaterial.uniforms.color.value = new THREE.Color(0x87CEFA); // Daytime color
-  } else if (isMidday) {
-    skyMaterial.uniforms.color.value = new THREE.Color(0x326696); // Midday color
-  } else {
-    skyMaterial.uniforms.color.value = new THREE.Color(0x001F3F); // Nighttime color
-  }
-}
-		 
+ 
 
     // Button to switch textures
     const button = document.createElement("button");
     button.innerHTML = "Switch to night theme";
     document.body.appendChild(button);
+
+	// Disable the button initially (until textures load)
+button.disabled = true;
 
     // Style the button
     button.style.position = "absolute";
@@ -1228,7 +1143,97 @@ button.addEventListener("click", () => {
   }
 
   console.log("Button clicked! Theme switched to:", isDay ? 'day' : (isMidday ? 'midday' : 'night'));
-;
+;// Load HDRI textures asynchronously
+function loadHdriTextures() {
+  hdrLoader.load(
+    "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743",
+    function (texture) {
+      const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+      rt.fromEquirectangularTexture(renderer, texture);
+      dayHdrTextureCube = rt.texture;
+      console.log("Day HDRI Loaded");
+      checkTexturesLoaded();
+    }
+  );
+
+  hdrLoader.load(
+    "js/kloppenheim_06_puresky.jpg",
+    function (texture) {
+      const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+      rt.fromEquirectangularTexture(renderer, texture);
+      middayHdrTextureCube = rt.texture;
+      console.log("Midday HDRI Loaded");
+      checkTexturesLoaded();
+    }
+  );
+
+  hdrLoader.load(
+    "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743",
+    function (texture) {
+      const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+      rt.fromEquirectangularTexture(renderer, texture);
+      nightHdrTextureCube = rt.texture;
+      console.log("Night HDRI Loaded");
+      checkTexturesLoaded();
+    }
+  );
+}
+
+// Check if all textures are loaded
+function checkTexturesLoaded() {
+  if (dayHdrTextureCube && middayHdrTextureCube && nightHdrTextureCube) {
+    texturesLoaded = true;
+    console.log("All HDRI textures loaded.");
+    // Set the initial background to day HDRI once all textures are loaded
+    scene.background = dayHdrTextureCube;
+    
+    // Enable the button once textures are loaded
+    button.disabled = false;
+  }
+}
+// Function to update the background texture
+// Function to update the background texture
+function switchBackgroundTexture() {
+  if (!texturesLoaded) {
+    console.log("Textures not loaded yet.");
+    return;
+  }
+
+  if (isDay) {
+    scene.background = dayHdrTextureCube;
+  } else if (isMidday) {
+    scene.background = middayHdrTextureCube;
+  } else {
+    scene.background = nightHdrTextureCube;
+  }
+}
+    // Function to switch globe textures between day, midday, and night
+function switchGlobeTexture() {
+  if (isDay) {
+    material2.map = dayTexture;
+    material2.bumpMap = dayBumpMap;
+  } else if (isMidday) {
+    material2.map = dayTexture;  // Optionally replace with midday texture if available
+    material2.bumpMap = dayBumpMap;
+  } else {
+    material2.map = nightTexture;
+    material2.bumpMap = nightBumpMap;
+  }
+        material2.needsUpdate = true;
+	    //texture.needsUpdate = true;
+					
+    }
+		 // Function to switch sky color
+function switchSkyColor() {
+  if (isDay) {
+    skyMaterial.uniforms.color.value = new THREE.Color(0x87CEFA); // Daytime color
+  } else if (isMidday) {
+    skyMaterial.uniforms.color.value = new THREE.Color(0x326696); // Midday color
+  } else {
+    skyMaterial.uniforms.color.value = new THREE.Color(0x001F3F); // Nighttime color
+  }
+}
+		
     // Initially, start with the day texture
     loadHdriTextures();
     switchGlobeTexture(isDay);
