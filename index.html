@@ -1148,7 +1148,7 @@ const hdrLoader = new THREE.TextureLoader(); // Use the correct loader based on 
 // Load HDRI textures asynchronously
 function loadHdriTextures() {
   hdrLoader.load(
-    "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743",
+    "js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png",
     function (texture) {
       const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
       rt.fromEquirectangularTexture(renderer, texture);
@@ -1170,7 +1170,7 @@ function loadHdriTextures() {
   );
 
   hdrLoader.load(
-    "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743",
+    "js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png",
     function (texture) {
       const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
       rt.fromEquirectangularTexture(renderer, texture);
