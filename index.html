@@ -985,10 +985,7 @@ const skyMaterial = new THREE.ShaderMaterial({
     color: { value: new THREE.Color(0x87CEFA) } // Daytime color
   }
 });
-let isDay = true;
-let isMidday = false;
-let dayHdrTextureCube, middayHdrTextureCube, nightHdrTextureCube;
-let texturesLoaded = false;
+
 // Create a sphere geometry for the sky
 const skyGeometry = new THREE.SphereGeometry(500, 60, 40);
 const skyMesh = new THREE.Mesh(skyGeometry, skyMaterial);
@@ -1069,17 +1066,23 @@ const material2 = new THREE.MeshPhongMaterial({
 // Function to update the background texture
 // Toggle textures
     //let isDay = true;
-		 
- 
+	let isDay = true;
+let isMidday = false;
+let dayHdrTextureCube, middayHdrTextureCube, nightHdrTextureCube;
+let texturesLoaded = false; // Track if all textures are loaded
 
-    // Button to switch textures
-    const button = document.createElement("button");
-    button.innerHTML = "Switch to night theme";
-    document.body.appendChild(button);
+// Button to toggle between day, midday, and night themes
+const button = document.createElement("button");
+button.innerHTML = "Switch to night theme";
+document.body.appendChild(button);
 
-	// Disable the button initially (until textures load)
+// Disable the button initially (until textures load)
 button.disabled = true;
 
+// Style the button (existing styling)
+
+
+		 
     // Style the button
     button.style.position = "absolute";
     button.style.right = "0px";
@@ -1100,20 +1103,11 @@ button.disabled = true;
         button.style.backgroundColor = "rgba(225, 225, 225, 0.25)";
     };
 
-    // Toggle texture on button click
-    /*button.addEventListener("click", () => {
-        isDay = !isDay; // Toggle the state
-        switchGlobeTexture(isDay); // Switch the texture
-	    switchBackgroundTexture(isDay);
-        button.innerHTML = isDay ? "Switch to night theme" : "Switch to day theme";
-	
-        console.log("Button clicked!");
-    });*/
-		 // Toggle sky color on button click
+
 // Handle button clicks to switch the theme
 button.addEventListener("click", () => {
   if (!texturesLoaded) {
-    console.log("Cannot switch theme. Textures are not yet loaded.");
+    console.log("Textures are not fully loaded yet.");
     return;
   }
 
@@ -1127,13 +1121,12 @@ button.addEventListener("click", () => {
     isDay = true;
   }
 
-  console.log("Button clicked! Theme switched to:", isDay ? 'day' : 'night');
-});
-// Update the textures and sky color
+  // Update the sky, globe texture, and background
   switchGlobeTexture();
   switchBackgroundTexture();
   switchSkyColor();
-		 // Update the button label
+
+  // Update button label
   if (isDay) {
     button.innerHTML = "Switch to night theme";
   } else if (isMidday) {
@@ -1142,8 +1135,16 @@ button.addEventListener("click", () => {
     button.innerHTML = "Switch to midday theme";
   }
 
-  console.log("Button clicked! Theme switched to:", isDay ? 'day' : (isMidday ? 'midday' : 'night'));
-;// Load HDRI textures asynchronously
+  console.log("Theme switched to:", isDay ? 'day' : (isMidday ? 'midday' : 'night'));
+
+  // Force scene to re-render to reflect the changes
+  renderer.render(scene, camera);
+});
+
+// Ensure you have included RGBELoader or TextureLoader depending on your texture format
+const hdrLoader = new THREE.TextureLoader(); // Use the correct loader based on your texture type
+
+// Load HDRI textures asynchronously
 function loadHdriTextures() {
   hdrLoader.load(
     "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743",
@@ -1189,9 +1190,12 @@ function checkTexturesLoaded() {
     
     // Enable the button once textures are loaded
     button.disabled = false;
+
+    // Force the initial render with the background
+    renderer.render(scene, camera);
   }
 }
-// Function to update the background texture
+
 // Function to update the background texture
 function switchBackgroundTexture() {
   if (!texturesLoaded) {
@@ -1199,6 +1203,7 @@ function switchBackgroundTexture() {
     return;
   }
 
+  // Switch based on isDay and isMidday states
   if (isDay) {
     scene.background = dayHdrTextureCube;
   } else if (isMidday) {
@@ -1206,8 +1211,12 @@ function switchBackgroundTexture() {
   } else {
     scene.background = nightHdrTextureCube;
   }
+
+  // Force the scene to re-render with the updated background
+  renderer.render(scene, camera);
 }
-    // Function to switch globe textures between day, midday, and night
+
+// Function to switch globe textures between day, midday, and night
 function switchGlobeTexture() {
   if (isDay) {
     material2.map = dayTexture;
@@ -1219,11 +1228,10 @@ function switchGlobeTexture() {
     material2.map = nightTexture;
     material2.bumpMap = nightBumpMap;
   }
-        material2.needsUpdate = true;
-	    //texture.needsUpdate = true;
-					
-    }
-		 // Function to switch sky color
+  material2.needsUpdate = true;
+}
+
+// Function to switch sky color
 function switchSkyColor() {
   if (isDay) {
     skyMaterial.uniforms.color.value = new THREE.Color(0x87CEFA); // Daytime color
@@ -1233,13 +1241,42 @@ function switchSkyColor() {
     skyMaterial.uniforms.color.value = new THREE.Color(0x001F3F); // Nighttime color
   }
 }
-		
-    // Initially, start with the day texture
-    loadHdriTextures();
-    switchGlobeTexture(isDay);
-		 
-    console.log("Theme switched to:", isDay ? 'day' : 'night');
-		
+
+// Initially, load HDR textures and start with the day theme
+loadHdriTextures();
+switchGlobeTexture();
+console.log("Theme switched to:", isDay ? 'day' : 'night');
+	 
+ 
+
+    // Button to switch textures
+    const button = document.createElement("button");
+    button.innerHTML = "Switch to night theme";
+    document.body.appendChild(button);
+
+	// Disable the button initially (until textures load)
+button.disabled = true;
+
+    // Style the button
+    button.style.position = "absolute";
+    button.style.right = "0px";
+    button.style.top = "55px";
+    button.style.padding = "4.5px 9.5px";
+    button.style.fontSize = "12px";
+    button.style.backgroundColor = "rgba(225, 225, 225, 0.25)";
+    button.style.border = "1px solid rgba(225, 225, 225, 0.25)";
+    button.style.borderRadius = "8px";
+    button.style.color = "rgba(155, 155, 155, 0.5)";
+    button.style.zIndex = "9999";
+
+    // Hover effects
+    button.onmouseover = () => {
+        button.style.backgroundColor = "rgba(225, 225, 225, 0.35)";
+    };
+    button.onmouseout = () => {
+        button.style.backgroundColor = "rgba(225, 225, 225, 0.25)";
+    };
+
 
 /*// Function to switch between day and night textures
 function switchGlobeTexture(isDay) {
