@@ -1248,36 +1248,6 @@ switchGlobeTexture();
 console.log("Theme switched to:", isDay ? 'day' : 'night');
 	 
  
-
-    // Button to switch textures
-    const button = document.createElement("button");
-    button.innerHTML = "Switch to night theme";
-    document.body.appendChild(button);
-
-	// Disable the button initially (until textures load)
-button.disabled = true;
-
-    // Style the button
-    button.style.position = "absolute";
-    button.style.right = "0px";
-    button.style.top = "55px";
-    button.style.padding = "4.5px 9.5px";
-    button.style.fontSize = "12px";
-    button.style.backgroundColor = "rgba(225, 225, 225, 0.25)";
-    button.style.border = "1px solid rgba(225, 225, 225, 0.25)";
-    button.style.borderRadius = "8px";
-    button.style.color = "rgba(155, 155, 155, 0.5)";
-    button.style.zIndex = "9999";
-
-    // Hover effects
-    button.onmouseover = () => {
-        button.style.backgroundColor = "rgba(225, 225, 225, 0.35)";
-    };
-    button.onmouseout = () => {
-        button.style.backgroundColor = "rgba(225, 225, 225, 0.25)";
-    };
-
-
 /*// Function to switch between day and night textures
 function switchGlobeTexture(isDay) {
     if (isDay) {
