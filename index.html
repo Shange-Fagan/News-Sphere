@@ -1414,7 +1414,8 @@ button.addEventListener("click", () => {
   let markerInfo = []; // information on markers
   let gMarker = new THREE.PlaneGeometry();
   let mMarker = new THREE.MeshBasicMaterial({
-    color: 0xff3232,
+    /*color: 0xff3232,*/
+	color: 0xFE9900,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
       shader.vertexShader = `
