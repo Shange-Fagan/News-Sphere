@@ -1006,7 +1006,7 @@ function switchSkyColor(isDay) {
 
 // Load HDRI textures
 const dayHdrTexture = hdrLoader.load(
-  "js/autumn_field_puresky.jpg",
+  "js/kloppenheim_06_puresky.jpg",
   function (texture) {
     const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
     rt.fromEquirectangularTexture(renderer, texture);
