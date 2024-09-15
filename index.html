@@ -1006,13 +1006,24 @@ function switchSkyColor(isDay) {
 
 // Load HDRI textures
 const dayHdrTexture = hdrLoader.load(
-  "js/kloppenheim_06_puresky.jpg",
+  "https://cdn.glitch.global/d5234716-b75d-48ae-9270-1e9e8af1ab7d/hdr3.png?v=1672145453743?",
   function (texture) {
     const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
     rt.fromEquirectangularTexture(renderer, texture);
     dayHdrTextureCube = rt.texture;
     if (isDay) {
       scene.background = dayHdrTextureCube;
+    }
+  }
+);
+		 const middayHdrTexture = hdrLoader.load(
+  "js/kloppenheim_06_puresky.jpg",
+  function (texture) {
+    const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+    rt.fromEquirectangularTexture(renderer, texture);
+    middayHdrTextureCube = rt.texture;
+    if (isDay) {
+      scene.background = middayHdrTextureCube;
     }
   }
 );
