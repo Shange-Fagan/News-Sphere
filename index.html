@@ -989,16 +989,22 @@ const skyMaterial = new THREE.ShaderMaterial({
   }
 });
 let isDay = true;
-let isMidday;
+let isMidday = false;
 // Create a sphere geometry for the sky
 const skyGeometry = new THREE.SphereGeometry(500, 60, 40);
 const skyMesh = new THREE.Mesh(skyGeometry, skyMaterial);
 skyMesh.material.side = THREE.BackSide; // Render from inside
 scene.add(skyMesh);
 
-// Function to update the sky color
-function switchSkyColor(isDay) {
-  skyMaterial.uniforms.color.value = isDay ? new THREE.Color(0x87CEFA) : new THREE.Color(0x001F3F); // Example colors
+// Toggle sky color
+function switchSkyColor() {
+  if (isDay) {
+    skyMaterial.uniforms.color.value = new THREE.Color(0x87CEFA); // Daytime color
+  } else if (isMidday) {
+    skyMaterial.uniforms.color.value = new THREE.Color(0x326696); // Midday color
+  } else {
+    skyMaterial.uniforms.color.value = new THREE.Color(0x001F3F); // Nighttime color
+  }
 }
 
 		 
@@ -1113,7 +1119,7 @@ let dayHdrTextureCube;
 		 let middayHdrTextureCube;
 		 let nightHdrTextureCube;
 scene.background = scene.background = dayHdrTextureCube;;
-		 function switchBackgroundTexture(isDay) {
+		 function switchBackgroundTexture() {
   if (isDay) {
     scene.background = dayHdrTextureCube;
   } else if (isMidday) {
@@ -1123,7 +1129,7 @@ scene.background = scene.background = dayHdrTextureCube;;
     scene.background = nightHdrTextureCube;
   }
 }
-    function switchGlobeTexture(isDay) {
+    function switchGlobeTexture() {
         if (isDay) {
             material2.map = dayTexture;
             material2.bumpMap = dayBumpMap;
@@ -1185,15 +1191,31 @@ scene.background = scene.background = dayHdrTextureCube;;
     });*/
 		 // Toggle sky color on button click
 button.addEventListener("click", () => {
-  isDay = !isDay; // Toggle the state
-  switchGlobeTexture(isDay); // Switch the globe texture
-  switchBackgroundTexture(isDay); // Switch the background HDRI
-  switchSkyColor(isDay); // Switch the sky color
-  button.innerHTML = isDay ? "Switch to night theme" : "Switch to day theme": "Switch to midday theme";
-  
+  if (isDay) {
+    isDay = false;
+    isMidday = true;
+  } else if (isMidday) {
+    isMidday = false;
+  } else {
+    isDay = true;
+  }
   console.log("Button clicked! Theme switched to:", isDay ? 'day' : 'night');
 });
+// Update the textures and sky color
+  switchGlobeTexture();
+  switchBackgroundTexture();
+  switchSkyColor();
+		 // Update the button label
+  if (isDay) {
+    button.innerHTML = "Switch to night theme";
+  } else if (isMidday) {
+    button.innerHTML = "Switch to day theme";
+  } else {
+    button.innerHTML = "Switch to midday theme";
+  }
 
+  console.log("Button clicked! Theme switched to:", isDay ? 'day' : (isMidday ? 'midday' : 'night'));
+;
     // Initially, start with the day texture
     switchGlobeTexture(isDay);
 		 
