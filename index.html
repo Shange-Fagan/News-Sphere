@@ -993,7 +993,7 @@ const skyMesh = new THREE.Mesh(skyGeometry, skyMaterial);
 skyMesh.material.side = THREE.BackSide; // Render from inside
 scene.add(skyMesh);
 
-// Toggle sky color
+// Function to switch sky color
 function switchSkyColor() {
   if (isDay) {
     skyMaterial.uniforms.color.value = new THREE.Color(0x87CEFA); // Daytime color
@@ -1115,37 +1115,32 @@ const material2 = new THREE.MeshPhongMaterial({
 let dayHdrTextureCube;
 		 let middayHdrTextureCube;
 		 let nightHdrTextureCube;
-scene.background = scene.background = dayHdrTextureCube;;
-		 function switchBackgroundTexture() {
-  if (isDay) {
+scene.background = dayHdrTextureCube;;
+		 // Function to update the background texture
+function switchBackgroundTexture() {
+  // Ensure HDRI textures are loaded before switching
+  if (isDay && dayHdrTextureCube) {
     scene.background = dayHdrTextureCube;
-  } else if (isMidday) {
+  } else if (isMidday && middayHdrTextureCube) {
     scene.background = middayHdrTextureCube;
-  }
-     else {
+  } else if (nightHdrTextureCube) {
     scene.background = nightHdrTextureCube;
+  } else {
+    console.log("Background texture not loaded yet.");
   }
 }
-    function switchGlobeTexture() {
-        if (isDay) {
-            material2.map = dayTexture;
-            material2.bumpMap = dayBumpMap;
-		//scene.background = dayHdrTextureCube;
-	//scene.background = new THREE.Color(0x87CEFA);
-		
-        } else if (isMidday) {
-            material2.map = dayTexture;
-            material2.bumpMap = dayBumpMap;
-		//scene.background = dayHdrTextureCube;
-	//scene.background = new THREE.Color(0x326696);
-		
-        } else {
-            material2.map = nightTexture;
-            material2.bumpMap = nightBumpMap;
-		//scene.background = nightHdrTextureCube;
-	//scene.background = new THREE.Color(0x326696);
-		
-        }
+    // Function to switch globe textures between day, midday, and night
+function switchGlobeTexture() {
+  if (isDay) {
+    material2.map = dayTexture;
+    material2.bumpMap = dayBumpMap;
+  } else if (isMidday) {
+    material2.map = dayTexture;  // Optionally replace with midday texture if available
+    material2.bumpMap = dayBumpMap;
+  } else {
+    material2.map = nightTexture;
+    material2.bumpMap = nightBumpMap;
+  }
         material2.needsUpdate = true;
 	    //texture.needsUpdate = true;
 					
