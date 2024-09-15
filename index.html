@@ -963,7 +963,7 @@ nightSkyMesh.visible = false;
     );
   }*/
 		 
-const vertexShader = `
+/*const vertexShader = `
 void main() {
   vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
   gl_Position = projectionMatrix * mvPosition;
@@ -990,7 +990,7 @@ const skyMaterial = new THREE.ShaderMaterial({
 const skyGeometry = new THREE.SphereGeometry(500, 60, 40);
 const skyMesh = new THREE.Mesh(skyGeometry, skyMaterial);
 skyMesh.material.side = THREE.BackSide; // Render from inside
-scene.add(skyMesh);
+scene.add(skyMesh);*/
 
 		 
 
@@ -1124,7 +1124,7 @@ button.addEventListener("click", () => {
   // Update the sky, globe texture, and background
   switchGlobeTexture();
   switchBackgroundTexture();
-  switchSkyColor();
+  //switchSkyColor();
 
   // Update button label
   if (isDay) {
@@ -1232,7 +1232,7 @@ function switchGlobeTexture() {
 }
 
 // Function to switch sky color
-function switchSkyColor() {
+/*function switchSkyColor() {
   if (isDay) {
     skyMaterial.uniforms.color.value = new THREE.Color(0x87CEFA); // Daytime color
   } else if (isMidday) {
@@ -1240,7 +1240,7 @@ function switchSkyColor() {
   } else {
     skyMaterial.uniforms.color.value = new THREE.Color(0x001F3F); // Nighttime color
   }
-}
+}*/
 
 // Initially, load HDR textures and start with the day theme
 loadHdriTextures();
