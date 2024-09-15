@@ -993,17 +993,6 @@ const skyMesh = new THREE.Mesh(skyGeometry, skyMaterial);
 skyMesh.material.side = THREE.BackSide; // Render from inside
 scene.add(skyMesh);
 
-// Function to switch sky color
-function switchSkyColor() {
-  if (isDay) {
-    skyMaterial.uniforms.color.value = new THREE.Color(0x87CEFA); // Daytime color
-  } else if (isMidday) {
-    skyMaterial.uniforms.color.value = new THREE.Color(0x326696); // Midday color
-  } else {
-    skyMaterial.uniforms.color.value = new THREE.Color(0x001F3F); // Nighttime color
-  }
-}
-
 		 
 
 		 const hdrLoader = new THREE.TextureLoader(); // Ensure you have included RGBELoader for HDRIs
@@ -1145,6 +1134,16 @@ function switchGlobeTexture() {
 	    //texture.needsUpdate = true;
 					
     }
+		 // Function to switch sky color
+function switchSkyColor() {
+  if (isDay) {
+    skyMaterial.uniforms.color.value = new THREE.Color(0x87CEFA); // Daytime color
+  } else if (isMidday) {
+    skyMaterial.uniforms.color.value = new THREE.Color(0x326696); // Midday color
+  } else {
+    skyMaterial.uniforms.color.value = new THREE.Color(0x001F3F); // Nighttime color
+  }
+}
 		 
 
     // Button to switch textures
