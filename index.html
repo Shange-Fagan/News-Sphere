@@ -1113,12 +1113,12 @@ button.addEventListener("click", () => {
 
   // Toggle between day, midday, and night
   if (isDay) {
-    isDay = false;
-    isMidday = true;
-  } else if (isMidday) {
-    isMidday = false;
-  } else {
     isDay = true;
+    isMidday = false;
+  } else if (isMidday) {
+    isMidday = true;
+  } else {
+    isDay = false;
   }
 
   // Update the sky, globe texture, and background
