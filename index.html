@@ -2946,10 +2946,14 @@ let t = clock.getElapsedTime();
     globalUniforms.time.value = t;
     label.userData.trackVisibility();
     //label2.userData.trackVisibility();
-    controls.update();
+    //controls.update();
     renderer.render(scene, camera);
     labelRenderer.render(scene, camera);
     renderer.render(scene, camera);
+			 if (!isWidgetActive) {
+        // Only update the globe's rotation if the widget is not active
+        controls.update();
+    }
 			 //globe.rotation.y += 0.25;
 			 //globe2.rotation.y += 0.25;
 		//cloudMesh.position.z += 0.05;
