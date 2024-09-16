@@ -624,7 +624,7 @@ canvas.cloud{
 
   window.addEventListener("resize", onWindowResize);
 
-  /*let controls = new OrbitControls(camera, labelRenderer.domElement);
+  let controls = new OrbitControls(camera, labelRenderer.domElement);
   controls.enablePan = false;
   controls.minDistance = 15;
   controls.maxDistance = 20;
@@ -633,7 +633,7 @@ canvas.cloud{
   controls.autoRotateSpeed *= 0.25;
 				
     controls.dampingFactor = 0.25;
-    controls.enableZoom = true;*/
+    controls.enableZoom = true;
 
   let globalUniforms = {
     time: { value: 0 },
