@@ -2506,6 +2506,22 @@ button.addEventListener("click", () => {
 divID.addEventListener("touchstart", (event) => {
     event.stopPropagation();
 });   
+	    let isWidgetActive = false;
+
+divID.addEventListener('click', function() {
+    isWidgetActive = true;
+    controls.enabled = false; // If using OrbitControls, disable control
+
+    // Show the news widget
+    showNewsWidget();
+});
+	    function closeNewsWidget() {
+    isWidgetActive = false;
+    controls.enabled = true;  // Re-enable controls
+
+    // Hide the news widget
+    hideNewsWidget();
+}
            
       /*<link rel="stylesheet" href="style.css"> <!--Copy this line of code-->*/
       /*divMag.innerHTML = `Mag: <b>${mi.mag}</b>`;
