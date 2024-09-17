@@ -740,6 +740,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     const labelsContainer = document.createElement('div');
     labelsContainer.id = "labels-container";
     document.body.appendChild(labelsContainer);
+	  const markerObjects = [];
 
     // Create Labels for Each Marker
     markersData.forEach((marker) => {
