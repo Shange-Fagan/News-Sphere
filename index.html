@@ -855,114 +855,95 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     labelDiv.id = `label-${data.id}`;
   
     // Close Button
-    const closeButton = document.createElement('button');
-    closeButton.className = 'close-button';
-    closeButton.innerText = 'X';
-    /*closeButton.addEventListener('click', () => {
-      labelDiv.classList.remove('active');
-    });*/
-    labelDiv.appendChild(closeButton);
-	  // Close Button Event Listener
+    // Close Button
+const closeButton = document.createElement('button');
+closeButton.className = 'close-button';
+closeButton.innerText = 'X';
+labelDiv.appendChild(closeButton);
+
+// Close Button Event Listener
 document.querySelectorAll('.marker-label .close-button').forEach(button => {
   closeButton.addEventListener('click', (event) => {
-  console.log('Close button clicked'); // Check if this appears in the console
-  event.stopPropagation(); // Stop the event from propagating up the DOM
-  const labelDiv = closeButton.closest('.marker-label');
-  labelDiv.classList.remove('active');
-});
-});
-    /*document.addEventListener("DOMContentLoaded", function () {
-    const closeButtons = document.querySelectorAll(".marker-label .close-button");
-
-    closeButtons.forEach((button) => {
-      button.addEventListener("click", function () {
-        const markerLabel = this.closest(".marker-label");
-        markerLabel.style.display = "none";  // Hide the marker label
-      });
-    });
-  });*/
-  
-    // Content Div
-    const contentDiv = document.createElement('div');
-    contentDiv.className = 'content';
-    labelDiv.appendChild(contentDiv);
-  
-    // Append to Labels Container
-    labelsContainer.appendChild(labelDiv);
-  
-    // CSS2DObject
-    const labelObject = new CSS2DObject(labelDiv);
-    labelObject.position.copy(data.worldPosition);
-    scene.add(labelObject);
-  
-    // Store label object for interaction
-    data.labelObject = labelObject;
-    labelDiv.addEventListener('mousedown', (event) => {
-      event.stopPropagation();
-    });
-    labelDiv.addEventListener('touchstart', (event) => {
-      event.stopPropagation();
-  });
-  });
-    // Raycaster for Interaction
-  const raycaster = new THREE.Raycaster();
-  const pointer = new THREE.Vector2();
-  
-  window.addEventListener('pointerdown', (event) => {
-    pointer.x = (event.clientX / innerWidth) * 2 - 1;
-    pointer.y = -(event.clientY / innerHeight) * 2 + 1;
-    raycaster.setFromCamera(pointer, camera);
-  
-    const intersects = raycaster.intersectObject(markers).filter((m) => {
-      return m.uv.subScalar(0.5).length() * 2 < 0.25;
-    });
-  
-    if (intersects.length > 0) {
-      const instanceId = intersects[0].instanceId;
-      const data = markersData[instanceId];
-  
-      // Update Label Content
-      const labelDiv = document.getElementById(`label-${data.id}`);
-      const contentDiv = labelDiv.querySelector('.content');
-      contentDiv.innerHTML = `<iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>`;
-  
-      // Show Label
-      labelDiv.classList.add('active');
-    }
-  });
-    // Animation Loop
-  const clock = new THREE.Clock();
-  
-  function animate() {
-    requestAnimationFrame(animate);
-  
-    // Update time uniform
-    globalUniforms.time.value = clock.getElapsedTime();
-  
-    // Update controls
-    controls.update();
-  
-    // Render
-    renderer.render(scene, camera);
-    labelRenderer.render(scene, camera);
-  }/*// Toggle between day and night textures
-    function toggleDayNight() {
-      if (isDay) {
-        globeMesh.material.map = nightTexture;
-        document.getElementById("toggleButton").textContent = "Switch to Day";
-      } else {
-        globeMesh.material.map = dayTexture;
-        document.getElementById("toggleButton").textContent = "Switch to Night";
-      }
-      globeMesh.material.needsUpdate = true;
-      isDay = !isDay;
-    }
+    console.log('Close button clicked'); // Check if this appears in the console
+    event.stopPropagation(); // Stop the event from propagating up the DOM
+    const labelDiv = closeButton.closest('.marker-label');
+    labelDiv.classList.remove('active');
     
-    // Add event listener to the button
-    document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
-*/
-  
-  animate();
+    // Resume globe autorotation when the label is closed
+    controls.autoRotate = true;
+  });
+});
+
+// Content Div
+const contentDiv = document.createElement('div');
+contentDiv.className = 'content';
+labelDiv.appendChild(contentDiv);
+
+// Append to Labels Container
+labelsContainer.appendChild(labelDiv);
+
+// CSS2DObject
+const labelObject = new CSS2DObject(labelDiv);
+labelObject.position.copy(data.worldPosition);
+scene.add(labelObject);
+
+// Store label object for interaction
+data.labelObject = labelObject;
+labelDiv.addEventListener('mousedown', (event) => {
+  event.stopPropagation();
+});
+labelDiv.addEventListener('touchstart', (event) => {
+  event.stopPropagation();
+});
+
+// Raycaster for Interaction
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+
+window.addEventListener('pointerdown', (event) => {
+  pointer.x = (event.clientX / innerWidth) * 2 - 1;
+  pointer.y = -(event.clientY / innerHeight) * 2 + 1;
+  raycaster.setFromCamera(pointer, camera);
+
+  const intersects = raycaster.intersectObject(markers).filter((m) => {
+    return m.uv.subScalar(0.5).length() * 2 < 0.25;
+  });
+
+  if (intersects.length > 0) {
+    const instanceId = intersects[0].instanceId;
+    const data = markersData[instanceId];
+
+    // Update Label Content
+    const labelDiv = document.getElementById(`label-${data.id}`);
+    const contentDiv = labelDiv.querySelector('.content');
+    contentDiv.innerHTML = `<iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>`;
+
+    // Show Label
+    labelDiv.classList.add('active');
+
+    // Stop the globe's autorotation when a marker is clicked
+    controls.autoRotate = false;
+  }
+});
+
+// Animation Loop
+const clock = new THREE.Clock();
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  // Update time uniform
+  globalUniforms.time.value = clock.getElapsedTime();
+
+  // Update controls
+  controls.update();
+
+  // Render
+  renderer.render(scene, camera);
+  labelRenderer.render(scene, camera);
+}
+
+animate();
     
   </script>
 </body>
