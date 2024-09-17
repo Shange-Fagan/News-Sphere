@@ -325,21 +325,26 @@ html, body {
     renderer.setSize(innerWidth, innerHeight);
     labelRenderer.setSize(innerWidth, innerHeight);
   }
-    // Track loaded textures
+// Track loaded textures
 let texturesLoaded = 0;
 const totalTextures = 4; // Update this if you have more or fewer textures
-
+// Increment the loaded textures count when each texture is fully loaded
+const textureLoader = new THREE.TextureLoader();
+const dayTexture = textureLoader.load("path_to_day_texture.jpg", checkTexturesLoaded);
+const nightTexture = textureLoader.load("path_to_night_texture.jpg", checkTexturesLoaded);
+// Call animate() only after all textures are loaded
 function checkTexturesLoaded() {
   texturesLoaded++;
   if (texturesLoaded === totalTextures) {
-    animate(); // Start animation after all textures are loaded
+    animate();  // Start animation only when all textures are ready
   }
 }
+
     //let dayTexture, nightTexture;
     let isDay = true; // Track whether it's currently day or night
 
 // Load Textures
-const textureLoader = new THREE.TextureLoader();
+//const textureLoader = new THREE.TextureLoader();
 
 // Background Texture
     /*const loader = new THREE.TextureLoader();
@@ -826,24 +831,30 @@ let globe2 = new THREE.Mesh(geometry, material2);
       }
     }
 
-    // Update marker labels' opacity based on distance from camera
-    function updateMarkerLabelOpacity() {
-      markerObjects.forEach(markerObj => {
-        const { labelDiv, worldPosition } = markerObj;
+    function updateMarkerLabelPosition() {
+  markerObjects.forEach(markerObj => {
+    const { labelDiv, worldPosition } = markerObj;
 
-        const markerPos = worldPosition.clone().project(camera);
-        const distance = camera.position.distanceTo(worldPosition);
+    const markerPos = worldPosition.clone().project(camera);
+    const x = (markerPos.x * 0.5 + 0.5) * window.innerWidth;
+    const y = -(markerPos.y * 0.5 - 0.5) * window.innerHeight;
 
-        let opacity = 1 - (distance / 20); // Adjust fade-out based on distance
-        opacity = Math.max(0, Math.min(opacity, 1));
+    // Update position of the label
+    labelDiv.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
 
-        labelDiv.style.opacity = opacity;
+    // Adjust opacity based on the distance from the camera
+    const distance = camera.position.distanceTo(worldPosition);
+    const opacity = Math.max(0, Math.min(1, 1 - distance / 20)); // Fade based on distance
+    labelDiv.style.opacity = opacity;
+  });
+}
+	  document.addEventListener("DOMContentLoaded", function () {
+  // Your code that accesses DOM elements, such as:
+  const labelsContainer = document.getElementById("labels-container");
+  const toggleButton = document.getElementById("toggleButton");
 
-        const x = (markerPos.x * 0.5 + 0.5) * window.innerWidth;
-        const y = -(markerPos.y * 0.5 - 0.5) * window.innerHeight;
-        labelDiv.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
-      });
-    }
+  // Now you can safely manipulate the DOM elements here
+});
 
     // Animation loop
     function animate() {
