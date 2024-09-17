@@ -110,7 +110,7 @@ a, button, input, select, iframe {
   display: block;
 }
 
-.marker-label .close-button {
+/*.marker-label .close-button {
   position: absolute;
   top: 25px;
   left: 20px;
@@ -124,6 +124,22 @@ a, button, input, select, iframe {
   transition: opacity 0.3s;
   cursor: pointer;
   z-index: 11;
+}*/
+	  .marker-label .close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0, 0, 0, 0.7); /* Darker background for visibility */
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 5px; /* Increase padding for larger click area */
+  cursor: pointer;
+  z-index: 9999;
+  opacity: 0.9;
+  transition: opacity 0.3s;
 }
 
 .marker-label .close-button:hover {
