@@ -142,9 +142,16 @@ html, body {
   cursor: pointer;
   z-index: 11;
 }*/
+	  
+/* Marker Labels */
+    .marker-label {
+      position: absolute;
+      display: none;
+      transition: opacity 0.5s ease; /* Smooth fade in/out */
+      z-index: 9999;
+    }
 	  .marker-label.active {
       display: block;
-      z-index: 9999;
     }
 
     .marker-label {
@@ -185,6 +192,7 @@ html, body {
 	   <script async src="https://fundingchoicesmessages.google.com/i/pub-5689710336620898?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
 </head>
 <body>
+<div id="labels-container"></div>
   <!-- Info Section -->
   <div id="info">Click the markers to show the label</div>
   <div id="credits">
