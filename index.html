@@ -249,6 +249,20 @@ iframe::-webkit-scrollbar {
         padding: 2.5px 0;
       }
     }
+	  /* Disable pointer events for all elements */
+* {
+  pointer-events: none;
+}
+
+/* Enable pointer events only for marker labels */
+.marker-label {
+  pointer-events: auto; /* Allow clicks and other events on the marker labels */
+}
+
+/* Enable pointer events for buttons or links you want to keep active */
+button, a {
+  pointer-events: auto;
+}
 	 
 </style>
 </head>
