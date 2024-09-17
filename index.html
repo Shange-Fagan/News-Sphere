@@ -418,43 +418,40 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
     // Set Initial Background Cube Map
    // scene.background = dayCubeMap;
    // scene.background = new THREE.Color(0x87CEEB); // Light sky blue
-	  // Create a gradient for the scene background
-	const canvas = document.createElement('canvas');
-	canvas.width = 1024;
-	canvas.height = 1024;
-	
-	const context = canvas.getContext('2d');
-	
-	// Create gradient from dark blue to light blue
-	const gradient = context.createRadialGradient(512, 512, 100, 512, 512, 512);
-	//gradient.addColorStop(0, '#87CEEB');  // Light sky blue near Earth
-	  gradient.addColorStop(0, '#87CEEB');  // Light sky blue near Earth
-	gradient.addColorStop(1, '#4682B4');  // Deep space blue at edges
-	//gradient.addColorStop(1, '#0d1b2a');  // Deep space blue at edges
-	context.fillStyle = gradient;
-	context.fillRect(0, 0, canvas.width, canvas.height);
-	
-	// Create a texture from the canvas
-	const daybackgroundTexture = new THREE.CanvasTexture(canvas);
-	  
-	  // Create a gradient for the night scene background
+	 // Create a gradient for the daytime scene background
+const canvas = document.createElement('canvas');
+canvas.width = 1024;
+canvas.height = 1024;
+
+const context = canvas.getContext('2d');
+
+// Create gradient from light sky blue to deep space blue
+const gradient = context.createRadialGradient(512, 512, 100, 512, 512, 512);
+gradient.addColorStop(0, '#87CEEB');  // Light sky blue near Earth
+gradient.addColorStop(1, '#4682B4');  // Deep space blue at edges
+context.fillStyle = gradient;
+context.fillRect(0, 0, canvas.width, canvas.height);
+
+// Create a texture from the canvas
+const daybackgroundTexture = new THREE.CanvasTexture(canvas);
+
+// Create a gradient for the night scene background
 const canvas2 = document.createElement('canvas');
 canvas2.width = 1024;
 canvas2.height = 1024;
 
-const context2 = canvas.getContext('2d');
+const context2 = canvas2.getContext('2d');  // Use the correct 'canvas2'
 
 // Create gradient from dark blue to slightly lighter blue
 const gradient2 = context2.createRadialGradient(512, 512, 100, 512, 512, 512);
 gradient2.addColorStop(0, '#000033');  // Darker blue (center near Earth)
 gradient2.addColorStop(1, '#000066');  // Slightly lighter blue for edges (space)
-
 context2.fillStyle = gradient2;
 context2.fillRect(0, 0, canvas2.width, canvas2.height);
 
 // Create a texture from the canvas
 const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
-
+	  
 	// Set the background of the scene
 	scene.background = daybackgroundTexture;
 // Toggle between Day/Night Textures and Cube Map
