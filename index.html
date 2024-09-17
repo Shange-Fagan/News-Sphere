@@ -866,7 +866,7 @@ document.querySelectorAll('.marker-label .close-button').forEach(button => {
   closeButton.addEventListener('click', (event) => {
   console.log('Close button clicked'); // Check if this appears in the console
   event.stopPropagation(); // Stop the event from propagating up the DOM
-  const labelDiv = button.closest('.marker-label');
+  const labelDiv = closeButton.closest('.marker-label');
   labelDiv.classList.remove('active');
 });
 });
