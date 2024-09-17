@@ -88,7 +88,7 @@ a, button, input, select, iframe {
   background: white;
   border: 2px solid #006b3f;
   border-radius: 10px;*/
-  /*position: absolute;*/
+  position: absolute;
   /*top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -171,6 +171,34 @@ a, button, input, select, iframe {
 iframe::-webkit-scrollbar {
   display: none;
 }
+	  iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+	  /* Responsive Design */
+    @media (max-width: 768px) {
+      /* Adjust the size and placement of the globe on mobile */
+      #toggleButton {
+        font-size: 10px;
+        padding: 3px 7px;
+        top: 50px;
+      }
+
+      #dayTicker, #nightTicker {
+        height: 40px; /* Reduce height for mobile */
+        font-size: 12px;
+      }
+
+      #credits {
+        font-size: 0.6rem; /* Make credits even smaller on mobile */
+      }
+
+      /* Adjust globe view on smaller devices by zooming out */
+      body {
+        overflow: hidden;
+      }
+    }
 	 
 </style>
 </head>
