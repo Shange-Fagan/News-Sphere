@@ -775,7 +775,7 @@ let globe2 = new THREE.Mesh(geometry, material2);
   ];*/
 	  
     // Labels and markers
-    const labelsContainer = document.getElementById("labels-container");
+    //const labelsContainer = document.getElementById("labels-container");
     const markerObjects = [];
 
     markersData.forEach((marker) => {
@@ -792,8 +792,15 @@ let globe2 = new THREE.Mesh(geometry, material2);
       labelDiv.appendChild(iframe);
 
       // Append label to container
-      labelsContainer.appendChild(labelDiv);
+      //labelsContainer.appendChild(labelDiv);
+document.addEventListener("DOMContentLoaded", function () {
+  // Your code that accesses DOM elements, such as:
+  const labelsContainer = document.getElementById("labels-container");
+  const toggleButton = document.getElementById("toggleButton");
 
+  // Now you can safely manipulate the DOM elements
+labelsContainer.appendChild(labelDiv);
+});
       // Create marker object
       const markerObject = new THREE.Object3D();
       const sphericalPosition = new THREE.Spherical(5.1, marker.position[1], marker.position[2]);
@@ -848,13 +855,7 @@ let globe2 = new THREE.Mesh(geometry, material2);
     labelDiv.style.opacity = opacity;
   });
 }
-	  document.addEventListener("DOMContentLoaded", function () {
-  // Your code that accesses DOM elements, such as:
-  const labelsContainer = document.getElementById("labels-container");
-  const toggleButton = document.getElementById("toggleButton");
-
-  // Now you can safely manipulate the DOM elements here
-});
+	
 
     // Animation loop
     function animate() {
