@@ -180,6 +180,11 @@ iframe::-webkit-scrollbar {
     <a href="https://www.linkedin.com/in/shange-fagan-bba3a3239/" target="_blank" rel="noopener">Shange Fagan</a>
   </div>
 
+  <div id="markerLabel" class="hidden">
+  <button id="closeButton">X</button>
+  <div class="text" id="idNum"></div>
+  </div>
+	
   <!-- Marker Labels (Will be dynamically generated) -->
   <div id="labels-container"></div>
 
@@ -197,13 +202,7 @@ iframe::-webkit-scrollbar {
     style="display: none;"
     sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"
   ></iframe>
-  <iframe
-    id="nightTicker"
-    src="https://rss.app/embed/v1/ticker/ye6DcnVZx4IHEsUK"
-    frameborder="0"
-    style="display: none;"
-    sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"
-  ></iframe>
+  
   <!-- Import Map -->
   <script type="importmap">
   {
