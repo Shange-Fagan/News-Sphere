@@ -108,6 +108,7 @@ a, button, input, select, iframe {
   pointer-events: auto; /* Ensure pointer events are enabled */
   z-index: 9999; /* Make sure the label is above other elements */
   /*background-color: rgba(255, 255, 255, 0.9);*/ /* Optional background for better visibility */
+  overflow: hidden; /* Hide any content that overflows */
 }
 
 .marker-label.active {
@@ -149,7 +150,7 @@ a, button, input, select, iframe {
   .close-button {
     position: absolute;
     top: 4.5px; /* Adjust as needed */
-    left: 30px; /* Adjust as needed */
+    right: 10px; /* Use 'right' instead of 'left' to avoid pushing the content */
     background: rgba(0, 0, 0, 0.5);
     border: none;
     border-radius: 3px;
@@ -157,6 +158,7 @@ a, button, input, select, iframe {
     font-size: 14px;
     font-weight: bold;
     /*padding: 5px;*/
+    padding: 4px 8px;
     cursor: pointer;
     z-index: 10000; /* Ensure the close button is always on top */
   }
@@ -179,6 +181,10 @@ a, button, input, select, iframe {
   display: block;
   position: relative;*/
   z-index: 1;
+  width: 100%; /* Make iframe take full width */
+  height: 250px; /* Adjust height as needed */
+  border: none; /* Remove iframe border */
+  display: block; /* Ensure it's a block element */
 }
 	  /*.marker-label iframe {
     width: 100%;
