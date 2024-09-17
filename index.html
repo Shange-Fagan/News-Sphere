@@ -622,7 +622,7 @@ rgbeLoader.load('textures/earth-blue-marble.hdr', (texture) => {
   scene.add(atmosphere);
   scene.add(globe);
   scene.add(globe2);
-})
+
   // custom globe material
   const globeMaterial = globe.material;
   material.bumpScale = 10;
@@ -634,6 +634,7 @@ rgbeLoader.load('textures/earth-blue-marble.hdr', (texture) => {
       globeMaterial.shininess = 15;
     }
   );
+})
 
   setTimeout(() => {
     // wait for scene to be populated (asynchronously)
