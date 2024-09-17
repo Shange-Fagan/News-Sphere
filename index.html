@@ -129,22 +129,38 @@ a, button, input, select, iframe {
   cursor: pointer;
   z-index: 11;
 }*/
-	  .marker-label .close-button {
+	  /*.marker-label .close-button {
   position: absolute;
   top: 4.5px;
   left: 15px;
   background: rgba(0, 0, 0, 0.5); /* Darker background for visibility */
-  border: 1px solid lightgray;
+  /*border: 1px solid lightgray;
   border-radius: 3px;
   color: white;
   font-size: 14px;
   font-weight: bold;
-  /*padding: 5px;*/ /* Increase padding for larger click area */
-  cursor: pointer;
+  padding: 5px; */ /* Increase padding for larger click area */
+  /*cursor: pointer;
   z-index: 9999;
   opacity: 0.25;
   transition: opacity 0.3s;
-}
+}*/
+	  /* Close Button Styles */
+  .close-button {
+    position: absolute;
+    top: 4.5px; /* Adjust as needed */
+    right: 15px; /* Adjust as needed */
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 3px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    /*padding: 5px;*/
+    cursor: pointer;
+    z-index: 10000; /* Ensure the close button is always on top */
+  }
+
 
 .marker-label .close-button:hover {
   opacity: 1;
