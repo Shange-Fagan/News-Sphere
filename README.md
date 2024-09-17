@@ -1,2 +1,2 @@
 # Instant-World-News
-A 3D graphical display of live news sourced from reuters, stock exchange, bbc news and other news feeds around the world displayed on a 3D globe
+A 3D graphical display of live news sourced from reuters, stock exchange, bbc news and other news feeds from around the world displayed on a 3D globe
