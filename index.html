@@ -169,7 +169,50 @@ a, button, input, select, iframe {
 iframe::-webkit-scrollbar {
   display: none;
 }
-	  
+	  #markerLabel {
+      position: "static";
+        object-fit: contain;
+        font-family: 'Space Mono', monospace;
+        transition: 0.3s;
+        background: transparent;
+        width: 142px;
+        height: 186px;
+        border: 4px solid  rgb(0, 107, 63) ;
+        border-radius: 10px;
+        z-index: 2;
+        margin: 0;
+        padding: 0;
+	position: absolute;
+	z-index: 10;
+}
+	   #closeButton {
+      position: absolute;
+      left: 25px;
+      top: 20px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      top: 6px;
+      left: 10px;
+      font-weight: 700;
+      text-align: center;
+      border: 1px solid lightgray;
+      border-radius: 3px;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      opacity: 0.25;
+      transition: opacity 0.3s;
+    }
+    #closeButton:hover {
+      opacity: 1;
+    }
+	  .text {
+      margin: 4px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+	  .hidden{
+      display: none;
+    }
 </style>
 </head>
 <body>
@@ -540,7 +583,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       frameborder:"0",
       loading:"lazy",
       width:"250",
-      height:"249",
+      height:"250",
       scrolling:"no",
       allowfullscreen:"true"
     },
@@ -554,7 +597,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       frameborder:"0",
       loading:"lazy",
       width:"250",
-      height:"249",
+      height:"250",
       scrolling:"no",
       allowfullscreen:"true"
     },
@@ -567,7 +610,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       frameborder:"0",
       loading:"lazy",
       width:"250",
-      height:"249",
+      height:"250",
       scrolling:"no",
       allowfullscreen:"true"
     },
@@ -580,7 +623,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       frameborder:"0",
       loading:"lazy",
       width:"250",
-      height:"249",
+      height:"250",
       scrolling:"no",
       allowfullscreen:"true"
     },
@@ -593,7 +636,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       frameborder:"0",
       loading:"lazy",
       width:"250",
-      height:"249",
+      height:"250",
       scrolling:"no",
       allowfullscreen:"true"
     },
@@ -606,7 +649,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       frameborder:"0",
       loading:"lazy",
       width:"250",
-      height:"249",
+      height:"250",
       scrolling:"no",
       allowfullscreen:"true"
     },
@@ -619,7 +662,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       frameborder:"0",
       loading:"lazy",
       width:"250",
-      height:"249",
+      height:"250",
       scrolling:"no",
       allowfullscreen:"true"
     },
@@ -632,7 +675,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       frameborder:"0",
       loading:"lazy",
       width:"250",
-      height:"249",
+      height:"250",
       scrolling:"no",
       allowfullscreen:"true"
     },
@@ -645,7 +688,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       frameborder:"0",
       loading:"lazy",
       width:"250",
-      height:"249",
+      height:"250",
       scrolling:"no",
       allowfullscreen:"true"
     },
