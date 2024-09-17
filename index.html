@@ -439,6 +439,27 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
 	
 	// Set the background of the scene
 	scene.background = daybackgroundTexture;
+	  
+	  // Create a gradient for the night scene background
+const canvas2 = document.createElement('canvas2');
+canvas2.width = 1024;
+canvas2.height = 1024;
+
+const context2 = canvas2.getContext('2d');
+
+// Create gradient from dark blue to slightly lighter blue
+const gradient2 = context2.createRadialGradient(512, 512, 100, 512, 512, 512);
+gradient2.addColorStop(0, '#000033');  // Darker blue (center near Earth)
+gradient2.addColorStop(1, '#000066');  // Slightly lighter blue for edges (space)
+
+context2.fillStyle = gradient2;
+context2.fillRect(0, 0, canvas2.width, canvas2.height);
+
+// Create a texture from the canvas
+const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
+
+// Set the background of the scene to the night theme
+//scene.background = backgroundTexture;
 
 // Toggle between Day/Night Textures and Cube Map
     function toggleDayNight() {
@@ -447,6 +468,7 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
         //scene.background = nightCubeMap;
         // Set a dark blue color for the night theme background
         scene.background = new THREE.Color(0x000033); // Dark blue
+	scene.background = nightbackgroundTexture;
         document.getElementById("toggleButton").textContent = "Switch to Day";
         document.getElementById("dayTicker").style.display = "none";
         document.getElementById("nightTicker").style.display = "block";
