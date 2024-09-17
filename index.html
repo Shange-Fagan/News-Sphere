@@ -67,6 +67,7 @@
     const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg", onTextureLoaded, undefined, onTextureError);
     const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg", onTextureLoaded, undefined, onTextureError);
 
+    const isMobile = /Mobi/i.test(navigator.userAgent);
     const dayCubeMap = cubeTextureLoader.load([
      isMobile ? 'js/px.webp' : 'js/px.png', // Right face
   isMobile ? 'js/nx.webp' : 'js/nx.png', // Left face
