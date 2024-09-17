@@ -908,7 +908,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       // Update Label Content
       const labelDiv = document.getElementById(`label-${data.id}`);
       const contentDiv = labelDiv.querySelector('.content');
-      contentDiv.innerHTML = `<iframe src="${data.iframeSrc}" frameborder="0"></iframe>`;
+      contentDiv.innerHTML = `<iframe src="${data.iframeSrc}" frameborder="0" width="250" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>`;
   
       // Show Label
       labelDiv.classList.add('active');
