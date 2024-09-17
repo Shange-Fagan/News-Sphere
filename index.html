@@ -856,6 +856,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
   
     // Close Button
     // Close Button
+// Close Button
 const closeButton = document.createElement('button');
 closeButton.className = 'close-button';
 closeButton.innerText = 'X';
@@ -871,6 +872,9 @@ document.querySelectorAll('.marker-label .close-button').forEach(button => {
     
     // Resume globe autorotation when the label is closed
     controls.autoRotate = true;
+    
+    // Re-enable the OrbitControls
+    controls.enabled = true;
   });
 });
 
@@ -921,8 +925,17 @@ window.addEventListener('pointerdown', (event) => {
     // Show Label
     labelDiv.classList.add('active');
 
-    // Stop the globe's autorotation when a marker is clicked
+    // Stop the globe's autorotation and disable OrbitControls
     controls.autoRotate = false;
+    controls.enabled = false; // Disable the controls while interacting with the iframe
+
+    // Add a listener to detect when the iframe loses focus and re-enable the controls
+    const iframe = labelDiv.querySelector('iframe');
+    iframe.addEventListener('load', () => {
+      iframe.contentWindow.addEventListener('blur', () => {
+        controls.enabled = true; // Re-enable the controls when iframe loses focus
+      });
+    });
   }
 });
 });
@@ -937,7 +950,9 @@ function animate() {
   globalUniforms.time.value = clock.getElapsedTime();
 
   // Update controls
-  controls.update();
+  if (controls.enabled) {
+    controls.update();
+  }
 
   // Render
   renderer.render(scene, camera);
@@ -945,7 +960,7 @@ function animate() {
 }
 
 animate();
-    
+  
   </script>
 </body>
 </html>
