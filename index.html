@@ -335,19 +335,24 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
     ]);
 
     // Set Initial Background Cube Map
-    scene.background = dayCubeMap;
+   // scene.background = dayCubeMap;
+      scene.background = new THREE.Color(0x87CEEB); // Light sky blue
 
 // Toggle between Day/Night Textures and Cube Map
     function toggleDayNight() {
       if (isDay) {
         globeMesh.material.map = nightTexture;
-        scene.background = nightCubeMap;
+        //scene.background = nightCubeMap;
+        // Set a dark blue color for the night theme background
+        scene.background = new THREE.Color(0x000033); // Dark blue
         document.getElementById("toggleButton").textContent = "Switch to Day";
         document.getElementById("dayTicker").style.display = "none";
         document.getElementById("nightTicker").style.display = "block";
       } else {
         globeMesh.material.map = dayTexture;
-        scene.background = dayCubeMap;
+        //scene.background = dayCubeMap;
+        // Set a solid blue color for the background
+        scene.background = new THREE.Color(0x87CEEB); // Light sky blue
         document.getElementById("toggleButton").textContent = "Switch to Night";
         document.getElementById("dayTicker").style.display = "block";
         document.getElementById("nightTicker").style.display = "none";
