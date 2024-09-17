@@ -860,14 +860,11 @@ let globe2 = new THREE.Mesh(geometry, material2);
       updateMarkerLabelOpacity();
       renderer.render(scene, camera);
     }
-
+	  
     animate();
-
-    window.addEventListener("resize", () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
+	  
+    
+    
   </script>
 </body>
 </html>
