@@ -40,7 +40,7 @@ a, button, input, select, iframe {
       font-size: 0.75rem; /* Smaller, more discreet font size */
       /*color: rgba(0, 0, 0, 0.4);*/ /* Make the credits less prominent */
     }
-	  #credits a {
+ #credits a {
       /*color: #1e90ff;*/
       text-decoration: none;
     }
@@ -48,7 +48,6 @@ a, button, input, select, iframe {
     #credits a:hover {
       text-decoration: underline;
     }
-
 /* Tickers */
 #dayTicker,
 #nightTicker {
@@ -59,8 +58,7 @@ a, button, input, select, iframe {
       width: 100%;
       font-family: Monospace;
        text-align: center;
-	  pointer-events: none;
-       /*z-index: 1;*/
+      z-index: 9999;
     
 }
 	  /* Responsive Ticker for Mobile */
@@ -68,7 +66,7 @@ a, button, input, select, iframe {
       #dayTicker, #nightTicker {
         font-size: 10px;
 	width: 100vw;
-        height: 60px;
+        height: 40px;
         top: 0;
       }
     }
@@ -98,20 +96,18 @@ a, button, input, select, iframe {
   height: 200px;
   background: white;
   border: 2px solid #006b3f;
-  border-radius: 10px;
+  border-radius: 10px;*/
   position: absolute;
-  top: 50%;
+  /*top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  /*z-index: 10;*/
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
+  z-index: 10;
   display: none; /* Hidden by default */
-  /*pointer-events: auto; 
 }
 
 .marker-label.active {
   display: block;
-	z-index: 9999;
 }
 
 .marker-label .close-button {
@@ -127,7 +123,7 @@ a, button, input, select, iframe {
   opacity: 0.25;
   transition: opacity 0.3s;
   cursor: pointer;
-  z-index: 9999;
+  z-index: 11;
 }
 
 .marker-label .close-button:hover {
@@ -159,7 +155,7 @@ a, button, input, select, iframe {
       border: 1px solid rgba(225, 225, 225, 0.25);
       border-radius: 8px;
       color: rgba(255, 255, 255, 0.5);
-      z-index: 9995;
+      z-index: 9999;
       cursor: pointer;
     }
 
@@ -184,12 +180,7 @@ a, button, input, select, iframe {
 iframe::-webkit-scrollbar {
   display: none;
 }
-	 /* iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }*/
-	  /* Responsive Design */
+	/* Responsive Design */
     @media (max-width: 768px) {
       /* Adjust the size and placement of the globe on mobile */
       #toggleButton {
@@ -250,7 +241,7 @@ iframe::-webkit-scrollbar {
         font-size: 0.4rem;
         padding: 2.5px 0;
       }
-    }
+    }  
 </style>
 </head>
 <body>
