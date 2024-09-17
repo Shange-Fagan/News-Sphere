@@ -317,7 +317,15 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
 });*/
 	  // Load the Cube Map
       const cubeTextureLoader = new THREE.CubeTextureLoader();
-	  const isMobile = /Mobi/i.test(navigator.userAgent);
+	  let isMobile = /Mobi/i.test(navigator.userAgent);
+
+	  // Responsive Globe for Mobile
+    let isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      camera.fov = 60;  // Increase FOV to zoom out on mobile
+      camera.updateProjectionMatrix();
+      globe2.scale.set(0.9, 0.9, 0.9); // Slightly scale down the globe
+    }
 
 /*const cubeMap = cubeTextureLoader.load([
   isMobile ? 'js/px.webp' : 'js/px.png', // Right face
@@ -387,13 +395,6 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     sphereHeight,
     sphereDepth
   );
-	   // Responsive Globe for Mobile
-    const isMobile = window.innerWidth <= 768;
-    if (isMobile) {
-      camera.fov = 60;  // Increase FOV to zoom out on mobile
-      camera.updateProjectionMatrix();
-      globe2.scale.set(0.9, 0.9, 0.9); // Slightly scale down the globe
-    }
 
   const sphereWidth2 = 5.099;
   const sphereHeight2 = 32.1;
