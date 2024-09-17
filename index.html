@@ -804,7 +804,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
         controls.autoRotate = true;  // Resume auto-rotation when closing the marker
       });
 
-      // Content
+      /*// Content
       const contentDiv = document.createElement('div');
       contentDiv.className = 'content';
       contentDiv.innerHTML = `<iframe src="${marker.iframeSrc}" frameborder="0"></iframe>`;
@@ -812,7 +812,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       labelDiv.appendChild(closeButton);
       labelDiv.appendChild(contentDiv);
 
-      labelsContainer.appendChild(labelDiv);
+      labelsContainer.appendChild(labelDiv);*/
 
     // Handle Pointer Click
 function onPointerClick(event) {
@@ -835,12 +835,14 @@ function onPointerClick(event) {
       // Set the iframe content for the marker
       const contentDiv = clickedMarker.labelDiv.querySelector('.content');
       contentDiv.innerHTML = `<iframe src="${markersData[clickedMarker.markerObject.id - 1].iframeSrc}" frameborder="0"></iframe>`;
-
+      labelDiv.appendChild(contentDiv);
       // Stop globe auto-rotation when marker is clicked
       controls.autoRotate = false;
     }
   }
 }
+	  labelDiv.appendChild(closeButton);
+	  labelsContainer.appendChild(labelDiv);
   
   // Marker Geometry and Material
   const markerGeometry = new THREE.PlaneGeometry();
