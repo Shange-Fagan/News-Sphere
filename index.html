@@ -752,297 +752,98 @@ let globe2 = new THREE.Mesh(geometry, material2);
       allowfullscreen:"true"
     },
   ];*/
-	  // Marker Labels Container
-const labelsContainer = document.createElement('div');
-labelsContainer.id = "labels-container";
-document.body.appendChild(labelsContainer);
-const markerObjects = [];
-
-// Create Labels for Each Marker
-markersData.forEach((marker) => {
-  const labelDiv = document.createElement('div');
-  labelDiv.className = 'marker-label';
-  labelDiv.id = `label-${marker.id}`;
-
-  // Create content for the label
-  const iframe = document.createElement("iframe");
-  iframe.src = marker.iframeSrc;
-  iframe.width = "250";
-  iframe.height = "250";
-  iframe.frameBorder = "0";
-
-  labelDiv.appendChild(iframe);
-  labelsContainer.appendChild(labelDiv);
-
-  // Position the marker using spherical coordinates
-  const markerObject = new THREE.Object3D();
-  const sphericalPosition = new THREE.Spherical(5.1, marker.position[1], marker.position[2]);
-  markerObject.position.setFromSpherical(sphericalPosition);
-  scene.add(markerObject);
-
-  markerObjects.push({
-    labelDiv,
-    markerObject,
-    worldPosition: markerObject.position.clone(),
-  });
-});
-
-// Update Marker Labels' Opacity Based on Their Distance to the Camera
-function updateMarkerLabelOpacity() {
-  markerObjects.forEach(markerObj => {
-    const { labelDiv, worldPosition } = markerObj;
-
-    // Convert the marker's position to screen coordinates
-    const markerPos = worldPosition.clone().project(camera);
-
-    // Get the distance from the camera
-    const distance = camera.position.distanceTo(worldPosition);
-
-    // Adjust opacity based on the distance (or alternatively the angle)
-    let opacity = 1 - (distance / 20); // Adjust this value as needed for the fade-out effect
-    opacity = Math.max(0, Math.min(opacity, 1)); // Clamp between 0 and 1
-
-    // Apply opacity to the marker label
-    labelDiv.style.opacity = opacity;
-
-    // Update position of the label in the DOM
-    const x = (markerPos.x * 0.5 + 0.5) * window.innerWidth;
-    const y = -(markerPos.y * 0.5 - 0.5) * window.innerHeight;
-    labelDiv.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
-  });
-}
-      
-      // Close Button
-      const closeButton = document.createElement('button');
-      closeButton.className = 'close-button';
-      closeButton.innerText = 'X';
-      closeButton.addEventListener('click', () => {
-        labelDiv.classList.remove('active');
-        controls.autoRotate = true;  // Resume auto-rotation when closing the marker
-	labelDiv.appendChild(closeButton);
-      });
 	  
+    // Labels and markers
+    const labelsContainer = document.getElementById("labels-container");
+    const markerObjects = [];
 
-      /*// Content
-      const contentDiv = document.createElement('div');
-      contentDiv.className = 'content';
-      contentDiv.innerHTML = `<iframe src="${marker.iframeSrc}" frameborder="0"></iframe>`;
+    markersData.forEach((marker) => {
+      // Create label for marker
+      const labelDiv = document.createElement("div");
+      labelDiv.className = "marker-label";
+      labelDiv.id = `label-${marker.id}`;
 
-      labelDiv.appendChild(closeButton);
-      labelDiv.appendChild(contentDiv);
+      const iframe = document.createElement("iframe");
+      iframe.src = marker.iframeSrc;
+      iframe.width = "250";
+      iframe.height = "250";
+      iframe.frameBorder = "0";
+      labelDiv.appendChild(iframe);
 
-      labelsContainer.appendChild(labelDiv);*/
+      // Append label to container
+      labelsContainer.appendChild(labelDiv);
 
-    // Handle Pointer Click
-function onPointerClick(event) {
-  onPointerMove(event);  // Update pointer position
-  raycaster.setFromCamera(pointer, camera);
+      // Create marker object
+      const markerObject = new THREE.Object3D();
+      const sphericalPosition = new THREE.Spherical(5.1, marker.position[1], marker.position[2]);
+      markerObject.position.setFromSpherical(sphericalPosition);
+      scene.add(markerObject);
 
-  // Check for intersections with marker objects
-  const intersects = raycaster.intersectObjects(markerObjects.map(m => m.markerObject));
+      markerObjects.push({ labelDiv, markerObject, worldPosition: markerObject.position.clone() });
+    });
 
-  if (intersects.length > 0) {
-    const intersectedMarker = intersects[0].object;  // Get the first intersected marker
-    const clickedMarker = markerObjects.find(m => m.markerObject === intersectedMarker);
+    // Raycaster setup
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
 
-    if (clickedMarker) {
-      console.log('Clicked on marker:', clickedMarker);
-
-      // Show the corresponding label
-      clickedMarker.labelDiv.classList.add('active');
-
-      // Set the iframe content for the marker
-      const contentDiv = clickedMarker.labelDiv.querySelector('.content');
-      contentDiv.innerHTML = `<iframe src="${markersData[clickedMarker.markerObject.id - 1].iframeSrc}" frameborder="0"></iframe>`;
-      labelDiv.appendChild(contentDiv);
-      // Stop globe auto-rotation when marker is clicked
-      controls.autoRotate = false;
+    function onPointerMove(event) {
+      pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
     }
-  }
-}
-  
-  // Marker Geometry and Material
-  const markerGeometry = new THREE.PlaneGeometry();
-  const markerMaterial = new THREE.MeshBasicMaterial({
-    color: 0xff3232,
-    onBeforeCompile: (shader) => {
-      shader.uniforms.time = globalUniforms.time;
-      shader.vertexShader = `
-      	attribute float phase;
-        varying float vPhase;
-        ${shader.vertexShader}
-      `.replace(
-        `#include <begin_vertex>`,
-        `#include <begin_vertex>
-        	vPhase = phase; // de-synch of ripples
-        `
-      );
-      shader.fragmentShader = `
-      	uniform float time;
-        varying float vPhase;
-      	${shader.fragmentShader}
-      `.replace(
-        `vec4 diffuseColor = vec4( diffuse, opacity );`,
-        `
-        vec2 lUv = (vUv - 0.5) * 2.;
-        float val = 0.;
-        float lenUv = length(lUv);
-        val = max(val, 1. - step(0.25, lenUv)); // central circle
-        val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
 
-        float tShift = fract(time * 0.5 + vPhase);
-        val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
+    window.addEventListener("pointerdown", onPointerClick);
 
-        if (val < 0.5) discard;
+    function onPointerClick(event) {
+      onPointerMove(event);
+      raycaster.setFromCamera(pointer, camera);
 
-        vec4 diffuseColor = vec4( diffuse, opacity );`
-      );
-    },
-  });
-  markerMaterial.defines = { USE_UV: '' };
-  
-  // Creating Markers
-  const markerCount = markersData.length;
-  const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
-  
-  const dummy = new THREE.Object3D();
-  const phaseArray = [];
-  
-  markersData.forEach((data, index) => {
-    const [radius, phi, theta] = data.position;
-    dummy.position.setFromSphericalCoords(radius, phi, theta);
-    dummy.lookAt(dummy.position.clone().setLength(radius + 1));
-    dummy.updateMatrix();
-    markers.setMatrixAt(index, dummy.matrix);
-    phaseArray.push(Math.random());
-    data.worldPosition = dummy.position.clone();
-  });
-  
-  markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(new Float32Array(phaseArray), 1));
-  scene.add(markers);
-    // Labels Container
-  //const labelsContainer = document.getElementById('labels-container');
-  
-  // Create Labels
-  markersData.forEach((data) => {
-    // Create Label Div
-    const labelDiv = document.createElement('div');
-    labelDiv.className = 'marker-label';
-    labelDiv.id = `label-${data.id}`;
-  
-    // Close Button
-    const closeButton = document.createElement('button');
-    closeButton.className = 'close-button';
-    closeButton.innerText = 'X';
-    closeButton.addEventListener('click', () => {
-      labelDiv.classList.remove('active');
-    });
-    labelDiv.appendChild(closeButton);
-    /*document.addEventListener("DOMContentLoaded", function () {
-    const closeButtons = document.querySelectorAll(".marker-label .close-button");
+      const intersects = raycaster.intersectObjects(markerObjects.map(m => m.markerObject));
 
-    closeButtons.forEach((button) => {
-      button.addEventListener("click", function () {
-        const markerLabel = this.closest(".marker-label");
-        markerLabel.style.display = "none";  // Hide the marker label
-      });
-    });
-  });*/
-  
-    // Content Div
-    const contentDiv = document.createElement('div');
-    contentDiv.className = 'content';
-    labelDiv.appendChild(contentDiv);
-  
-    // Append to Labels Container
-    labelsContainer.appendChild(labelDiv);
-  
-    // CSS2DObject
-    const labelObject = new CSS2DObject(labelDiv);
-    labelObject.position.copy(data.worldPosition);
-    scene.add(labelObject);
-  
-    // Store label object for interaction
-    data.labelObject = labelObject;
-    labelDiv.addEventListener('mousedown', (event) => {
-      event.stopPropagation();
-    });
-    labelDiv.addEventListener('touchstart', (event) => {
-      event.stopPropagation();
-  });
-  });
-    // Raycaster for Interaction
-  const raycaster = new THREE.Raycaster();
-  const pointer = new THREE.Vector2();
-  
-  window.addEventListener('pointerdown', (event) => {
-    pointer.x = (event.clientX / innerWidth) * 2 - 1;
-    pointer.y = -(event.clientY / innerHeight) * 2 + 1;
-    raycaster.setFromCamera(pointer, camera);
-  
-    const intersects = raycaster.intersectObject(markers).filter((m) => {
-      return m.uv.subScalar(0.5).length() * 2 < 0.25;
-    });
-  
-    if (intersects.length > 0) {
-      const instanceId = intersects[0].instanceId;
-      const data = markersData[instanceId];
-  
-      // Update Label Content
-      const labelDiv = document.getElementById(`label-${data.id}`);
-      const contentDiv = labelDiv.querySelector('.content');
-      contentDiv.innerHTML = `<iframe src="${data.iframeSrc}" frameborder="0"></iframe>`;
-  
-      // Show Label
-      labelDiv.classList.add('active');
-    }
-  });
-    // Animation Loop
-  const clock = new THREE.Clock();
-  
-  function animate() {
-    requestAnimationFrame(animate);
-	  updateMarkerLabelOpacity();
-  
-    // Update time uniform
-    globalUniforms.time.value = clock.getElapsedTime();
-  
-    // Update controls
-    controls.update();
+      if (intersects.length > 0) {
+        const intersectedMarker = intersects[0].object;
+        const clickedMarker = markerObjects.find(m => m.markerObject === intersectedMarker);
 
-      // Update marker opacity and position
-      //updateMarkerLabelOpacity();
-
-  
-    // Render
-    renderer.render(scene, camera);
-    labelRenderer.render(scene, camera);
-  }/*// Toggle between day and night textures
-    function toggleDayNight() {
-      if (isDay) {
-        globeMesh.material.map = nightTexture;
-        document.getElementById("toggleButton").textContent = "Switch to Day";
-      } else {
-        globeMesh.material.map = dayTexture;
-        document.getElementById("toggleButton").textContent = "Switch to Night";
+        if (clickedMarker) {
+          clickedMarker.labelDiv.classList.add("active");
+          controls.autoRotate = false;
+        }
       }
-      globeMesh.material.needsUpdate = true;
-      isDay = !isDay;
     }
-    
-    // Add event listener to the button
-    document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
-*/
-  
-  animate();
-	  // Adjust the marker labels on window resize
-window.addEventListener('resize', () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  updateMarkerLabelOpacity();
-});
-    
+
+    // Update marker labels' opacity based on distance from camera
+    function updateMarkerLabelOpacity() {
+      markerObjects.forEach(markerObj => {
+        const { labelDiv, worldPosition } = markerObj;
+
+        const markerPos = worldPosition.clone().project(camera);
+        const distance = camera.position.distanceTo(worldPosition);
+
+        let opacity = 1 - (distance / 20); // Adjust fade-out based on distance
+        opacity = Math.max(0, Math.min(opacity, 1));
+
+        labelDiv.style.opacity = opacity;
+
+        const x = (markerPos.x * 0.5 + 0.5) * window.innerWidth;
+        const y = -(markerPos.y * 0.5 - 0.5) * window.innerHeight;
+        labelDiv.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
+      });
+    }
+
+    // Animation loop
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      updateMarkerLabelOpacity();
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    window.addEventListener("resize", () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
   </script>
 </body>
 </html>
