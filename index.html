@@ -160,7 +160,7 @@ a, button, input, select, iframe {
   font-weight: bold;
   cursor: pointer;
   /*opacity: 0.25;*/
-  z-index: 10000; /* Ensure the close button is always on top */
+  z-index: 10001; /* Ensure the close button is always on top */
 }
 
 /*.close-button:hover {
@@ -204,40 +204,24 @@ a, button, input, select, iframe {
     display: block;
   }*/
     /* Button Style */
-    /*#toggleButton {
+    #toggleButton {
       position: absolute;
       right: 0px;
       top: 55px;
       padding: 4.5px 9.5px;
       font-size: 12px;
-      background-color: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background-color: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       border-radius: 8px;
       color: rgba(255, 255, 255, 0.75);
-      z-index: 30;
+      z-index: 9999;
       cursor: pointer;
     }
 
     #toggleButton:hover {
       background-color: rgba(225, 225, 225, 0.35);
-    }*/
-#toggleButton {
-  position: absolute;
-  right: 20px; /* Adjust this to move it away from the edge */
-  top: 55px;
-  padding: 6px 12px;
-  font-size: 14px;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 8px;
-  color: rgba(255, 255, 255, 0.9);
-  z-index: 9999; /* Ensure the button is on top */
-  cursor: pointer;
-}
+    }
 
-#toggleButton:hover {
-  background-color: rgba(225, 225, 225, 0.35);
-}
 :root {
      /*========== Font and typography ==========*/
   /*.5rem = 8px | 1rem = 16px ...*/
