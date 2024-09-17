@@ -857,10 +857,18 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     const closeButton = document.createElement('button');
     closeButton.className = 'close-button';
     closeButton.innerText = 'X';
-    closeButton.addEventListener('click', () => {
+    /*closeButton.addEventListener('click', () => {
       labelDiv.classList.remove('active');
-    });
+    });*/
     labelDiv.appendChild(closeButton);
+	  // Close Button Event Listener
+document.querySelectorAll('.marker-label .close-button').forEach(button => {
+  button.addEventListener('click', (event) => {
+    event.stopPropagation(); // Stop the event from propagating up the DOM
+    const labelDiv = button.closest('.marker-label');
+    labelDiv.classList.remove('active');
+  });
+});
     /*document.addEventListener("DOMContentLoaded", function () {
     const closeButtons = document.querySelectorAll(".marker-label .close-button");
 
