@@ -507,6 +507,65 @@ const material2 = new THREE.MeshPhongMaterial({
   light.position.set(5, 3, 5);
   scene.add(light);
     // Markers Data
+	  // Markers Data
+    const markersData = [
+      {
+        //Africa
+      id: 1,
+      position: [5.1, 1.2, 1.5],
+      iframeSrc: "https://rss.app/embed/v1/carousel/dIqCIlIGNRu8C6sq",
+      },
+      // More markers...
+	    {
+        //Europe
+      id: 2,
+      position: [5.1, 0.7, 1.8],
+      iframeSrc: "https://rss.app/embed/v1/carousel/dIqCIlIGNRu8C6sq",
+      },
+	     {
+        //America
+      id: 3,
+      position: [5.1, 0.9, 0],
+      iframeSrc: "https://rss.app/embed/v1/carousel/j4Lz0RvN9tozg8ti",
+      },
+	    {
+        //South America
+      id: 4,
+      position: [5.1, 1.6, 0.4],
+      iframeSrc: "https://rss.app/embed/v1/carousel/egKZAx1vbuN40QJ5",
+      },
+	    {
+        //Middle East
+      id: 5,
+      position: [5.1, 1, 2.3],
+      iframeSrc: "https://rss.app/embed/v1/carousel/QtI2HAU7LB5FfP93",
+      },
+	    {
+        //Asia
+      id: 6,
+      position: [5.1, 0.9, 3],
+      iframeSrc: "https://rss.app/embed/v1/carousel/dwbg7NploOubDAzi",
+      },
+	    {
+        //Japan
+      id: 7,
+      position: [5.1, 0.9, 4],
+      iframeSrc: "https://rss.app/embed/v1/carousel/H7fYbpNYSCQC0Kob",
+      },
+	    {
+        // Jamaica
+      id: 8,
+      position: [5.1, 1.2, 0.2],
+      iframeSrc: "https://rss.app/embed/v1/carousel/t8w4T1GZ8wZ4bHWQ",
+      },
+	     {
+        //UK
+      id: 9,
+      position: [5.1, 0.6, 1.45],
+      iframeSrc: "https://rss.app/embed/v1/carousel/h02Ux8iXmbwRcpWU",
+      },
+    ];
+	  /*
   const markersData = [
     {
       //Africa
@@ -626,7 +685,53 @@ const material2 = new THREE.MeshPhongMaterial({
       scrolling:"no",
       allowfullscreen:"true"
     },
-  ];
+  ];*/
+	  // Marker Labels Container
+    const labelsContainer = document.createElement('div');
+    labelsContainer.id = "labels-container";
+    document.body.appendChild(labelsContainer);
+
+    // Create Labels for Each Marker
+    markersData.forEach((marker) => {
+      const labelDiv = document.createElement('div');
+      labelDiv.className = 'marker-label';
+      labelDiv.id = `label-${marker.id}`;
+
+      // Close Button
+      const closeButton = document.createElement('button');
+      closeButton.className = 'close-button';
+      closeButton.innerText = 'X';
+      closeButton.addEventListener('click', () => {
+        labelDiv.classList.remove('active');
+        controls.autoRotate = true;  // Resume auto-rotation when closing the marker
+      });
+
+      // Content
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'content';
+      contentDiv.innerHTML = `<iframe src="${marker.iframeSrc}" frameborder="0"></iframe>`;
+
+      labelDiv.appendChild(closeButton);
+      labelDiv.appendChild(contentDiv);
+
+      labelsContainer.appendChild(labelDiv);
+    });
+
+    // Detect Marker Interaction (Click or Touch)
+    window.addEventListener('pointerdown', (event) => {
+      const intersectedMarker = detectMarkerInteraction(event);
+      if (intersectedMarker) {
+        controls.autoRotate = false;  // Stop globe auto-rotation
+        const labelDiv = document.getElementById(`label-${intersectedMarker.id}`);
+        labelDiv.classList.add('active');
+      }
+    });
+
+    function detectMarkerInteraction(event) {
+      // Here, add raycasting or collision detection logic to check which marker is clicked
+      // Return the clicked marker or null if no marker is clicked.
+      return markersData[0];  // Example, return the first marker for demo
+    }
   
   // Marker Geometry and Material
   const markerGeometry = new THREE.PlaneGeometry();
