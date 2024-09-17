@@ -214,24 +214,17 @@
     // Load Textures and Cube Maps
     const textureLoader = new THREE.TextureLoader();
     const cubeTextureLoader = new THREE.CubeTextureLoader();
-    const dayTexture = textureLoader.load("path_to_day_texture.jpg");
-    const nightTexture = textureLoader.load("path_to_night_texture.jpg");
+    const dayTexture = textureLoader.load("https://path_to_your_day_texture.jpg");
+    const nightTexture = textureLoader.load("https://path_to_your_night_texture.jpg");
 
     const dayCubeMap = cubeTextureLoader.load([
-     isMobile ? 'js/px.webp' : 'js/px.png', // Right face
-  isMobile ? 'js/nx.webp' : 'js/nx.png', // Left face
-  isMobile ? 'js/py.webp' : 'js/py.png', // Top face
-  isMobile ? 'js/ny.webp' : 'js/ny.png', // Bottom face
-  isMobile ? 'js/pz.webp' : 'js/pz.png', // Front face
-  isMobile ? 'js/nz.webp' : 'js/nz.png'  // Back face
+      'path_to_px.png', 'path_to_nx.png', 'path_to_py.png',
+      'path_to_ny.png', 'path_to_pz.png', 'path_to_nz.png'
     ]);
+
     const nightCubeMap = cubeTextureLoader.load([
-      isMobile ? 'js/px_(1).webp' : 'textures/px_(1).png', // Right face
-  isMobile ? 'js/nx_(1).webp' : 'textures/nx_(1).png', // Left face
-  isMobile ? 'js/py_(1).webp' : 'textures/py_(1).png', // Top face
-  isMobile ? 'js/ny_(1).webp' : 'textures/ny_(1).png', // Bottom face
-  isMobile ? 'js/pz_(1).webp' : 'textures/pz_(1).png', // Front face
-  isMobile ? 'js/nz_(1).webp' : 'textures/nz_(1).png'  // Back face
+      'path_to_night_px.png', 'path_to_night_nx.png', 'path_to_night_py.png',
+      'path_to_night_ny.png', 'path_to_night_pz.png', 'path_to_night_nz.png'
     ]);
 
     // Globe Material
@@ -275,125 +268,52 @@
     // Marker Data
     const markersData = [
       {
-      //Africa
-      id: 1,
-      position: [5.1, 1.2, 1.5],
-      iframeSrc: "https://rss.app/embed/v1/carousel/dIqCIlIGNRu8C6sq",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"lazy",
-      width:"250",
-      height:"249",
-      scrolling:"no",
-      allowfullscreen:"true"
-    },
-    // ... Add other markers here
-    {
-      //Europe
-      id: 2,
-      position: [5.1, 0.7, 1.8],
-      iframeSrc: "https://rss.app/embed/v1/carousel/dIqCIlIGNRu8C6sq",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"lazy",
-      width:"250",
-      height:"249",
-      scrolling:"no",
-      allowfullscreen:"true"
-    },
-    {
-      //America
-      id: 3,
-      position: [5.1, 0.9, 0],
-      iframeSrc: "https://rss.app/embed/v1/carousel/j4Lz0RvN9tozg8ti",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"lazy",
-      width:"250",
-      height:"249",
-      scrolling:"no",
-      allowfullscreen:"true"
-    },
-    {
-      //South America
-      id: 4,
-      position: [5.1, 1.6, 0.4],
-      iframeSrc: "https://rss.app/embed/v1/carousel/egKZAx1vbuN40QJ5",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"lazy",
-      width:"250",
-      height:"249",
-      scrolling:"no",
-      allowfullscreen:"true"
-    },
-    {
-      //Middle East
-      id: 5,
-      position: [5.1, 1, 2.3],
-      iframeSrc: "https://rss.app/embed/v1/carousel/QtI2HAU7LB5FfP93",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"lazy",
-      width:"250",
-      height:"249",
-      scrolling:"no",
-      allowfullscreen:"true"
-    },
-    {
-      //Asia
-      id: 6,
-      position: [5.1, 0.9, 3],
-      iframeSrc: "https://rss.app/embed/v1/carousel/dwbg7NploOubDAzi",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"lazy",
-      width:"250",
-      height:"249",
-      scrolling:"no",
-      allowfullscreen:"true"
-    },
-    {
-      //Japan
-      id: 7,
-      position: [5.1, 0.9, 4],
-      iframeSrc: "https://rss.app/embed/v1/carousel/H7fYbpNYSCQC0Kob",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"lazy",
-      width:"250",
-      height:"249",
-      scrolling:"no",
-      allowfullscreen:"true"
-    },
-    {
-      // Jamaica
-      id: 8,
-      position: [5.1, 1.2, 0.2],
-      iframeSrc: "https://rss.app/embed/v1/carousel/t8w4T1GZ8wZ4bHWQ",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"lazy",
-      width:"250",
-      height:"249",
-      scrolling:"no",
-      allowfullscreen:"true"
-    },
-    {
-      //UK
-      id: 9,
-      position: [5.1, 0.6, 1.45],
-      iframeSrc: "https://rss.app/embed/v1/carousel/h02Ux8iXmbwRcpWU",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"lazy",
-      width:"250",
-      height:"249",
-      scrolling:"no",
-      allowfullscreen:"true"
-    },
-  ];
-  
+        id: 1,
+        position: [5.1, 1.2, 1.5],
+        iframeSrc: "https://rss.app/embed/v1/carousel/dIqCIlIGNRu8C6sq",
+      },
+      {
+        id: 2,
+        position: [5.1, 0.7, 1.8],
+        iframeSrc: "https://rss.app/embed/v1/carousel/dIqCIlIGNRu8C6sq",
+      },
+      {
+        id: 3,
+        position: [5.1, 0.9, 0],
+        iframeSrc: "https://rss.app/embed/v1/carousel/j4Lz0RvN9tozg8ti",
+      },
+      {
+        id: 4,
+        position: [5.1, 1.6, 0.4],
+        iframeSrc: "https://rss.app/embed/v1/carousel/egKZAx1vbuN40QJ5",
+      },
+      {
+        id: 5,
+        position: [5.1, 1, 2.3],
+        iframeSrc: "https://rss.app/embed/v1/carousel/QtI2HAU7LB5FfP93",
+      },
+      {
+        id: 6,
+        position: [5.1, 0.9, 3],
+        iframeSrc: "https://rss.app/embed/v1/carousel/dwbg7NploOubDAzi",
+      },
+      {
+        id: 7,
+        position: [5.1, 0.9, 4],
+        iframeSrc: "https://rss.app/embed/v1/carousel/H7fYbpNYSCQC0Kob",
+      },
+      {
+        id: 8,
+        position: [5.1, 1.2, 0.2],
+        iframeSrc: "https://rss.app/embed/v1/carousel/t8w4T1GZ8wZ4bHWQ",
+      },
+      {
+        id: 9,
+        position: [5.1, 0.6, 1.45],
+        iframeSrc: "https://rss.app/embed/v1/carousel/h02Ux8iXmbwRcpWU",
+      }
+    ];
+
     // Markers and Labels Setup
     const labelsContainer = document.getElementById("labels-container");
     const markerObjects = [];
