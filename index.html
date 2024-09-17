@@ -589,50 +589,6 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     }
   );
 
-// Atmosphere (Glow) Shader Material
-const atmosphereMaterial = new THREE.ShaderMaterial({
-  vertexShader: `
-    varying vec3 vertexNormal;
-    
-    void main() {
-      // Make the normal vector point outwards
-      vertexNormal = normalize(normalMatrix * normal);
-      
-      // Standard position calculation
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-  `,
-  fragmentShader: `
-    varying vec3 vertexNormal;
-    
-    void main() {
-      // The intensity of the glow is based on how perpendicular the normal is to the view direction
-      float intensity = pow(0.6 - dot(vertexNormal, vec3(0.0, 0.0, 1.0)), 2.0);
-      
-      // The color of the glow (you can adjust the RGB values here)
-      vec3 glowColor = vec3(0.3, 0.6, 1.0);  // Blue glow
-      
-      // Final output color with the glow effect
-      gl_FragColor = vec4(glowColor * intensity, 1.0);
-    }
-  `,
-  blending: THREE.AdditiveBlending,  // Additive blending for glowing effect
-  side: THREE.BackSide,  // Render only the back faces to give the illusion of a glow around the edges
-  transparent: true  // Make sure it's transparent to blend with the scene
-});
-
-// Create a slightly larger sphere to represent the atmosphere
-const atmosphere2 = new THREE.Mesh(
-  new THREE.SphereGeometry(5.1, 32, 32),  // Slightly larger than the globe itself
-  atmosphereMaterial
-);
-
-// Scale the atmosphere up slightly to make it wrap around the globe
-atmosphere2.scale.set(1.1, 1.1, 1.1);
-
-// Add the atmosphere to the scene
-scene.add(atmosphere2);
-
   setTimeout(() => {
     // wait for scene to be populated (asynchronously)
     var dl = new THREE.DirectionalLight(0xffffff, 1);
