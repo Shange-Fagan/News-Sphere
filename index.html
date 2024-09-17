@@ -737,64 +737,64 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     },
   ];*/
 	  // Marker Labels Container
-    const labelsContainer = document.createElement('div');
-    labelsContainer.id = "labels-container";
-    document.body.appendChild(labelsContainer);
-	  const markerObjects = [];
+const labelsContainer = document.createElement('div');
+labelsContainer.id = "labels-container";
+document.body.appendChild(labelsContainer);
+const markerObjects = [];
 
-    // Create Labels for Each Marker
-    markersData.forEach((marker) => {
-      const labelDiv = document.createElement('div');
-      labelDiv.className = 'marker-label';
-      labelDiv.id = `label-${marker.id}`;
+// Create Labels for Each Marker
+markersData.forEach((marker) => {
+  const labelDiv = document.createElement('div');
+  labelDiv.className = 'marker-label';
+  labelDiv.id = `label-${marker.id}`;
 
-	    // Create content for the label
-      const iframe = document.createElement("iframe");
-      iframe.src = marker.iframeSrc;
-      iframe.width = "250";
-      iframe.height = "250";
-      iframe.frameBorder = "0";
+  // Create content for the label
+  const iframe = document.createElement("iframe");
+  iframe.src = marker.iframeSrc;
+  iframe.width = "250";
+  iframe.height = "250";
+  iframe.frameBorder = "0";
 
-      labelDiv.appendChild(iframe);
-      labelsContainer.appendChild(labelDiv);
-// Position the marker using spherical coordinates
-      const markerObject = new THREE.Object3D();
-      const sphericalPosition = new THREE.Spherical(5.1, marker.position[1], marker.position[2]);
-      markerObject.position.setFromSpherical(sphericalPosition);
-      scene.add(markerObject);
+  labelDiv.appendChild(iframe);
+  labelsContainer.appendChild(labelDiv);
 
-      markerObjects.push({
-        labelDiv,
-        markerObject,
-        worldPosition: markerObject.position.clone(),
-      });
-    });
+  // Position the marker using spherical coordinates
+  const markerObject = new THREE.Object3D();
+  const sphericalPosition = new THREE.Spherical(5.1, marker.position[1], marker.position[2]);
+  markerObject.position.setFromSpherical(sphericalPosition);
+  scene.add(markerObject);
 
-    // Update Marker Labels' Opacity Based on Their Distance to the Camera
-    function updateMarkerLabelOpacity() {
-      markerObjects.forEach(markerObj => {
-        const { labelDiv, markerObject, worldPosition } = markerObj;
+  markerObjects.push({
+    labelDiv,
+    markerObject,
+    worldPosition: markerObject.position.clone(),
+  });
+});
 
-        // Convert the marker's position to the screen coordinates
-        const markerPos = worldPosition.clone().project(camera);
+// Update Marker Labels' Opacity Based on Their Distance to the Camera
+function updateMarkerLabelOpacity() {
+  markerObjects.forEach(markerObj => {
+    const { labelDiv, worldPosition } = markerObj;
 
-        // Get the distance from the camera
-        const distance = camera.position.distanceTo(worldPosition);
+    // Convert the marker's position to screen coordinates
+    const markerPos = worldPosition.clone().project(camera);
 
-        // Adjust opacity based on the distance (or alternatively the angle)
-        let opacity = 1 - (distance / 20); // Adjust this value as needed for the fade-out effect
-        opacity = Math.max(0, Math.min(opacity, 1)); // Clamp between 0 and 1
+    // Get the distance from the camera
+    const distance = camera.position.distanceTo(worldPosition);
 
-        // Apply opacity to the marker label
-        labelDiv.style.opacity = opacity;
+    // Adjust opacity based on the distance (or alternatively the angle)
+    let opacity = 1 - (distance / 20); // Adjust this value as needed for the fade-out effect
+    opacity = Math.max(0, Math.min(opacity, 1)); // Clamp between 0 and 1
 
-        // Update position of the label in the DOM
-        const x = (markerPos.x * 0.5 + 0.5) * window.innerWidth;
-        const y = -(markerPos.y * 0.5 - 0.5) * window.innerHeight;
-        labelDiv.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
-	labelsContainer.appendChild(labelDiv);
-      });
-    }
+    // Apply opacity to the marker label
+    labelDiv.style.opacity = opacity;
+
+    // Update position of the label in the DOM
+    const x = (markerPos.x * 0.5 + 0.5) * window.innerWidth;
+    const y = -(markerPos.y * 0.5 - 0.5) * window.innerHeight;
+    labelDiv.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
+  });
+}
       
       // Close Button
       const closeButton = document.createElement('button');
@@ -986,6 +986,7 @@ function onPointerClick(event) {
   
   function animate() {
     requestAnimationFrame(animate);
+	  updateMarkerLabelOpacity();
   
     // Update time uniform
     globalUniforms.time.value = clock.getElapsedTime();
@@ -994,7 +995,7 @@ function onPointerClick(event) {
     controls.update();
 
       // Update marker opacity and position
-      updateMarkerLabelOpacity();
+      //updateMarkerLabelOpacity();
 
   
     // Render
@@ -1018,6 +1019,13 @@ function onPointerClick(event) {
 */
   
   animate();
+	  // Adjust the marker labels on window resize
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  updateMarkerLabelOpacity();
+});
     
   </script>
 </body>
