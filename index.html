@@ -792,6 +792,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
         const x = (markerPos.x * 0.5 + 0.5) * window.innerWidth;
         const y = -(markerPos.y * 0.5 - 0.5) * window.innerHeight;
         labelDiv.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
+	labelsContainer.appendChild(labelDiv);
       });
     }
       
@@ -802,7 +803,9 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       closeButton.addEventListener('click', () => {
         labelDiv.classList.remove('active');
         controls.autoRotate = true;  // Resume auto-rotation when closing the marker
+	labelDiv.appendChild(closeButton);
       });
+	  
 
       /*// Content
       const contentDiv = document.createElement('div');
@@ -841,8 +844,6 @@ function onPointerClick(event) {
     }
   }
 }
-	  labelDiv.appendChild(closeButton);
-	  labelsContainer.appendChild(labelDiv);
   
   // Marker Geometry and Material
   const markerGeometry = new THREE.PlaneGeometry();
