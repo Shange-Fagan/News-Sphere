@@ -451,11 +451,10 @@ context2.fillRect(0, 0, canvas2.width, canvas2.height);
 
 // Create a texture from the canvas
 const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
-	  
 	// Set the background of the scene
 	scene.background = daybackgroundTexture;
 // Toggle between Day/Night Textures and Cube Map
-    function toggleDayNight() {
+    /*function toggleDayNight() {
       if (isDay) {
         globe2.material.map = nightTexture;
         //scene.background = nightCubeMap;
@@ -481,7 +480,7 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
 
 	// Add Event Listener to the Toggle Button
 	    document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
-
+*/
 		// Load Textures
   //const textureLoader = new THREE.TextureLoader();
   const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
@@ -599,12 +598,13 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       side: THREE.BackSide,
     })
   );
-	  // Load the HDR environment map
+	  
+	atmosphere.scale.set(1.1, 1.1, 1.1);	
+	// Load the HDR environment map
 const rgbeLoader = new RGBELoader();
 rgbeLoader.load('textures/earth-blue-marble.hdr', (texture) => {
     texture.mapping = THREE.EquirectangularReflectionMapping; // Use reflection mapping for realistic reflections
 
-	atmosphere.scale.set(1.1, 1.1, 1.1);	
   const material2 = new THREE.MeshPhongMaterial({
   specular: 0x111111,
   //shininess: 5,
@@ -634,6 +634,34 @@ rgbeLoader.load('textures/earth-blue-marble.hdr', (texture) => {
       globeMaterial.shininess = 15;
     }
   );
+	// Toggle between Day/Night Textures and Cube Map
+    function toggleDayNight() {
+      if (isDay) {
+        globe2.material.map = nightTexture;
+        //scene.background = nightCubeMap;
+        // Set a dark blue color for the night theme background
+        //scene.background = new THREE.Color(0x000033); // Dark blue
+	scene.background = nightbackgroundTexture;
+        document.getElementById("toggleButton").textContent = "Switch to Day";
+        document.getElementById("dayTicker").style.display = "none";
+        document.getElementById("nightTicker").style.display = "block";
+      } else {
+        globe2.material.map = dayTexture;
+        //scene.background = dayCubeMap;
+        // Set a solid blue color for the background
+        //scene.background = new THREE.Color(0x87CEEB); // Light sky blue
+	scene.background = daybackgroundTexture;
+        document.getElementById("toggleButton").textContent = "Switch to Night";
+        document.getElementById("dayTicker").style.display = "block";
+        document.getElementById("nightTicker").style.display = "none";
+      }
+      globe2.material.needsUpdate = true;
+      isDay = !isDay;
+    }
+
+	// Add Event Listener to the Toggle Button
+	    document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
+
 })
 
   setTimeout(() => {
