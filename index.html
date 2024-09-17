@@ -389,12 +389,11 @@ const material2 = new THREE.MeshPhongMaterial({
 	  //let isMobile = /Mobi/i.test(navigator.userAgent);
 let globe2 = new THREE.Mesh(geometry, material2);
 	  // Responsive Globe for Mobile
-    let isMobile = window.innerWidth <= 768;
     if (isMobile) {
-      camera.fov = 60;  // Increase FOV to zoom out on mobile
-      camera.updateProjectionMatrix();
-      //globe2.scale.set(0.9, 0.9, 0.9); // Slightly scale down the globe
-    }
+  camera.fov = 60;  // Adjust FOV for mobile
+  camera.position.set(0, 0, 20);  // Move the camera back
+  camera.updateProjectionMatrix();
+}
 
 /*const cubeMap = cubeTextureLoader.load([
   isMobile ? 'js/px.webp' : 'js/px.png', // Right face
