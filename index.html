@@ -814,21 +814,33 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 
       labelsContainer.appendChild(labelDiv);
 
-    // Detect Marker Interaction (Click or Touch)
-    window.addEventListener('pointerdown', (event) => {
-      const intersectedMarker = detectMarkerInteraction(event);
-      if (intersectedMarker) {
-        controls.autoRotate = false;  // Stop globe auto-rotation
-        const labelDiv = document.getElementById(`label-${intersectedMarker.id}`);
-        labelDiv.classList.add('active');
-      }
-    });
+    // Handle Pointer Click
+function onPointerClick(event) {
+  onPointerMove(event);  // Update pointer position
+  raycaster.setFromCamera(pointer, camera);
 
-    function detectMarkerInteraction(event) {
-      // Here, add raycasting or collision detection logic to check which marker is clicked
-      // Return the clicked marker or null if no marker is clicked.
-      return markersData[0];  // Example, return the first marker for demo
+  // Check for intersections with marker objects
+  const intersects = raycaster.intersectObjects(markerObjects.map(m => m.markerObject));
+
+  if (intersects.length > 0) {
+    const intersectedMarker = intersects[0].object;  // Get the first intersected marker
+    const clickedMarker = markerObjects.find(m => m.markerObject === intersectedMarker);
+
+    if (clickedMarker) {
+      console.log('Clicked on marker:', clickedMarker);
+
+      // Show the corresponding label
+      clickedMarker.labelDiv.classList.add('active');
+
+      // Set the iframe content for the marker
+      const contentDiv = clickedMarker.labelDiv.querySelector('.content');
+      contentDiv.innerHTML = `<iframe src="${markersData[clickedMarker.markerObject.id - 1].iframeSrc}" frameborder="0"></iframe>`;
+
+      // Stop globe auto-rotation when marker is clicked
+      controls.autoRotate = false;
     }
+  }
+}
   
   // Marker Geometry and Material
   const markerGeometry = new THREE.PlaneGeometry();
