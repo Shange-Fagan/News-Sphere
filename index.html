@@ -213,7 +213,8 @@
 
     // Load Textures and Cube Maps
     const textureLoader = new THREE.TextureLoader();
-    const cubeTextureLoader = new THREE.CubeTextureLoader();
+    const cubeTextureLoader = new THREE.const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
+  const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
     const dayTexture = textureLoader.load("https://path_to_your_day_texture.jpg");
     const nightTexture = textureLoader.load("https://path_to_your_night_texture.jpg");
 
