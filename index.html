@@ -315,10 +315,19 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
   rt.fromEquirectangularTexture(renderer, texture);
   scene.background = rt.texture;
 });*/
+	  const sphereWidth = 5.1;
+  const sphereHeight = 32.1;
+  const sphereDepth = 32.1;
+  const geometry = new THREE.SphereGeometry(
+    sphereWidth,
+    sphereHeight,
+    sphereDepth
+  );
+
 	  // Load the Cube Map
       const cubeTextureLoader = new THREE.CubeTextureLoader();
 	  //let isMobile = /Mobi/i.test(navigator.userAgent);
-
+let globe2 = new THREE.Mesh(geometry, material2);
 	  // Responsive Globe for Mobile
     let isMobile = window.innerWidth <= 768;
     if (isMobile) {
@@ -387,14 +396,7 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
   const specularMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png");
 		const dayBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
 const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
-  const sphereWidth = 5.1;
-  const sphereHeight = 32.1;
-  const sphereDepth = 32.1;
-  const geometry = new THREE.SphereGeometry(
-    sphereWidth,
-    sphereHeight,
-    sphereDepth
-  );
+  
 
   const sphereWidth2 = 5.099;
   const sphereHeight2 = 32.1;
