@@ -613,9 +613,9 @@ rgbeLoader.load('textures/earth-blue-marble.hdr', (texture) => {
   bumpMap: dayBumpMap, // Start with day bump map
   bumpScale: 0.35,
   blending: THREE.AdditiveBlending,
-  shininess: 100, // Adjust shininess for more or less glossy finish
+  shininess: 5, // Adjust shininess for more or less glossy finish
   envMap: texture, // Apply HDR map as an environment map
-  reflectivity: 0.9, // Adjust reflectivity for glossy look
+  //reflectivity: 0.9, // Adjust reflectivity for glossy look
 });
 	  let globe = new THREE.Mesh(geometry2, material);
   let globe2 = new THREE.Mesh(geometry, material2);
