@@ -331,6 +331,16 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
     sphereHeight,
     sphereDepth
   );
+	  // Create the material
+const material2 = new THREE.MeshPhongMaterial({
+  specular: 0x111111,
+  shininess: 5,
+  map: dayTexture, // Start with day texture
+  specularMap: textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png"),
+  bumpMap: dayBumpMap, // Start with day bump map
+  bumpScale: 0.35,
+  blending: THREE.AdditiveBlending,
+});
 
 	  // Load the Cube Map
       const cubeTextureLoader = new THREE.CubeTextureLoader();
@@ -504,17 +514,8 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       side: THREE.BackSide,
     })
   );
-	atmosphere.scale.set(1.1, 1.1, 1.1);	
-// Create the material
-const material2 = new THREE.MeshPhongMaterial({
-  specular: 0x111111,
-  shininess: 5,
-  map: dayTexture, // Start with day texture
-  specularMap: textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png"),
-  bumpMap: dayBumpMap, // Start with day bump map
-  bumpScale: 0.35,
-  blending: THREE.AdditiveBlending,
-});
+	atmosphere.scale.set(1.1, 1.1, 1.1);
+
 	  let globe = new THREE.Mesh(geometry2, material);
   //let globe2 = new THREE.Mesh(geometry, material2);
   scene.add(atmosphere);
