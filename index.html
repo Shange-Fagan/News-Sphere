@@ -341,7 +341,7 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
 // Toggle between Day/Night Textures and Cube Map
     function toggleDayNight() {
       if (isDay) {
-        globeMesh.material.map = nightTexture;
+        globe2.material.map = nightTexture;
         //scene.background = nightCubeMap;
         // Set a dark blue color for the night theme background
         scene.background = new THREE.Color(0x000033); // Dark blue
@@ -349,7 +349,7 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
         document.getElementById("dayTicker").style.display = "none";
         document.getElementById("nightTicker").style.display = "block";
       } else {
-        globeMesh.material.map = dayTexture;
+        globe2.material.map = dayTexture;
         //scene.background = dayCubeMap;
         // Set a solid blue color for the background
         scene.background = new THREE.Color(0x87CEEB); // Light sky blue
@@ -357,7 +357,7 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
         document.getElementById("dayTicker").style.display = "block";
         document.getElementById("nightTicker").style.display = "none";
       }
-      globeMesh.material.needsUpdate = true;
+      globe2.material.needsUpdate = true;
       isDay = !isDay;
     }
 
@@ -489,6 +489,22 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
   bumpScale: 0.35,
   blending: THREE.AdditiveBlending,
 });
+	  let globe = new THREE.Mesh(geometry2, material);
+  let globe2 = new THREE.Mesh(geometry, material2);
+  scene.add(atmosphere);
+  scene.add(globe);
+  scene.add(globe2);
+  // custom globe material
+  const globeMaterial = globe.material;
+  material.bumpScale = 10;
+  new THREE.TextureLoader().load(
+    "//unpkg.com/three-globe/example/img/earth-water.png",
+    (texture) => {
+      globeMaterial.specularMap = texture;
+      globeMaterial.specular = new THREE.Color("grey");
+      globeMaterial.shininess = 15;
+    }
+  );
 
     // Markers Data
   const markersData = [
