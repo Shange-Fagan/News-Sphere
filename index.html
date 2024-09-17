@@ -417,7 +417,27 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
 
     // Set Initial Background Cube Map
    // scene.background = dayCubeMap;
-      scene.background = new THREE.Color(0x87CEEB); // Light sky blue
+   // scene.background = new THREE.Color(0x87CEEB); // Light sky blue
+	  // Create a gradient for the scene background
+	const canvas = document.createElement('canvas');
+	canvas.width = 1024;
+	canvas.height = 1024;
+	
+	const context = canvas.getContext('2d');
+	
+	// Create gradient from dark blue to light blue
+	const gradient = context.createRadialGradient(512, 512, 100, 512, 512, 512);
+	gradient.addColorStop(0, '#87CEEB');  // Light sky blue near Earth
+	gradient.addColorStop(1, '#0d1b2a');  // Deep space blue at edges
+	
+	context.fillStyle = gradient;
+	context.fillRect(0, 0, canvas.width, canvas.height);
+	
+	// Create a texture from the canvas
+	const daybackgroundTexture = new THREE.CanvasTexture(canvas);
+	
+	// Set the background of the scene
+	scene.background = daybackgroundTexture;
 
 // Toggle between Day/Night Textures and Cube Map
     function toggleDayNight() {
@@ -433,7 +453,8 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
         globe2.material.map = dayTexture;
         //scene.background = dayCubeMap;
         // Set a solid blue color for the background
-        scene.background = new THREE.Color(0x87CEEB); // Light sky blue
+        //scene.background = new THREE.Color(0x87CEEB); // Light sky blue
+	scene.background = daybackgroundTexture;
         document.getElementById("toggleButton").textContent = "Switch to Night";
         document.getElementById("dayTicker").style.display = "block";
         document.getElementById("nightTicker").style.display = "none";
@@ -442,10 +463,10 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
       isDay = !isDay;
     }
 
-// Add Event Listener to the Toggle Button
-    document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
+	// Add Event Listener to the Toggle Button
+	    document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
 
-    // Load Textures
+		// Load Textures
   //const textureLoader = new THREE.TextureLoader();
   const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
   const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
