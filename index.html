@@ -149,23 +149,31 @@ a, button, input, select, iframe {
 }*/
 	  /* Close Button Styles */
   .close-button {
-    position: absolute;
-    top: 4.5px; /* Adjust as needed */
-    right: 22px; /* Use 'right' instead of 'left' to avoid pushing the content */
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    border-radius: 3px;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    /*padding: 5px;*/
-    /*padding: 4px 8px;*/
-    cursor: pointer;
-    z-index: 10000; /* Ensure the close button is always on top */
-  }
+  position: absolute;
+  top: 10px; /* Adjust as needed */
+  right: 10px; /* Adjust to your desired position */
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 3px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000; /* Ensure the close button is always on top */
+}
 
+/*.close-button:hover {
+  background: rgba(0, 0, 0, 0.8); /* Add a hover effect */
+}*/
 
-.marker-label .close-button:hover {
+.marker-label iframe {
+  width: 100%; /* Make iframe take full width */
+  height: 250px; /* Adjust height as needed */
+  border: none;
+  display: block; /* Ensure iframe is a block element */
+}
+
+.close-button:hover {
   opacity: 1;
 }
 
@@ -181,11 +189,11 @@ a, button, input, select, iframe {
   border: none;
   display: block;
   position: relative;*/
-  z-index: 1;
-  width: 100%; /* Make iframe take full width */
-  height: 250px; /* Adjust height as needed */
-  border: none; /* Remove iframe border */
-  display: block; /* Ensure it's a block element */
+  /*z-index: 1;*/
+  /*width: 100%; */ /* Make iframe take full width */
+  /*height: 250px; */ /* Adjust height as needed */
+  /*border: none; */ /* Remove iframe border */
+  /*display: block;*/ /* Ensure it's a block element */
 }
 	  /*.marker-label iframe {
     width: 100%;
