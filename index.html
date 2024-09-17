@@ -392,19 +392,19 @@ let globe2 = new THREE.Mesh(geometry, material2);
 // Toggle between Day/Night Textures and Cube Map
     function toggleDayNight() {
       if (isDay) {
-        globe2.material2.map = nightTexture;
+        globe2.material.map = nightTexture;
         scene.background = nightCubeMap;
         document.getElementById("toggleButton").textContent = "Switch to Day";
         document.getElementById("dayTicker").style.display = "none";
         document.getElementById("nightTicker").style.display = "block";
       } else {
-        globe2.material2.map = dayTexture;
+        globe2.material.map = dayTexture;
         scene.background = dayCubeMap;
         document.getElementById("toggleButton").textContent = "Switch to Night";
         document.getElementById("dayTicker").style.display = "block";
         document.getElementById("nightTicker").style.display = "none";
       }
-      globe2.material2.needsUpdate = true;
+      globe2.material.needsUpdate = true;
       isDay = !isDay;
     }
 
