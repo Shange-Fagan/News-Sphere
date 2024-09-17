@@ -331,9 +331,22 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
     sphereHeight,
     sphereDepth
   );
+	  const sphereWidth2 = 5.099;
+  const sphereHeight2 = 32.1;
+  const sphereDepth2 = 32.1;
+  const geometry2 = new THREE.SphereGeometry(
+    sphereWidth2,
+    sphereHeight2,
+    sphereDepth2
+  );
 	  const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
 	  const dayBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
 	    const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
+const bumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
+  const specularMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png");
+		//const dayBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
+const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
+  
 
 	  // Create the material
 const material2 = new THREE.MeshPhongMaterial({
@@ -414,20 +427,13 @@ let globe2 = new THREE.Mesh(geometry, material2);
   //const textureLoader = new THREE.TextureLoader();
   //const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
   //const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
-  const bumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
-  const specularMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png");
+  //const bumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
+  //const specularMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png");
 		//const dayBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
-const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
+//const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
   
 
-  const sphereWidth2 = 5.099;
-  const sphereHeight2 = 32.1;
-  const sphereDepth2 = 32.1;
-  const geometry2 = new THREE.SphereGeometry(
-    sphereWidth2,
-    sphereHeight2,
-    sphereDepth2
-  );
+  
   //const textureLoader = new THREE.TextureLoader();
   const shaderMaterial = new THREE.ShaderMaterial({});
 
