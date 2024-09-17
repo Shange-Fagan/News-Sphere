@@ -430,27 +430,6 @@ let globe2 = new THREE.Mesh(geometry, material2);
     // Set Initial Background Cube Map
     scene.background = dayCubeMap;
 
-// Toggle between Day/Night Textures and Cube Map
-    function toggleDayNight() {
-      if (isDay) {
-        globe2.material.map = nightTexture;
-        scene.background = nightCubeMap;
-        document.getElementById("toggleButton").textContent = "Switch to Day";
-        document.getElementById("dayTicker").style.display = "none";
-        document.getElementById("nightTicker").style.display = "block";
-      } else {
-        globe2.material.map = dayTexture;
-        scene.background = dayCubeMap;
-        document.getElementById("toggleButton").textContent = "Switch to Night";
-        document.getElementById("dayTicker").style.display = "block";
-        document.getElementById("nightTicker").style.display = "none";
-      }
-      globe2.material.needsUpdate = true;
-      isDay = !isDay;
-    }
-
-// Add Event Listener to the Toggle Button
-    document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
 
     // Load Textures
   //const textureLoader = new THREE.TextureLoader();
@@ -800,6 +779,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Now you can safely manipulate the DOM elements
 labelsContainer.appendChild(labelDiv);
+	// Toggle between Day/Night Textures and Cube Map
+    function toggleDayNight() {
+      if (isDay) {
+        globe2.material.map = nightTexture;
+        scene.background = nightCubeMap;
+        document.getElementById("toggleButton").textContent = "Switch to Day";
+        document.getElementById("dayTicker").style.display = "none";
+        document.getElementById("nightTicker").style.display = "block";
+      } else {
+        globe2.material.map = dayTexture;
+        scene.background = dayCubeMap;
+        document.getElementById("toggleButton").textContent = "Switch to Night";
+        document.getElementById("dayTicker").style.display = "block";
+        document.getElementById("nightTicker").style.display = "none";
+      }
+      globe2.material.needsUpdate = true;
+      isDay = !isDay;
+    }
+
+// Add Event Listener to the Toggle Button
+    document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
+
 });
       // Create marker object
       const markerObject = new THREE.Object3D();
