@@ -212,8 +212,8 @@
     scene.add(directionalLight);
 
     // Load Textures and Cube Maps
-    const textureLoader = new THREE.CubeTextureLoader();
-    const cubeTextureLoader = new THREE.TextureLoader();
+    const textureLoader = new THREE.TextureLoader();
+    const cubeTextureLoader = new THREE.CubeTextureLoader();
     const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
   const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
 const isMobile = window.innerWidth <= 768;
