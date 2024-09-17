@@ -144,20 +144,28 @@ html, body {
 }*/
 	  
 /* Marker Labels */
-    .marker-label {
-      position: absolute;
-      display: none;
-      transition: opacity 0.5s ease; /* Smooth fade in/out */
-      z-index: 9999;
-    }
+    /* Marker Labels */
+.marker-label {
+  position: absolute;  /* Positioned relative to the viewport */
+  display: none;  /* Hidden by default */
+  transition: opacity 0.5s ease;  /* Smooth fade in/out */
+  background-color: rgba(255, 255, 255, 0.9);  /* Slightly translucent background */
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Add shadow for better visibility */
+  z-index: 9999;
+}
 	  .marker-label.active {
       display: block;
     }
-	  @media (max-width: 768px) {
-      .marker-label {
-        font-size: 0.8rem;
-      }
-    }
+	  /* For small screen devices */
+@media (max-width: 768px) {
+  .marker-label {
+    font-size: 0.8rem;  /* Reduce font size on mobile */
+    padding: 6px;  /* Smaller padding for mobile */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);  /* Adjust shadow for mobile */
+  }
+}
 	  /* Footer Styles */
     footer {
       position: fixed;
@@ -170,7 +178,23 @@ html, body {
       font-size: 0.9rem;
       z-index: 9999;
     }
+/* Close button styles (if used) */
+.marker-label .close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 5px;
+  font-size: 12px;
+  cursor: pointer;
+}
 
+.marker-label .close-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
     footer a {
       color: #1e90ff;
       text-decoration: none;
