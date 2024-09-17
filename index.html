@@ -848,26 +848,22 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
   const labelsContainer = document.getElementById('labels-container');
   
   // Create Labels
-  markersData.forEach((data) => {
-    // Create Label Div
-    const labelDiv = document.createElement('div');
-    labelDiv.className = 'marker-label';
-    labelDiv.id = `label-${data.id}`;
-  
-    // Close Button
-    // Close Button
-// Close Button
-const closeButton = document.createElement('button');
-closeButton.className = 'close-button';
-closeButton.innerText = 'X';
-labelDiv.appendChild(closeButton);
+markersData.forEach((data) => {
+  // Create Label Div
+  const labelDiv = document.createElement('div');
+  labelDiv.className = 'marker-label';
+  labelDiv.id = `label-${data.id}`;
 
-// Close Button Event Listener
-document.querySelectorAll('.marker-label .close-button').forEach(button => {
+  // Close Button
+  const closeButton = document.createElement('button');
+  closeButton.className = 'close-button';
+  closeButton.innerText = 'X';
+  labelDiv.appendChild(closeButton);
+
+  // Close Button Event Listener
   closeButton.addEventListener('click', (event) => {
     console.log('Close button clicked'); // Check if this appears in the console
     event.stopPropagation(); // Stop the event from propagating up the DOM
-    const labelDiv = closeButton.closest('.marker-label');
     labelDiv.classList.remove('active');
     
     // Resume globe autorotation when the label is closed
@@ -876,28 +872,28 @@ document.querySelectorAll('.marker-label .close-button').forEach(button => {
     // Re-enable the OrbitControls
     controls.enabled = true;
   });
-});
 
-// Content Div
-const contentDiv = document.createElement('div');
-contentDiv.className = 'content';
-labelDiv.appendChild(contentDiv);
+  // Content Div
+  const contentDiv = document.createElement('div');
+  contentDiv.className = 'content';
+  labelDiv.appendChild(contentDiv);
 
-// Append to Labels Container
-labelsContainer.appendChild(labelDiv);
+  // Append to Labels Container
+  labelsContainer.appendChild(labelDiv);
 
-// CSS2DObject
-const labelObject = new CSS2DObject(labelDiv);
-labelObject.position.copy(data.worldPosition);
-scene.add(labelObject);
+  // CSS2DObject
+  const labelObject = new CSS2DObject(labelDiv);
+  labelObject.position.copy(data.worldPosition);
+  scene.add(labelObject);
 
-// Store label object for interaction
-data.labelObject = labelObject;
-labelDiv.addEventListener('mousedown', (event) => {
-  event.stopPropagation();
-});
-labelDiv.addEventListener('touchstart', (event) => {
-  event.stopPropagation();
+  // Store label object for interaction
+  data.labelObject = labelObject;
+  labelDiv.addEventListener('mousedown', (event) => {
+    event.stopPropagation();
+  });
+  labelDiv.addEventListener('touchstart', (event) => {
+    event.stopPropagation();
+  });
 });
 
 // Raycaster for Interaction
@@ -938,7 +934,6 @@ window.addEventListener('pointerdown', (event) => {
     });
   }
 });
-});
 
 // Animation Loop
 const clock = new THREE.Clock();
@@ -960,7 +955,7 @@ function animate() {
 }
 
 animate();
-  
+
   </script>
 </body>
 </html>
