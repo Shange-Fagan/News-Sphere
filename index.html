@@ -603,7 +603,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 const rgbeLoader = new RGBELoader();
 rgbeLoader.load('textures/earth-blue-marble.hdr', (texture) => {
     texture.mapping = THREE.EquirectangularReflectionMapping; // Use reflection mapping for realistic reflections
-
+}
 	atmosphere.scale.set(1.1, 1.1, 1.1);	
   const material2 = new THREE.MeshPhongMaterial({
   specular: 0x111111,
@@ -615,7 +615,7 @@ rgbeLoader.load('textures/earth-blue-marble.hdr', (texture) => {
   blending: THREE.AdditiveBlending,
   shininess: 5, // Adjust shininess for more or less glossy finish
   envMap: texture, // Apply HDR map as an environment map
-  //reflectivity: 0.9, // Adjust reflectivity for glossy look
+  reflectivity: 0.9, // Adjust reflectivity for glossy look
 });
 	  let globe = new THREE.Mesh(geometry2, material);
   let globe2 = new THREE.Mesh(geometry, material2);
