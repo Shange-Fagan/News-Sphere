@@ -436,9 +436,6 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
 	
 	// Create a texture from the canvas
 	const daybackgroundTexture = new THREE.CanvasTexture(canvas);
-	
-	// Set the background of the scene
-	scene.background = daybackgroundTexture;
 	  
 	  // Create a gradient for the night scene background
 const canvas2 = document.createElement('canvas');
@@ -458,9 +455,8 @@ context2.fillRect(0, 0, canvas2.width, canvas2.height);
 // Create a texture from the canvas
 const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
 
-// Set the background of the scene to the night theme
-//scene.background = backgroundTexture;
-
+	// Set the background of the scene
+	scene.background = daybackgroundTexture;
 // Toggle between Day/Night Textures and Cube Map
     function toggleDayNight() {
       if (isDay) {
