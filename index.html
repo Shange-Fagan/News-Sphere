@@ -238,6 +238,69 @@ a, button, input, select, iframe {
 /* Remove scrollbar from iframes */
 iframe::-webkit-scrollbar {
   display: none;
+}  #newsOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    /*background-color: rgba(0, 0, 0, 0.8);*/
+    /*display: flex;*/
+    display: none;  
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure it's on top of everything */
+  }
+  
+  #newsIframe {
+    width: 80%;
+    height: 80%;
+    background: rgba(255, 255, 255, 0.5);
+    z-index: 1; /* Lower than the close button */
+  }
+
+	  #newsButton {
+    position: absolute;
+      left: 0px;
+      top: 55px;
+      padding: 4.5px 9.5px;
+      font-size: 12px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 8px;
+      color: rgba(255, 255, 255, 0.75);
+      z-index: 10001; /* Higher than the iframe */
+      cursor: pointer;
+}
+
+#newsButton:hover {
+  background-color: rgba(225, 225, 225, 0.35);
+}
+	  
+	  #closeNewsButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  border: 2px solid white; /* Optional border */
+  border-radius: 50%; /* Makes the button circular */
+  cursor: pointer;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#closeNewsButton:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Optional hover effect */
+  color: red; /* Optional color change on hover */
 }
 	/* Responsive Design */
     @media (max-width: 768px) {
@@ -305,71 +368,7 @@ iframe::-webkit-scrollbar {
         font-size: 0.4rem;
         padding: 2.5px 0;
       }
-    }  
-	  #newsOverlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.3);
-    /*background-color: rgba(0, 0, 0, 0.8);*/
-    /*display: flex;*/
-    display: none;  
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; /* Ensure it's on top of everything */
-  }
-  
-  #newsIframe {
-    width: 80%;
-    height: 80%;
-    background: rgba(255, 255, 255, 0.5);
-    z-index: 1; /* Lower than the close button */
-  }
-
-	  #newsButton {
-    position: absolute;
-      left: 0px;
-      top: 55px;
-      padding: 4.5px 9.5px;
-      font-size: 12px;
-      background-color: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 8px;
-      color: rgba(255, 255, 255, 0.75);
-      z-index: 10001; /* Higher than the iframe */
-      cursor: pointer;
-}
-
-#newsButton:hover {
-  background-color: rgba(225, 225, 225, 0.35);
-}
-	  
-	  #closeNewsButton {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 10px;
-  width: 40px;
-  height: 40px;
-  background-color: transparent;
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  border: 2px solid white; /* Optional border */
-  border-radius: 50%; /* Makes the button circular */
-  cursor: pointer;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#closeNewsButton:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Optional hover effect */
-  color: red; /* Optional color change on hover */
-}
+    }
 
 
 </style>
