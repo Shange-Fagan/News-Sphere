@@ -301,6 +301,35 @@ iframe::-webkit-scrollbar {
         padding: 2.5px 0;
       }
     }  
+	  #newsOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure it's on top of everything */
+  }
+  
+  #newsIframe {
+    width: 80%;
+    height: 80%;
+  }
+  
+  #closeNewsButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px 15px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 10000; /* Ensure it's above the iframe */
+  }
 </style>
 	<meta name="google-adsense-account" content="ca-pub-5689710336620898">
 	   <script async src="https://fundingchoicesmessages.google.com/i/pub-5689710336620898?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
@@ -352,7 +381,14 @@ iframe::-webkit-scrollbar {
   </script>
 
 <button id="toggleButton">Switch to Night</button>
+<!-- Button to toggle the iframe -->
+<button id="newsButton">Show News</button>
   <!-- The iframe containers will be added dynamically -->
+</div>
+  <!-- Iframe overlay for news articles -->
+<div id="newsOverlay" style="display: none;">
+  <iframe id="newsIframe" src="https://example.com/embed" frameborder="0"></iframe>
+  <button id="closeNewsButton">Close</button>
 </div>
   <!-- Scripts -->
   <!-- Include Three.js and other dependencies here -->
@@ -421,6 +457,13 @@ iframe::-webkit-scrollbar {
     renderer.setSize(innerWidth, innerHeight);
     labelRenderer.setSize(innerWidth, innerHeight);
   }
+	  document.getElementById('newsButton').addEventListener('click', function() {
+  document.getElementById('newsOverlay').style.display = 'flex';
+});
+
+document.getElementById('closeNewsButton').addEventListener('click', function() {
+  document.getElementById('newsOverlay').style.display = 'none';
+});
     // Track loaded textures
 let texturesLoaded = 0;
 const totalTextures = 4; // Update this if you have more or fewer textures
