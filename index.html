@@ -238,7 +238,11 @@ a, button, input, select, iframe {
     #threeDotsButton:hover {
       background-color: rgba(225, 225, 225, 0.35);
     }
-	    
+	#multiViewports {
+    width: 480px;  /* Adjust the width to fit your content */
+    height: 270px; /* Adjust the height as needed */
+    overflow: hidden;
+}
 
 
 :root {
@@ -467,13 +471,19 @@ function checkTexturesLoaded() {
     }
 	  // Initialize Three.js for multiple viewports
 // Function to initialize viewports
+// Initialize Three.js for multiple viewports
 function initMultiViewports() {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 5000);
+    camera.position.set(0, 0, 100); // Ensure the camera is positioned correctly
 
     // Initialize CSS3DRenderer and append it to the DOM
-    const renderer = new CSS3DRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    const cssRenderer = new CSS3DRenderer();
+    cssRenderer.setSize(window.innerWidth, window.innerHeight);
+    cssRenderer.domElement.style.position = 'absolute';
+    cssRenderer.domElement.style.top = '0px';
+    cssRenderer.domElement.style.pointerEvents = 'none'; // Prevent it from capturing pointer events
+
     const viewportElement = document.getElementById('multiViewports');
 
     if (!viewportElement) {
@@ -481,9 +491,9 @@ function initMultiViewports() {
         return;
     }
 
-    viewportElement.appendChild(renderer.domElement);
+    viewportElement.appendChild(cssRenderer.domElement);
 
-    // Add some content
+    // Add some content (iFrames in this case)
     for (let i = 0; i < 3; i++) {
         const element = document.createElement('iframe');
         element.src = `https://rss.app/embed/v1/feed/mQblJHqwi9bCZ20z${i}`;
@@ -498,21 +508,19 @@ function initMultiViewports() {
     // Animate the scene
     function animate() {
         requestAnimationFrame(animate);
-        renderer.render(scene, camera);
+        cssRenderer.render(scene, camera); // Only render the CSS3DRenderer here
     }
     animate();
 }
+
 // Call the init function when the button is clicked
-/*document.getElementById('threeDotsButton').addEventListener('click', function() {
-    document.getElementById('multiViewports').style.display = 'block';
-    initMultiViewports();  // Initialize multi viewports with iframes
-});*/
 document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('threeDotsButton').addEventListener('click', function() {
-    document.getElementById('multiViewports').style.display = 'block';
-    initMultiViewports();
-  });
+    document.getElementById('threeDotsButton').addEventListener('click', function() {
+        document.getElementById('multiViewports').style.display = 'block';
+        initMultiViewports();
+    });
 });
+
 
     //let dayTexture, nightTexture;
     let isDay = true; // Track whether it's currently day or night
