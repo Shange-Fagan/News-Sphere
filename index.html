@@ -932,8 +932,8 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
   ];
   
   // Marker Geometry and Material
-  // const markerGeometry = new THREE.PlaneGeometry();
-  const markerGeometry = new THREE.PlaneGeometry(5, 5); // Increase size for mobile
+  const markerGeometry = new THREE.PlaneGeometry();
+  // const markerGeometry = new THREE.PlaneGeometry(5, 5); // Increase size for mobile
 if (window.innerWidth <= 768) {
   markerGeometry.scale(1.5, 1.5, 1.5); // Scale markers for mobile
 }
