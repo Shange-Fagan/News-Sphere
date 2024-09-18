@@ -333,7 +333,7 @@ iframe::-webkit-scrollbar {
       border: 1px solid rgba(255, 255, 255, 0.25);
       border-radius: 8px;
       color: rgba(255, 255, 255, 0.75);
-      z-index: 9999; /* Higher than the iframe */
+      z-index: 10000; /* Higher than the iframe */
       cursor: pointer;
 }
 
@@ -417,11 +417,10 @@ iframe::-webkit-scrollbar {
   </script>
 
 <button id="toggleButton">Switch to Night</button>
-	<!-- X Button to close the iframe -->
-<button id="closeNewsButton">×</button>
-<!-- Button to toggle the iframe -->
 <button id="newsButton">Show News</button>
   <!-- The iframe containers will be added dynamically -->
+  <!-- X Button to close the iframe -->
+<button id="closeNewsButton">×</button>
   <!-- Iframe overlay for news articles -->
 <div id="newsOverlay" style="display: none;">
   <iframe id="newsIframe" width="900" height="1600" src="https://rss.app/embed/v1/wall/tHOhb3QtEMySDCuu" frameborder="0"></iframe>
