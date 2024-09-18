@@ -500,9 +500,15 @@ function initMultiViewports() {
     // Add some content (iFrames in this case)
     for (let i = 0; i < 3; i++) {
         const element = document.createElement('iframe');
-        element.src = `https://rss.app/embed/v1/feed/mQblJHqwi9bCZ20z${i}`;
+        /*element.src = `https://rss.app/embed/v1/feed/mQblJHqwi9bCZ20z${i}`;
+        element.style.width = '480px';
+        element.style.height = '270px';*/
+        // Example of using an RSS feed for world news
+        element.src = `https://rss.app/embed/v1/feed/5NgqiIvxoBVXc09l`; // Example RSS widget
         element.style.width = '480px';
         element.style.height = '270px';
+        element.frameBorder = '0';
+        element.scrolling = 'no';
 
         const cssObject = new THREE.CSS3DObject(element);
         cssObject.position.set(i * 500 - 500, 0, 0);
