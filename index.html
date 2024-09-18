@@ -390,7 +390,7 @@ iframe::-webkit-scrollbar {
   controls.dampingFactor = 0.25;
   controls.enableZoom = true;
   controls.minDistance = 15;
-  controls.maxDistance = 20;
+  controls.maxDistance = 25;
   controls.autoRotate = true;
   controls.autoRotateSpeed = 0.5;
 
@@ -427,6 +427,12 @@ function checkTexturesLoaded() {
     animate(); // Start animation after all textures are loaded
   }
 }
+	   // Check if the user is on a mobile device
+    if (window.innerWidth <= 768) {  // This checks for mobile devices based on screen width
+        camera.position.set(20, 0.5, 15).setLength(25);      // Set the camera's z position to 25 for mobile device
+    } else {
+        camera.position.set(20, 0.5, 15).setLength(16);    // Default z position for desktop or larger screens
+    }
     //let dayTexture, nightTexture;
     let isDay = true; // Track whether it's currently day or night
 
