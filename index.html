@@ -493,9 +493,15 @@ function initMultiViewports() {
 }
 
 // Call the init function when the button is clicked
-document.getElementById('threeDotsButton').addEventListener('click', function() {
+/*document.getElementById('threeDotsButton').addEventListener('click', function() {
     document.getElementById('multiViewports').style.display = 'block';
     initMultiViewports();  // Initialize multi viewports with iframes
+});*/
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('threeDotsButton').addEventListener('click', function() {
+    document.getElementById('multiViewports').style.display = 'block';
+    initMultiViewports();
+  });
 });
 
     //let dayTexture, nightTexture;
