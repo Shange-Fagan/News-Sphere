@@ -466,32 +466,42 @@ function checkTexturesLoaded() {
         camera.position.set(20, 0.5, 15).setLength(16);    // Default z position for desktop or larger screens
     }
 	  // Initialize Three.js for multiple viewports
+// Function to initialize viewports
 function initMultiViewports() {
-    var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 5000);
-    var renderer = new THREE.CSS3DRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.getElementById('multiViewports').appendChild(renderer.domElement);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 5000);
 
-    // Create iframes for news videos
-    for (var i = 0; i < 3; i++) {
-        var element = document.createElement('iframe');
-        element.src = "https://rss.app/embed/v1/feed/mQblJHqwi9bCZ20z" + i; // Update with real URLs
+    // Initialize CSS3DRenderer and append it to the DOM
+    const renderer = new CSS3DRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    const viewportElement = document.getElementById('multiViewports');
+
+    if (!viewportElement) {
+        console.error("DOM element #multiViewports not found");
+        return;
+    }
+
+    viewportElement.appendChild(renderer.domElement);
+
+    // Add some content
+    for (let i = 0; i < 3; i++) {
+        const element = document.createElement('iframe');
+        element.src = `https://rss.app/embed/v1/feed/mQblJHqwi9bCZ20z${i}`;
         element.style.width = '480px';
         element.style.height = '270px';
 
-        var cssObject = new THREE.CSS3DObject(element);
-        cssObject.position.set(i * 500 - 500, 0, 0); // Adjust positions for each iframe
+        const cssObject = new THREE.CSS3DObject(element);
+        cssObject.position.set(i * 500 - 500, 0, 0);
         scene.add(cssObject);
     }
 
+    // Animate the scene
     function animate() {
         requestAnimationFrame(animate);
         renderer.render(scene, camera);
     }
     animate();
 }
-
 // Call the init function when the button is clicked
 /*document.getElementById('threeDotsButton').addEventListener('click', function() {
     document.getElementById('multiViewports').style.display = 'block';
