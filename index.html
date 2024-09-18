@@ -109,7 +109,7 @@ a, button, input, select, iframe {
   pointer-events: auto; /* Ensure pointer events are enabled */
   z-index: 9999; /* Make sure the label is above other elements */
   /*background-color: rgba(255, 255, 255, 0.9);*/ /* Optional background for better visibility */
-  overflow: hidden; /* Hide any content that overflows */
+  /*overflow: hidden;*/ /* Hide any content that overflows */
 }
 
 .marker-label.active {
@@ -222,7 +222,7 @@ a, button, input, select, iframe {
       background-color: rgba(225, 225, 225, 0.35);
     }
 	    #threeDotsButton {
-      position: absolute;
+      position: absolute !important;
       left: 0px;
       bottom: 0px;
       padding: 4.5px 9.5px;
