@@ -556,7 +556,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     sphereDepth
   );
 
-  const sphereWidth2 = 5;
+  const sphereWidth2 = 5.095;
   const sphereHeight2 = 64;
   const sphereDepth2 = 64;
   const geometry2 = new THREE.SphereGeometry(
@@ -630,7 +630,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
   });
 
   const atmosphere = new THREE.Mesh(
-    new THREE.SphereGeometry(5.09, 64, 64),
+    new THREE.SphereGeometry(5.095, 64, 64),
     new THREE.ShaderMaterial({
       vertexShader: `
                 varying vec3 vertexNormal;
