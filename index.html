@@ -386,15 +386,15 @@ iframe::-webkit-scrollbar {
   <!-- Main JavaScript -->
   <script type="module">
     // JavaScript code will go here
-    import * as THREE from "three";
-  import { OrbitControls } from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls";
+    import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.134.0/build/three.module.js";
+  import { OrbitControls } from "https://cdn.skypack.dev/three@0.134.0/examples/jsm/controls/OrbitControls";
   import {
     CSS2DRenderer,
     CSS2DObject,
-  } from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/renderers/CSS2DRenderer.js";
-    import { CSS3DRenderer } from "https://cdn.jsdelivr.net/npm/three@0.136.0/examples/jsm/renderers/CSS3DRenderer.js";
+  } from "https://cdn.skypack.dev/three@0.134.0/examples/jsm/renderers/CSS2DRenderer.js";
+    import { CSS3DRenderer } from "https://cdn.jsdelivr.net/npm/three@0.134.0/examples/jsm/renderers/CSS3DRenderer.js";
     console.log(CSS3DRenderer); // Should output the CSS3DRenderer constructor function
-    import { RGBELoader } from 'https://cdn.jsdelivr.net/npm/three@0.136.0/examples/jsm/loaders/RGBELoader.js';
+    import { RGBELoader } from 'https://cdn.jsdelivr.net/npm/three@0.134.0/examples/jsm/loaders/RGBELoader.js';
   
   // Scene Setup
   const scene = new THREE.Scene();
