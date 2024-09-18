@@ -221,6 +221,23 @@ a, button, input, select, iframe {
     #toggleButton:hover {
       background-color: rgba(225, 225, 225, 0.35);
     }
+	    #threeDotsButton {
+      position: absolute;
+      left: 0px;
+      bottom: 0px;
+      padding: 4.5px 9.5px;
+      font-size: 12px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 8px;
+      color: rgba(255, 255, 255, 0.75);
+      z-index: 9999;
+      cursor: pointer;
+    }
+	    #threeDotsButton:hover {
+      background-color: rgba(225, 225, 225, 0.35);
+    }
+
 
 :root {
      /*========== Font and typography ==========*/
@@ -320,7 +337,8 @@ iframe::-webkit-scrollbar {
     <a href="https://www.linkedin.com/in/shange-fagan-bba3a3239/" target="_blank">LinkedIn</a> | 
     <a href="https://instagram.com/shangefagan" target="_blank">Instagram</a>
   </footer>
-	
+	<button id="threeDotsButton">•••</button>
+
   <!-- Marker Labels (Will be dynamically generated) -->
   <div id="labels-container"></div>
 <div id="multiViewports" style="display: none;">
