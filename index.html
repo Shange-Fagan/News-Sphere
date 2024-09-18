@@ -1029,6 +1029,18 @@ function animate() {
     controls.update();
   }
 
+  // Update marker labels' opacity based on distance from the camera
+  markersData.forEach((data) => {
+    const labelDiv = document.getElementById(`label-${data.id}`);
+    const distance = camera.position.distanceTo(data.worldPosition);
+
+    // Adjust the opacity based on the distance (e.g., fully visible within 15 units, fades out after 25 units)
+    const opacity = Math.max(0, Math.min(1, (25 - distance) / 10));
+
+    // Apply opacity to label
+    labelDiv.style.opacity = opacity;
+  });
+
   // Render
   renderer.render(scene, camera);
   labelRenderer.render(scene, camera);
