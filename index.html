@@ -389,7 +389,9 @@ iframe::-webkit-scrollbar {
   import { OrbitControls } from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls";
   import {
     CSS2DRenderer,
+    CSS3DRenderer,
     CSS2DObject,
+    CSS3DObject,
   } from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/renderers/CSS2DRenderer.js";
     import { RGBELoader } from 'https://cdn.jsdelivr.net/npm/three@0.136.0/examples/jsm/loaders/RGBELoader.js';
   
@@ -444,6 +446,22 @@ iframe::-webkit-scrollbar {
     renderer.setSize(innerWidth, innerHeight);
     labelRenderer.setSize(innerWidth, innerHeight);
   }
+    // Track loaded textures
+let texturesLoaded = 0;
+const totalTextures = 4; // Update this if you have more or fewer textures
+
+function checkTexturesLoaded() {
+  texturesLoaded++;
+  if (texturesLoaded === totalTextures) {
+    animate(); // Start animation after all textures are loaded
+  }
+}
+	   // Check if the user is on a mobile device
+    if (window.innerWidth <= 768) {  // This checks for mobile devices based on screen width
+        camera.position.set(20, 0.5, 15).setLength(20);      // Set the camera's z position to 25 for mobile device
+    } else {
+        camera.position.set(20, 0.5, 15).setLength(16);    // Default z position for desktop or larger screens
+    }
 	  // Initialize Three.js for multiple viewports
 function initMultiViewports() {
     var scene = new THREE.Scene();
@@ -477,22 +495,6 @@ document.getElementById('threeDotsButton').addEventListener('click', function() 
     initMultiViewports();  // Initialize multi viewports with iframes
 });
 
-    // Track loaded textures
-let texturesLoaded = 0;
-const totalTextures = 4; // Update this if you have more or fewer textures
-
-function checkTexturesLoaded() {
-  texturesLoaded++;
-  if (texturesLoaded === totalTextures) {
-    animate(); // Start animation after all textures are loaded
-  }
-}
-	   // Check if the user is on a mobile device
-    if (window.innerWidth <= 768) {  // This checks for mobile devices based on screen width
-        camera.position.set(20, 0.5, 15).setLength(20);      // Set the camera's z position to 25 for mobile device
-    } else {
-        camera.position.set(20, 0.5, 15).setLength(16);    // Default z position for desktop or larger screens
-    }
     //let dayTexture, nightTexture;
     let isDay = true; // Track whether it's currently day or night
 
