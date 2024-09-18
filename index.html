@@ -429,7 +429,7 @@ function checkTexturesLoaded() {
 }
 	   // Check if the user is on a mobile device
     if (window.innerWidth <= 768) {  // This checks for mobile devices based on screen width
-        camera.position.set(20, 0.5, 15).setLength(25);      // Set the camera's z position to 25 for mobile device
+        camera.position.set(20, 0.5, 15).setLength(20);      // Set the camera's z position to 25 for mobile device
     } else {
         camera.position.set(20, 0.5, 15).setLength(16);    // Default z position for desktop or larger screens
     }
@@ -562,7 +562,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     sphereDepth
   );
 
-  const sphereWidth2 = 5.095;
+  const sphereWidth2 = 5.025;
   const sphereHeight2 = 64;
   const sphereDepth2 = 64;
   const geometry2 = new THREE.SphereGeometry(
@@ -636,7 +636,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
   });
 
   const atmosphere = new THREE.Mesh(
-    new THREE.SphereGeometry(5.095, 64, 64),
+    new THREE.SphereGeometry(5.025, 64, 64),
     new THREE.ShaderMaterial({
       vertexShader: `
                 varying vec3 vertexNormal;
