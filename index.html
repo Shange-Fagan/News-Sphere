@@ -949,6 +949,10 @@ markersData.forEach((data) => {
   });
 });
 
+document.getElementById('threeDotsButton').addEventListener('click', function() {
+    document.getElementById('multiViewports').style.display = 'block';
+});
+
 // Raycaster for Interaction
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
