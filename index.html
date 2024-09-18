@@ -369,7 +369,11 @@ iframe::-webkit-scrollbar {
   // Scene Setup
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 2000);
-  camera.position.set(20, 0.5, 15).setLength(17);
+  //camera.position.set(20, 0.5, 15).setLength(17);
+  // Camera Position
+  // Position the camera so it faces Africa
+  camera.position.set(0, 0, 10); // You can tweak the z-value based on how far you want the camera to be.
+
   
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(innerWidth, innerHeight);
