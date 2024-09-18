@@ -391,7 +391,10 @@ iframe::-webkit-scrollbar {
   controls.minDistance = 15;
   controls.maxDistance = 20;
   controls.autoRotate = true;
-  controls.autoRotateSpeed = 0.25;
+  controls.autoRotateSpeed = 0.5;
+  // Use OrbitControls to target Africa
+  controls.target.set(0, 0, 0); // This will point the camera towards the center (Africa)
+
 
    // Lighting - Reduced intensity to reduce glare
     /*const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Soft ambient light
