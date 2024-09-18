@@ -238,11 +238,6 @@ a, button, input, select, iframe {
     #threeDotsButton:hover {
       background-color: rgba(225, 225, 225, 0.35);
     }
-	#multiViewports {
-    width: 480px;  /* Adjust the width to fit your content */
-    height: 270px; /* Adjust the height as needed */
-    overflow: hidden;
-}
 
 
 :root {
@@ -381,7 +376,6 @@ iframe::-webkit-scrollbar {
 
 <button id="toggleButton">Switch to Night</button>
 <button id="threeDotsButton">• • •</button>
-<div id="multiViewports" style="display: none;">
   <!-- The iframe containers will be added dynamically -->
 </div>
   <!-- Scripts -->
@@ -396,8 +390,6 @@ iframe::-webkit-scrollbar {
     CSS2DRenderer,
     CSS2DObject,
   } from "https://unpkg.com/three@0.136.0/examples/jsm/renderers/CSS2DRenderer.js";
-    import { CSS3DRenderer } from "https://unpkg.com/three@0.136.0/examples/jsm/renderers/CSS3DRenderer.js";
-    console.log(CSS3DRenderer); // Should output the CSS3DRenderer constructor function
     import { RGBELoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders/RGBELoader.js';
   
   // Scene Setup
@@ -469,79 +461,6 @@ function checkTexturesLoaded() {
     } else {
         camera.position.set(20, 0.5, 15).setLength(16);    // Default z position for desktop or larger screens
     }
-	  // Initialize Three.js for multiple viewports
-// Function to initialize viewports
-// Initialize Three.js for multiple viewports
-// Initialize Three.js for multiple viewports
-function initMultiViewports() {
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 5000);
-    camera.position.set(0, 0, 100); // Ensure the camera is positioned correctly
-
-    // Initialize CSS3DRenderer and append it to the DOM
-    const cssRenderer = new CSS3DRenderer();
-    cssRenderer.setSize(window.innerWidth, window.innerHeight);
-    cssRenderer.domElement.style.position = 'absolute';
-    cssRenderer.domElement.style.top = '0px';
-    cssRenderer.domElement.style.pointerEvents = 'none'; // Prevent it from capturing pointer events
-
-    const viewportElement = document.getElementById('multiViewports');
-
-    if (!viewportElement) {
-        console.error("DOM element #multiViewports not found");
-        return;
-    }
-
-    // Prevent appending the renderer multiple times
-    if (!viewportElement.contains(cssRenderer.domElement)) {
-        viewportElement.appendChild(cssRenderer.domElement);
-    }
-
-    // Add some content (iFrames in this case)
-    for (let i = 0; i < 3; i++) {
-        const element = document.createElement('iframe');
-        /*element.src = `https://rss.app/embed/v1/feed/mQblJHqwi9bCZ20z${i}`;
-        element.style.width = '480px';
-        element.style.height = '270px';*/
-        // Example of using an RSS feed for world news
-        element.src = `https://rss.app/embed/v1/feed/5NgqiIvxoBVXc09l`; // Example RSS widget
-        element.style.width = '480px';
-        element.style.height = '270px';
-        element.frameBorder = '0';
-        element.scrolling = 'no';
-
-        const cssObject = new THREE.CSS3DObject(element);
-        cssObject.position.set(i * 500 - 500, 0, 0);
-        scene.add(cssObject);
-    }
-
-    // Animate the scene
-    function animate() {
-        requestAnimationFrame(animate);
-        cssRenderer.render(scene, camera); // Only render the CSS3DRenderer here
-    }
-    animate();
-}
-
-// Toggle visibility of the viewports
-document.addEventListener('DOMContentLoaded', function() {
-    let isVisible = false; // State to track visibility
-
-    document.getElementById('threeDotsButton').addEventListener('click', function() {
-        const viewportElement = document.getElementById('multiViewports');
-
-        if (isVisible) {
-            viewportElement.style.display = 'none'; // Hide the viewports
-        } else {
-            viewportElement.style.display = 'block'; // Show the viewports
-            initMultiViewports(); // Initialize the viewports if showing
-        }
-
-        // Toggle visibility state
-        isVisible = !isVisible;
-    });
-});
-
 
     //let dayTexture, nightTexture;
     let isDay = true; // Track whether it's currently day or night
