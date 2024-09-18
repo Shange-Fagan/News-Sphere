@@ -323,9 +323,6 @@ iframe::-webkit-scrollbar {
 	
   <!-- Marker Labels (Will be dynamically generated) -->
   <div id="labels-container"></div>
-  <div id="multiViewports" style="display: none;">
-    <!-- The iframe containers will be added dynamically -->
-  </div>
 
   <!-- Tickers -->
   <iframe
@@ -947,10 +944,6 @@ markersData.forEach((data) => {
   labelDiv.addEventListener('touchstart', (event) => {
     event.stopPropagation();
   });
-});
-
-document.getElementById('threeDotsButton').addEventListener('click', function() {
-    document.getElementById('multiViewports').style.display = 'block';
 });
 
 // Raycaster for Interaction
