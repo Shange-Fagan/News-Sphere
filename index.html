@@ -554,7 +554,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     sphereDepth
   );
 
-  const sphereWidth2 = 5.09;
+  const sphereWidth2 = 5.099;
   const sphereHeight2 = 32.1;
   const sphereDepth2 = 32.1;
   const geometry2 = new THREE.SphereGeometry(
@@ -647,7 +647,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
                      gl_FragColor = vec4(0.3, 0.6, 1.0, 1.0) * intensity;
                     }
                     `,
-	    transparent: true, 
+	    transparent: false, 
       blending: THREE.AdditiveBlending,
       side: THREE.BackSide,
     })
