@@ -106,35 +106,15 @@ a, button, input, select, iframe {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
   /*z-index: 10;*/
   display: none; /* Hidden by default */
-  transition: opacity 0.5s ease; /* Smooth transition for opacity */
   pointer-events: auto; /* Ensure pointer events are enabled */
   z-index: 9999; /* Make sure the label is above other elements */
   /*background-color: rgba(255, 255, 255, 0.9);*/ /* Optional background for better visibility */
   /*overflow: hidden;*/ /* Hide any content that overflows */
 }
-	  /* Define the keyframes for the pop-up animation */
-@keyframes popup-appear {
-  0% {
-    transform: scale(0.5);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* Apply the animation to marker labels when they are shown */
+	  
 .marker-label.active {
   display: block;
-  animation: popup-appear 0.3s ease-out; /* Animation duration is 0.3 seconds */
-  z-index: 9999;
-  transform-origin: center; /* Ensure the pop-up grows from the center */
 }
-
-/*.marker-label.active {
-  display: block;
-}*/
 
 /*.marker-label .close-button {
   position: absolute;
@@ -1023,18 +1003,6 @@ function animate() {
   if (controls.enabled) {
     controls.update();
   }
-
-  // Update marker labels' opacity based on distance from the camera
-  markersData.forEach((data) => {
-    const labelDiv = document.getElementById(`label-${data.id}`);
-    const distance = camera.position.distanceTo(data.worldPosition);
-
-    // Adjust the opacity based on the distance (e.g., fully visible within 15 units, fades out after 25 units)
-    const opacity = Math.max(0, Math.min(1, (25 - distance) / 10));
-
-    // Apply opacity to label
-    labelDiv.style.opacity = opacity;
-  });
 
   // Render
   renderer.render(scene, camera);
