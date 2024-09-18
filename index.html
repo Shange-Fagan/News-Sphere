@@ -408,7 +408,6 @@ iframe::-webkit-scrollbar {
   <!-- Iframe overlay for news articles -->
 <div id="newsOverlay" style="display: none;">
   <iframe id="newsIframe" src="https://rss.app/embed/v1/wall/tHOhb3QtEMySDCuu" frameborder="0"></iframe>
-  <button id="closeNewsButton">Close</button>
 </div>
   <!-- Scripts -->
   <!-- Include Three.js and other dependencies here -->
@@ -478,11 +477,14 @@ iframe::-webkit-scrollbar {
     labelRenderer.setSize(innerWidth, innerHeight);
   }
 	  document.getElementById('newsButton').addEventListener('click', function() {
-  document.getElementById('newsOverlay').style.display = 'flex';
-});
-
-document.getElementById('closeNewsButton').addEventListener('click', function() {
-  document.getElementById('newsOverlay').style.display = 'none';
+  const newsOverlay = document.getElementById('newsOverlay');
+  if (newsOverlay.style.display === 'flex') {
+    newsOverlay.style.display = 'none';  // Hide the news articles
+    document.getElementById('newsButton').textContent = 'Show News';  // Update button text
+  } else {
+    newsOverlay.style.display = 'flex';  // Show the news articles
+    document.getElementById('newsButton').textContent = 'Hide News';  // Update button text
+  }
 });
     // Track loaded textures
 let texturesLoaded = 0;
