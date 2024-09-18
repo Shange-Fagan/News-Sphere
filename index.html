@@ -437,6 +437,39 @@ iframe::-webkit-scrollbar {
     renderer.setSize(innerWidth, innerHeight);
     labelRenderer.setSize(innerWidth, innerHeight);
   }
+	  // Initialize Three.js for multiple viewports
+function initMultiViewports() {
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 5000);
+    var renderer = new THREE.CSS3DRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById('multiViewports').appendChild(renderer.domElement);
+
+    // Create iframes for news videos
+    for (var i = 0; i < 3; i++) {
+        var element = document.createElement('iframe');
+        element.src = "https://www.youtube.com/embed/latest_news_video" + i; // Update with real URLs
+        element.style.width = '480px';
+        element.style.height = '270px';
+
+        var cssObject = new THREE.CSS3DObject(element);
+        cssObject.position.set(i * 500 - 500, 0, 0); // Adjust positions for each iframe
+        scene.add(cssObject);
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+    }
+    animate();
+}
+
+// Call the init function when the button is clicked
+document.getElementById('threeDotsButton').addEventListener('click', function() {
+    document.getElementById('multiViewports').style.display = 'block';
+    initMultiViewports();  // Initialize multi viewports with iframes
+});
+
     // Track loaded textures
 let texturesLoaded = 0;
 const totalTextures = 4; // Update this if you have more or fewer textures
