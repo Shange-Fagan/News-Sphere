@@ -472,6 +472,7 @@ function checkTexturesLoaded() {
 	  // Initialize Three.js for multiple viewports
 // Function to initialize viewports
 // Initialize Three.js for multiple viewports
+// Initialize Three.js for multiple viewports
 function initMultiViewports() {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 5000);
@@ -491,7 +492,10 @@ function initMultiViewports() {
         return;
     }
 
-    viewportElement.appendChild(cssRenderer.domElement);
+    // Prevent appending the renderer multiple times
+    if (!viewportElement.contains(cssRenderer.domElement)) {
+        viewportElement.appendChild(cssRenderer.domElement);
+    }
 
     // Add some content (iFrames in this case)
     for (let i = 0; i < 3; i++) {
@@ -513,11 +517,22 @@ function initMultiViewports() {
     animate();
 }
 
-// Call the init function when the button is clicked
+// Toggle visibility of the viewports
 document.addEventListener('DOMContentLoaded', function() {
+    let isVisible = false; // State to track visibility
+
     document.getElementById('threeDotsButton').addEventListener('click', function() {
-        document.getElementById('multiViewports').style.display = 'block';
-        initMultiViewports();
+        const viewportElement = document.getElementById('multiViewports');
+
+        if (isVisible) {
+            viewportElement.style.display = 'none'; // Hide the viewports
+        } else {
+            viewportElement.style.display = 'block'; // Show the viewports
+            initMultiViewports(); // Initialize the viewports if showing
+        }
+
+        // Toggle visibility state
+        isVisible = !isVisible;
     });
 });
 
