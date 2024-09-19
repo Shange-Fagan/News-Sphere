@@ -1165,7 +1165,21 @@ window.addEventListener('pointerdown', (event) => {
   if (intersects.length > 0) {
     const instanceId = intersects[0].instanceId;
     const data = markersData[instanceId];
+	  
+    // Stop the globe's autorotation and disable OrbitControls
+    controls.autoRotate = false;
+    controls.enabled = false; // Disable the controls while interacting with the iframe
 
+    // Add a listener to detect when the iframe loses focus and re-enable the controls
+    const iframe = labelDiv.querySelector('iframe');
+    console.log(iframe); // Check if the iframe element is being correctly selected
+    iframe.addEventListener('load', () => {
+	console.log('Iframe loaded');
+      iframe.contentWindow.addEventListener('blur', () => {
+	console.log('Iframe lost focus');
+        controls.enabled = true; // Re-enable the controls when iframe loses focus
+      });
+    });
     // Update Label Content
 const labelDiv = document.getElementById(`label-${data.id}`);
 const contentDiv = labelDiv.querySelector('.content');
@@ -1175,21 +1189,7 @@ contentDiv.innerHTML = `<iframe src="${data.iframeSrc}" frameborder="0" width="2
 labelDiv.classList.add('active');
 
 
-    // Stop the globe's autorotation and disable OrbitControls
-    controls.autoRotate = false;
-    controls.enabled = false; // Disable the controls while interacting with the iframe
 
-    // Add a listener to detect when the iframe loses focus and re-enable the controls
-    const iframe = labelDiv.querySelector('iframe');
-    console.log(iframe); // Check if the iframe element is being correctly selected
-
-    iframe.addEventListener('load', () => {
-	console.log('Iframe loaded');
-      iframe.contentWindow.addEventListener('blur', () => {
-	console.log('Iframe lost focus');
-        controls.enabled = true; // Re-enable the controls when iframe loses focus
-      });
-    });
   }
 });
 	  // Loading spinner functionality
