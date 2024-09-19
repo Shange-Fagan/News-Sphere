@@ -1176,14 +1176,14 @@ labelDiv.classList.add('active');
 
 // Loading spinner functionality
 document.getElementById(`label-${data.id}`).addEventListener('click', function() {
-  const iframe = document.querySelector(`#label-${data.id} iframe`);
+  const iframe2 = document.querySelector(`#label-${data.id} iframe`);
   const loadingIcon = document.getElementById('loadingIcon');
 
   // Show loading icon when clicked
   loadingIcon.style.display = 'block';
   
   // Hide spinner when the iframe is fully loaded
-  iframe.onload = function() {
+  iframe2.onload = function() {
     loadingIcon.style.display = 'none';
   };
 });
