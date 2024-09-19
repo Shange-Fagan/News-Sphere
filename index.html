@@ -252,8 +252,29 @@ iframe::-webkit-scrollbar {
     align-items: center;
     z-index: 9999; /* Ensure it's on top of everything */
   }
+	  #newsOverlaynightheme {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    /*background-color: rgba(0, 0, 0, 0.8);*/
+    /*display: flex;*/
+    display: none;  
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure it's on top of everything */
+  }
   
   #newsIframe {
+    width: 80%;
+    height: 80%;
+    /*background: rgba(255, 255, 255, 0.5);*/
+    background: none;
+    z-index: 1; /* Lower than the close button */
+  }
+	  #newsIframenighttheme {
     width: 80%;
     height: 80%;
     /*background: rgba(255, 255, 255, 0.5);*/
@@ -433,7 +454,7 @@ iframe::-webkit-scrollbar {
   <iframe id="newsIframe" width="900" height="1600" src="https://rss.app/embed/v1/wall/IlN7qHjVhWJAunMd" frameborder="0"></iframe>
 </div>
 <div id="newsOverlaynighttheme" style="display: none;">
-  <iframe id="newsIframe" width="900" height="1600" src="https://rss.app/embed/v1/wall/AAkqLTDQ5NROznbg" frameborder="0"></iframe>
+  <iframe id="newsIframenightheme" width="900" height="1600" src="https://rss.app/embed/v1/wall/AAkqLTDQ5NROznbg" frameborder="0"></iframe>
 </div>
   <!-- Scripts -->
   <!-- Include Three.js and other dependencies here -->
