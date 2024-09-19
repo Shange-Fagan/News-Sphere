@@ -577,39 +577,39 @@ document.getElementById('closeNewsButton').addEventListener('click', function() 
 document.getElementById('newsOverlaynighttheme').style.display = 'none';
 document.getElementById('closeNewsButton').style.display = 'none';  // Close the news iframe
 });
-const cloudParticles = [];
-const cloudTexture = new THREE.TextureLoader().load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png'); // Add your cloud texture
+const cloudTexture = new THREE.TextureLoader().load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png');
 
-for (let i = 0; i < 50; i++) {
-  const cloudGeo = new THREE.PlaneBufferGeometry(500, 500);
-  //const cloudGeo = new THREE.PlaneBufferGeometry(500, 500);
-  const cloudMaterial = new THREE.MeshLambertMaterial({
-    map: cloudTexture,
-    transparent: true,
-  });
+const cloudMaterial = new THREE.ShaderMaterial({
+  uniforms: {
+    cloudTexture: { type: 't', value: cloudTexture }
+  },
+  vertexShader: `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: `
+    uniform sampler2D cloudTexture;
+    varying vec2 vUv;
+    void main() {
+      vec4 textureColor = texture2D(cloudTexture, vUv);
+      textureColor.a *= 0.5;  // Adjust opacity
+      gl_FragColor = vec4(textureColor.rgb, textureColor.a);
+    }
+  `,
+  transparent: true
+});
 
-  const cloud = new THREE.Mesh(cloudGeo, cloudMaterial);
-  cloud.position.set(
-    Math.random() * 1000 - 500,
-    100,
-    Math.random() * 1000 - 500
-  );
-  cloud.rotation.x = 1.16;
-  cloud.rotation.y = -0.12;
-  cloud.rotation.z = Math.random() * 2 * Math.PI;
-  cloud.material.opacity = 0.55;
-  cloudParticles.push(cloud);
-  scene.add(cloud);
-}
+// Create geometry and apply the shader material
+const cloudGeo = new THREE.PlaneGeometry(800, 800);
+const cloudMesh = new THREE.Mesh(cloudGeo, cloudMaterial);
 
-function animateClouds() {
-  cloudParticles.forEach((p) => {
-    p.rotation.z += 0.001;
-  });
-  requestAnimationFrame(animateClouds);
-}
+// Position the clouds in the scene
+cloudMesh.position.set(0, 100, -500);
+scene.add(cloudMesh);
 
-animateClouds();
 
     // Track loaded textures
 let texturesLoaded = 0;
