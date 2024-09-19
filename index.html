@@ -578,7 +578,7 @@ document.getElementById('newsOverlaynighttheme').style.display = 'none';
 document.getElementById('closeNewsButton').style.display = 'none';  // Close the news iframe
 });
 	  
-const cloudTexture = new THREE.TextureLoader().load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png', () => {
+const cloudTexture = new THREE.TextureLoader().load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png')
   const cloudMaterial = new THREE.ShaderMaterial({
   uniforms: {
     cloudTexture: { type: 't', value: cloudTexture }
@@ -610,7 +610,6 @@ const cloudMesh = new THREE.Mesh(cloudGeo, cloudMaterial);
 cloudMesh.position.set(0, 100, -500);
 // Add clouds after texture is loaded
   //scene.add(cloudMesh);
-});
 
     // Track loaded textures
 let texturesLoaded = 0;
