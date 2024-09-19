@@ -612,9 +612,9 @@ cloudMesh.position.set(-100, -100, -500);// Add clouds after texture is loaded
 
 // Create a mirrored version of the cloud mesh on the left
 const mirroredCloudMesh = cloudMesh.clone();
-mirroredCloudMesh.position.set(100, 100, 500); // Mirror on the X-axis (left side)
+mirroredCloudMesh.position.set(100, -100, -500); // Mirror on the X-axis (left side)
 mirroredCloudMesh.scale.x *= -1;  // Flip the cloud mesh horizontally to mirror it
-scene.add(mirroredCloudMesh);
+//scene.add(mirroredCloudMesh);
 
 
     // Track loaded textures
@@ -716,7 +716,7 @@ context2.fillRect(0, 0, canvas2.width, canvas2.height);
 const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
 	// Set the background of the scene
 	  scene.add(cloudMesh);
-	  scene.add(flippedCloudMesh);
+	  scene.add(mirroredCloudMesh);
 	scene.background = daybackgroundTexture;
 // Toggle between Day/Night Textures and Cube Map
     function toggleDayNight() {
@@ -727,7 +727,7 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
         //scene.background = new THREE.Color(0x000033); // Dark blue
 	scene.background = nightbackgroundTexture;
 	scene.remove(cloudMesh);
-        scene.remove(flippedCloudMesh);
+        scene.remove(mirroredCloudMesh);
         document.getElementById("toggleButton").textContent = "Switch to Day";
         document.getElementById("dayTicker").style.display = "none";
         document.getElementById("nightTicker").style.display = "block";
@@ -738,7 +738,7 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
         //scene.background = new THREE.Color(0x87CEEB); // Light sky blue
 	scene.background = daybackgroundTexture;
 	scene.add(cloudMesh);         // Add clouds
-	scene.add(flippedCloudMesh);
+	scene.add(mirroredCloudMesh);
         document.getElementById("toggleButton").textContent = "Switch to Night";
         document.getElementById("dayTicker").style.display = "block";
         document.getElementById("nightTicker").style.display = "none";
