@@ -1198,7 +1198,7 @@ labelDiv.classList.add('active');
   }
 });
 	  // Loading spinner functionality
-document.getElementById('labels-container').addEventListener('click', function() {
+/*document.getElementById('labels-container').addEventListener('click', function() {
   const loadingIcon = document.getElementById('loadingIcon');
   
   // Show loading icon when iframe is clicked
@@ -1208,7 +1208,21 @@ document.getElementById('labels-container').addEventListener('click', function()
   setTimeout(() => {
     loadingIcon.style.display = 'none';
   }, 3000); // Adjust time as needed
+});*/
+	  document.addEventListener('DOMContentLoaded', function () {
+  const iframe = document.querySelector('iframe');
+  const loadingIcon = document.getElementById('loadingIcon');
+  
+  iframe.addEventListener('load', function () {
+    loadingIcon.style.display = 'block'; // Show the loading icon when iframe starts loading
+    
+    // Simulate a delay or hide the loading icon once the iframe content has loaded
+    setTimeout(function () {
+      loadingIcon.style.display = 'none'; // Hide the loading icon after 3 seconds
+    }, 3000); // Adjust the timeout as needed
+  });
 });
+
 
 // Animation Loop
 const clock = new THREE.Clock();
