@@ -523,6 +523,8 @@ iframe::-webkit-scrollbar {
     renderer.setSize(window.innerWidth, window.innerHeight);
     labelRenderer.setSize(window.innerWidth, window.innerHeight);
 }
+	  //let dayTexture, nightTexture;
+    let isDay = true; // Track whether it's currently day or night
 	  document.getElementById('newsButton').addEventListener('click', function() {
 if (isDay) {
         const newsOverlaynighttheme = document.getElementById('newsOverlaynighttheme');
@@ -572,7 +574,7 @@ function checkTexturesLoaded() {
     }
 
     //let dayTexture, nightTexture;
-    let isDay = true; // Track whether it's currently day or night
+    //let isDay = true; // Track whether it's currently day or night
 
 // Load Textures
 const textureLoader = new THREE.TextureLoader();
