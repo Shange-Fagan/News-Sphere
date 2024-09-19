@@ -578,7 +578,7 @@ document.getElementById('newsOverlaynighttheme').style.display = 'none';
 document.getElementById('closeNewsButton').style.display = 'none';  // Close the news iframe
 });
 	  
-const cloudTexture = new THREE.TextureLoader().load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png')
+/*const cloudTexture = new THREE.TextureLoader().load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png')
   const cloudMaterial = new THREE.ShaderMaterial({
   uniforms: {
     cloudTexture: { type: 't', value: cloudTexture }
@@ -608,7 +608,7 @@ const cloudMesh = new THREE.Mesh(cloudGeo, cloudMaterial);
 
 // Position the clouds in the scene
 cloudMesh.position.set(-100, -100, -500);// Add clouds after texture is loaded
-  //scene.add(cloudMesh);
+  //scene.add(cloudMesh);*/
 
 
     // Track loaded textures
@@ -709,7 +709,7 @@ context2.fillRect(0, 0, canvas2.width, canvas2.height);
 // Create a texture from the canvas
 const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
 	// Set the background of the scene
-	  scene.add(cloudMesh);
+	 // scene.add(cloudMesh);
 	scene.background = daybackgroundTexture;
 // Toggle between Day/Night Textures and Cube Map
     function toggleDayNight() {
@@ -719,7 +719,7 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
         // Set a dark blue color for the night theme background
         //scene.background = new THREE.Color(0x000033); // Dark blue
 	scene.background = nightbackgroundTexture;
-	scene.remove(cloudMesh);
+	//scene.remove(cloudMesh);
         document.getElementById("toggleButton").textContent = "Switch to Day";
         document.getElementById("dayTicker").style.display = "none";
         document.getElementById("nightTicker").style.display = "block";
@@ -729,7 +729,7 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
         // Set a solid blue color for the background
         //scene.background = new THREE.Color(0x87CEEB); // Light sky blue
 	scene.background = daybackgroundTexture;
-	scene.add(cloudMesh);         // Add clouds
+	//scene.add(cloudMesh);         // Add clouds
         document.getElementById("toggleButton").textContent = "Switch to Night";
         document.getElementById("dayTicker").style.display = "block";
         document.getElementById("nightTicker").style.display = "none";
