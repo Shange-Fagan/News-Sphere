@@ -584,10 +584,9 @@ for (let i = 0; i < 50; i++) {
   const cloudGeo = new THREE.PlaneBufferGeometry(500, 500);
   //const cloudGeo = new THREE.PlaneBufferGeometry(500, 500);
   const cloudMaterial = new THREE.MeshLambertMaterial({
-  map: cloudTexture,
-  transparent: true,
-  opacity: 0.3, // Lower opacity
-});
+    map: cloudTexture,
+    transparent: true,
+  });
 
   const cloud = new THREE.Mesh(cloudGeo, cloudMaterial);
   cloud.position.set(
