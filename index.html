@@ -612,7 +612,7 @@ cloudMesh.position.set(-100, -100, -500);// Add clouds after texture is loaded
 
 // Create a mirrored version of the cloud mesh on the left
 const mirroredCloudMesh = cloudMesh.clone();
-mirroredCloudMesh.position.set(100, 6, -500); // Mirror on the X-axis (left side)
+mirroredCloudMesh.position.set(100, 100, 500); // Mirror on the X-axis (left side)
 mirroredCloudMesh.scale.x *= -1;  // Flip the cloud mesh horizontally to mirror it
 scene.add(mirroredCloudMesh);
 
