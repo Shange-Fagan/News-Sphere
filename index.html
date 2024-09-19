@@ -720,6 +720,7 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
         //scene.background = new THREE.Color(0x000033); // Dark blue
 	scene.background = nightbackgroundTexture;
 	//scene.remove(cloudMesh);
+	markerMaterial.color = 0xff3232
         document.getElementById("toggleButton").textContent = "Switch to Day";
         document.getElementById("dayTicker").style.display = "none";
         document.getElementById("nightTicker").style.display = "block";
@@ -729,7 +730,8 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
         // Set a solid blue color for the background
         //scene.background = new THREE.Color(0x87CEEB); // Light sky blue
 	scene.background = daybackgroundTexture;
-	//scene.add(cloudMesh);         // Add clouds
+	//scene.add(cloudMesh); // Add clouds
+        markerMaterial.color = 0xff3232
         document.getElementById("toggleButton").textContent = "Switch to Night";
         document.getElementById("dayTicker").style.display = "block";
         document.getElementById("nightTicker").style.display = "none";
