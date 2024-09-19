@@ -335,6 +335,11 @@ iframe::-webkit-scrollbar {
   height: 50px;
 	display: none;
 }
+	  #markerContainer {
+  position: relative;
+  display: inline-block; /* Ensures it wraps tightly around marker label */
+}
+	  
 	/* Responsive Design */
     @media (max-width: 768px) {
       /* Adjust the size and placement of the globe on mobile */
@@ -1215,21 +1220,24 @@ labelDiv.classList.add('active');
   }, 3000); // Adjust time as needed
 });*/
 	  // Event listener for marker label click
-document.getElementById('marker-label').addEventListener('click', function () {
+document.getElementById('labels-container').addEventListener('click', function () {
   const loadingIcon = document.getElementById('loadingIcon');
-  const iframe = document.querySelector('iframe');
+  const iframe = document.getElementById('myIframe');
 
-  // Show the loading icon immediately when the marker is clicked
+  // Show the loading icon when the marker is clicked
   loadingIcon.style.display = 'block';
 
-  // Change the iframe src to reload or load new content
-  iframe.src = 'https://worldnewshub.org'; // Or update the iframe source to whatever is needed
-  
-  // Listen for the iframe 'load' event to hide the loading icon after the content loads
+  // Load or reload the iframe content
+  iframe.src = 'https://worldnewshub.org?' + new Date().getTime(); // Append timestamp to force reload
+
+  // Hide the loading icon when the iframe content is fully loaded
   iframe.addEventListener('load', function () {
-    loadingIcon.style.display = 'none'; // Hide the loading icon after iframe has fully loaded
+    setTimeout(function () {
+      loadingIcon.style.display = 'none'; // Hide the loading icon after a short delay
+    }, 500); // Optional delay for visibility
   });
 });
+
 
 
 
