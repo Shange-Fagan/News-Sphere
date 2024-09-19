@@ -252,7 +252,7 @@ iframe::-webkit-scrollbar {
     align-items: center;
     z-index: 9999; /* Ensure it's on top of everything */
   }
-	  #newsOverlaynightheme {
+	  #newsOverlaynighttheme {
     position: absolute;
     top: 0;
     left: 0;
@@ -454,7 +454,7 @@ iframe::-webkit-scrollbar {
   <iframe id="newsIframe" width="900" height="1600" src="https://rss.app/embed/v1/wall/IlN7qHjVhWJAunMd" frameborder="0"></iframe>
 </div>
 <div id="newsOverlaynighttheme" style="display: none;">
-  <iframe id="newsIframenightheme" width="900" height="1600" src="https://rss.app/embed/v1/wall/AAkqLTDQ5NROznbg" frameborder="0"></iframe>
+  <iframe id="newsIframenighttheme" width="900" height="1600" src="https://rss.app/embed/v1/wall/AAkqLTDQ5NROznbg" frameborder="0"></iframe>
 </div>
   <!-- Scripts -->
   <!-- Include Three.js and other dependencies here -->
@@ -523,16 +523,34 @@ iframe::-webkit-scrollbar {
     renderer.setSize(window.innerWidth, window.innerHeight);
     labelRenderer.setSize(window.innerWidth, window.innerHeight);
 }
-
 	  document.getElementById('newsButton').addEventListener('click', function() {
+if (isDay) {
+        const newsOverlaynighttheme = document.getElementById('newsOverlaynighttheme');
+	const newsOverlay = document.getElementById('newsOverlay');
+        newsOverlaynighttheme.style.display = 'flex';  // Show the news iframe
+	newsOverlay.style.display = 'none';  // Show the news iframe
+	const closeNewsButton = document.getElementById('closeNewsButton');
+        closeNewsButton.style.display = 'flex';  // Show the news iframe
+      } else {
+        const newsOverlay = document.getElementById('newsOverlay');
+	const newsOverlaynighttheme = document.getElementById('newsOverlaynighttheme');
+        newsOverlay.style.display = 'flex';  // Show the news iframe
+	newsOverlaynighttheme.style.display = 'none';  // Show the news iframe
+	const closeNewsButton = document.getElementById('closeNewsButton');
+        closeNewsButton.style.display = 'flex';  // Show the news iframe
+      }
+      isDay = !isDay;
+    }
+	 /* document.getElementById('newsButton').addEventListener('click', function() {
   const newsOverlay = document.getElementById('newsOverlay');
   newsOverlay.style.display = 'flex';  // Show the news iframe
 const closeNewsButton = document.getElementById('closeNewsButton');
   closeNewsButton.style.display = 'flex';  // Show the news iframe
-});
+});*/
 
 document.getElementById('closeNewsButton').addEventListener('click', function() {
   document.getElementById('newsOverlay').style.display = 'none';  // Close the news iframe
+document.getElementById('newsOverlaynighttheme').style.display = 'none';
 document.getElementById('closeNewsButton').style.display = 'none';  // Close the news iframe
 });
 
