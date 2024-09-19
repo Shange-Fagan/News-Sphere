@@ -1167,24 +1167,27 @@ window.addEventListener('pointerdown', (event) => {
     const data = markersData[instanceId];
 
     // Update Label Content
-    const labelDiv = document.getElementById(`label-${data.id}`);
-    const contentDiv = labelDiv.querySelector('.content');
-    contentDiv.innerHTML = `<iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>`;
+const labelDiv = document.getElementById(`label-${data.id}`);
+const contentDiv = labelDiv.querySelector('.content');
+contentDiv.innerHTML = `<iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>`;
 
-    // Show Label
-    labelDiv.classList.add('active');
-	  
-    document.getElementById('marker-label').addEventListener('click', function() {
-    const iframe = document.getElementById(`label-${data.id}`);
-    const iframeDiv = iframe.querySelector('.content');
-    iframeDiv.innerHTML = `<iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>`;
-    const loadingIcon = document.getElementById('loadingIcon');
-    // Show loading icon when clicked
-    loadingIcon.style.display = 'block';
-    iframe.onload = function() {
-    loadingIcon.style.display = 'none'; // Hide icon when iframe finishes loading
+// Show Label
+labelDiv.classList.add('active');
+
+// Loading spinner functionality
+document.getElementById(`label-${data.id}`).addEventListener('click', function() {
+  const iframe = document.querySelector(`#label-${data.id} iframe`);
+  const loadingIcon = document.getElementById('loadingIcon');
+
+  // Show loading icon when clicked
+  loadingIcon.style.display = 'block';
+  
+  // Hide spinner when the iframe is fully loaded
+  iframe.onload = function() {
+    loadingIcon.style.display = 'none';
   };
 });
+
 
     // Stop the globe's autorotation and disable OrbitControls
     controls.autoRotate = false;
