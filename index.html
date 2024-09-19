@@ -1137,6 +1137,14 @@ window.addEventListener('pointerdown', (event) => {
 
     // Show Label
     labelDiv.classList.add('active');
+	  document.getElementById('marker-label').addEventListener('click', function() {
+  const loadingIcon = document.getElementById('loadingIcon');
+  // Show loading icon when clicked
+  loadingIcon.style.display = 'block';
+  labelDiv.onload = function() {
+    loadingIcon.style.display = 'none'; // Hide icon when iframe finishes loading
+  };
+});
 
     // Stop the globe's autorotation and disable OrbitControls
     controls.autoRotate = false;
