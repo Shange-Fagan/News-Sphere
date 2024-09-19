@@ -1181,6 +1181,8 @@ labelDiv.classList.add('active');
 
     // Add a listener to detect when the iframe loses focus and re-enable the controls
     const iframe = labelDiv.querySelector('iframe');
+    console.log(iframe); // Check if the iframe element is being correctly selected
+
     iframe.addEventListener('load', () => {
       iframe.contentWindow.addEventListener('blur', () => {
         controls.enabled = true; // Re-enable the controls when iframe loses focus
