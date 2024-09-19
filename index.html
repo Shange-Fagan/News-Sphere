@@ -713,7 +713,8 @@ context2.fillRect(0, 0, canvas2.width, canvas2.height);
 // Create a texture from the canvas
 const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
 	// Set the background of the scene
-	  scene.add(cloudMesh); 
+	  scene.add(cloudMesh);
+	  scene.add(flippedCloudMesh);
 	scene.background = daybackgroundTexture;
 // Toggle between Day/Night Textures and Cube Map
     function toggleDayNight() {
@@ -734,6 +735,7 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
         //scene.background = new THREE.Color(0x87CEEB); // Light sky blue
 	scene.background = daybackgroundTexture;
 	scene.add(cloudMesh);         // Add clouds
+	scene.add(flippedCloudMesh);
         document.getElementById("toggleButton").textContent = "Switch to Night";
         document.getElementById("dayTicker").style.display = "block";
         document.getElementById("nightTicker").style.display = "none";
