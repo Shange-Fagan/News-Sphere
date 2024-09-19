@@ -608,7 +608,7 @@ const cloudMesh = new THREE.Mesh(cloudGeo, cloudMaterial);
 
 // Position the clouds in the scene
 cloudMesh.position.set(0, 100, -500);
-scene.add(cloudMesh);
+//scene.add(cloudMesh);
 
 const starMaterial = new THREE.ShaderMaterial({
   vertexShader: `
@@ -639,7 +639,7 @@ const starField = new THREE.Mesh(
   new THREE.SphereGeometry(1000, 64, 64),
   starMaterial
 );
-scene.add(starField);
+//scene.add(starField);
 
     // Track loaded textures
 let texturesLoaded = 0;
@@ -748,6 +748,7 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
         // Set a dark blue color for the night theme background
         //scene.background = new THREE.Color(0x000033); // Dark blue
 	scene.background = nightbackgroundTexture;
+	scene.add(starField);
         document.getElementById("toggleButton").textContent = "Switch to Day";
         document.getElementById("dayTicker").style.display = "none";
         document.getElementById("nightTicker").style.display = "block";
@@ -757,6 +758,7 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
         // Set a solid blue color for the background
         //scene.background = new THREE.Color(0x87CEEB); // Light sky blue
 	scene.background = daybackgroundTexture;
+	scene.add(cloudMesh);
         document.getElementById("toggleButton").textContent = "Switch to Night";
         document.getElementById("dayTicker").style.display = "block";
         document.getElementById("nightTicker").style.display = "none";
