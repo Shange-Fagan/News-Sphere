@@ -595,7 +595,7 @@ const cloudTexture = new THREE.TextureLoader().load('https://mrdoob.com/lab/java
     varying vec2 vUv;
     void main() {
       vec4 textureColor = texture2D(cloudTexture, vUv);
-      textureColor.a *= 0.5;  // Adjust opacity
+      textureColor.a *= 0.9;  // Adjust opacity
       gl_FragColor = vec4(textureColor.rgb, textureColor.a);
     }
   `,
@@ -607,7 +607,7 @@ const cloudGeo = new THREE.PlaneGeometry(800, 800);
 const cloudMesh = new THREE.Mesh(cloudGeo, cloudMaterial);
 
 // Position the clouds in the scene
-cloudMesh.position.set(0, 100, -500);
+cloudMesh.position.set(0, 0, -500);
 // Add clouds after texture is loaded
   //scene.add(cloudMesh);
 
