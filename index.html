@@ -627,12 +627,13 @@ const starMaterial = new THREE.ShaderMaterial({
 
     void main() {
       vec3 color = vec3(0.0, 0.0, 0.1); // Dark night color
-      float starIntensity = smoothstep(0.995, 1.0, random(vUv));
+      float starIntensity = smoothstep(0.99, 1.0, random(vUv)); // Adjust for better star visibility
       color += vec3(1.0) * starIntensity; // Stars
 
       gl_FragColor = vec4(color, 1.0);
     }
   `,
+side: THREE.BackSide // Render the stars inside the sphere
 });
 
 const starField = new THREE.Mesh(
