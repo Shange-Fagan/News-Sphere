@@ -428,7 +428,7 @@ iframe::-webkit-scrollbar {
     <a href="https://www.linkedin.com/in/shange-fagan-bba3a3239/" target="_blank">LinkedIn</a> | 
     <a href="https://instagram.com/shangefagan" target="_blank">Instagram</a>
   </footer>
-
+  
 <!-- Tickers -->
   <iframe
     id="dayTicker"
@@ -443,7 +443,8 @@ iframe::-webkit-scrollbar {
     style="display: none;"
     sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"
   ></iframe>
-  
+  <!-- Marker Labels (Will be dynamically generated) -->
+  <div id="labels-container"></div>
   <!-- Import Map -->
   <script type="importmap">
   {
@@ -469,15 +470,6 @@ iframe::-webkit-scrollbar {
 <div id="newsOverlaynighttheme" style="display: none;">
   <iframe id="newsIframenighttheme" width="900" height="1600" src="https://rss.app/embed/v1/wall/IlN7qHjVhWJAunMd" frameborder="0"></iframe>
 </div>
-<div id="markerContainer" style="position: relative;">
-<!-- Marker Labels (Will be dynamically generated) -->
-  <div id="labels-container">
-<div id="loadingIcon" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-  <img src="Spinner@1x-1.0s-200px-200px.gif" alt="Loading..." />
-</div>
-</div>
-</div>
-
   <!-- Scripts -->
   <!-- Include Three.js and other dependencies here -->
 
@@ -1219,24 +1211,6 @@ labelDiv.classList.add('active');
     loadingIcon.style.display = 'none';
   }, 3000); // Adjust time as needed
 });*/
-	  // Event listener for marker label click
-document.getElementById('labels-container').addEventListener('click', function () {
-  const loadingIcon = document.getElementById('loadingIcon');
-  const iframe = document.getElementById('myIframe');
-
-  // Show the loading icon when the marker is clicked
-  loadingIcon.style.display = 'block';
-
-  // Load or reload the iframe content
-  iframe.src = 'https://worldnewshub.org?' + new Date().getTime(); // Append timestamp to force reload
-
-  // Hide the loading icon when the iframe content is fully loaded
-  iframe.addEventListener('load', function () {
-    setTimeout(function () {
-      loadingIcon.style.display = 'none'; // Hide the loading icon after a short delay
-    }, 500); // Optional delay for visibility
-  });
-});
 
 
 
