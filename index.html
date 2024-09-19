@@ -1137,11 +1137,15 @@ window.addEventListener('pointerdown', (event) => {
 
     // Show Label
     labelDiv.classList.add('active');
-	  document.getElementById('marker-label').addEventListener('click', function() {
-  const loadingIcon = document.getElementById('loadingIcon');
-  // Show loading icon when clicked
-  loadingIcon.style.display = 'block';
-  labelDiv.onload = function() {
+	  
+    document.getElementById('marker-label').addEventListener('click', function() {
+    const iframe = document.getElementById(`label-${data.id}`);
+    const iframeDiv = iframe.querySelector('.content');
+    iframeDiv.innerHTML = `<iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>`;
+    const loadingIcon = document.getElementById('loadingIcon');
+    // Show loading icon when clicked
+    loadingIcon.style.display = 'block';
+    iframe.onload = function() {
     loadingIcon.style.display = 'none'; // Hide icon when iframe finishes loading
   };
 });
