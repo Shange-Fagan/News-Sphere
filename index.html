@@ -724,7 +724,8 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
         // Set a dark blue color for the night theme background
         //scene.background = new THREE.Color(0x000033); // Dark blue
 	scene.background = nightbackgroundTexture;
-	scene.add(cloudMesh);         // Add clouds
+	scene.remove(cloudMesh);
+        scene.remove(flippedCloudMesh);
         document.getElementById("toggleButton").textContent = "Switch to Day";
         document.getElementById("dayTicker").style.display = "none";
         document.getElementById("nightTicker").style.display = "block";
