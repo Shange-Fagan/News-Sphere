@@ -1174,19 +1174,6 @@ contentDiv.innerHTML = `<iframe src="${data.iframeSrc}" frameborder="0" width="2
 // Show Label
 labelDiv.classList.add('active');
 
-// Loading spinner functionality
-document.getElementById('marker-label').addEventListener('click', function() {
-  const loadingIcon = document.getElementById('loadingIcon');
-  
-  // Show loading icon when iframe is clicked
-  loadingIcon.style.display = 'block';
-  
-  // Hide the loading icon after a set timeout (3 seconds in this case)
-  setTimeout(() => {
-    loadingIcon.style.display = 'none';
-  }, 3000); // Adjust time as needed
-});
-
 
     // Stop the globe's autorotation and disable OrbitControls
     controls.autoRotate = false;
@@ -1200,6 +1187,18 @@ document.getElementById('marker-label').addEventListener('click', function() {
       });
     });
   }
+});
+	  // Loading spinner functionality
+document.getElementById('marker-label').addEventListener('click', function() {
+  const loadingIcon = document.getElementById('loadingIcon');
+  
+  // Show loading icon when iframe is clicked
+  loadingIcon.style.display = 'block';
+  
+  // Hide the loading icon after a set timeout (3 seconds in this case)
+  setTimeout(() => {
+    loadingIcon.style.display = 'none';
+  }, 3000); // Adjust time as needed
 });
 
 // Animation Loop
