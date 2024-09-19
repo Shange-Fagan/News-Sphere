@@ -609,8 +609,45 @@ const cloudMesh = new THREE.Mesh(cloudGeo, cloudMaterial);
 // Position the clouds in the scene
 cloudMesh.position.set(-100, -100, -500);// Add clouds after texture is loaded
   //scene.add(cloudMesh);*/
+	  
+const markerMaterial = new THREE.MeshBasicMaterial({
+    color: 0xff3232,
+    onBeforeCompile: (shader) => {
+      shader.uniforms.time = globalUniforms.time;
+      shader.vertexShader = `
+      	attribute float phase;
+        varying float vPhase;
+        ${shader.vertexShader}
+      `.replace(
+        `#include <begin_vertex>`,
+        `#include <begin_vertex>
+        	vPhase = phase; // de-synch of ripples
+        `
+      );
+      shader.fragmentShader = `
+      	uniform float time;
+        varying float vPhase;
+      	${shader.fragmentShader}
+      `.replace(
+        `vec4 diffuseColor = vec4( diffuse, opacity );`,
+        `
+        vec2 lUv = (vUv - 0.5) * 2.;
+        float val = 0.;
+        float lenUv = length(lUv);
+        val = max(val, 1. - step(0.25, lenUv)); // central circle
+        val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
 
+        float tShift = fract(time * 0.5 + vPhase);
+        val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
 
+        if (val < 0.5) discard;
+
+        vec4 diffuseColor = vec4( diffuse, opacity );`
+      );
+    },
+  });
+  markerMaterial.defines = { USE_UV: '' };
+	  
     // Track loaded textures
 let texturesLoaded = 0;
 const totalTextures = 4; // Update this if you have more or fewer textures
@@ -1042,43 +1079,7 @@ if (window.innerWidth <= 768) {
   markerGeometry.scale(1.25, 1.25, 1.25); // Scale markers for mobile
 }
 
-  const markerMaterial = new THREE.MeshBasicMaterial({
-    color: 0xff3232,
-    onBeforeCompile: (shader) => {
-      shader.uniforms.time = globalUniforms.time;
-      shader.vertexShader = `
-      	attribute float phase;
-        varying float vPhase;
-        ${shader.vertexShader}
-      `.replace(
-        `#include <begin_vertex>`,
-        `#include <begin_vertex>
-        	vPhase = phase; // de-synch of ripples
-        `
-      );
-      shader.fragmentShader = `
-      	uniform float time;
-        varying float vPhase;
-      	${shader.fragmentShader}
-      `.replace(
-        `vec4 diffuseColor = vec4( diffuse, opacity );`,
-        `
-        vec2 lUv = (vUv - 0.5) * 2.;
-        float val = 0.;
-        float lenUv = length(lUv);
-        val = max(val, 1. - step(0.25, lenUv)); // central circle
-        val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
 
-        float tShift = fract(time * 0.5 + vPhase);
-        val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
-
-        if (val < 0.5) discard;
-
-        vec4 diffuseColor = vec4( diffuse, opacity );`
-      );
-    },
-  });
-  markerMaterial.defines = { USE_UV: '' };
   
   // Creating Markers
   const markerCount = markersData.length;
