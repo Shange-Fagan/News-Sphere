@@ -336,6 +336,25 @@ iframe::-webkit-scrollbar {
   height: 50px;
 	display: none;
 }
+	  .loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: none; /* Initially hidden */
+    z-index: 9999; /* Above everything else */
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 	  #markerContainer {
   position: relative;
   display: inline-block; /* Ensures it wraps tightly around marker label */
@@ -446,6 +465,7 @@ iframe::-webkit-scrollbar {
   ></iframe>
   <!-- Marker Labels (Will be dynamically generated) -->
   <div id="labels-container"></div>
+  <div id="loadingIcon" class="loading-spinner"></div>
   <!-- Import Map -->
   <script type="importmap">
   {
