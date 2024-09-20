@@ -699,11 +699,18 @@ function checkTexturesLoaded() {
 const textureLoader = new THREE.TextureLoader();
 
 // Background Texture
-    const loader = new THREE.TextureLoader();
+   /* const loader = new THREE.TextureLoader();
 loader.load('textures/TCom_Aerials0006_3_L.jpg', function (texture) {
   const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
   rt.fromEquirectangularTexture(renderer, texture);
   //scene.background = rt.texture;
+});*/
+	  const loader = new THREE.TextureLoader();
+loader.load('textures/TCom_Aerials0006_3_L.jpg', function (texture) {
+  rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+  rt.fromEquirectangularTexture(renderer, texture);
+}, undefined, function (error) {
+  console.error('Error loading texture:', error);
 });
 	  // Load the Cube Map
       const cubeTextureLoader = new THREE.CubeTextureLoader();
