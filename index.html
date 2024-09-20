@@ -1300,10 +1300,10 @@ window.addEventListener('pointerdown', (event) => {
 	// Hide loading spinner when iframe finishes loading
       spinner.style.display = 'none';
       iframe.style.pointerEvents = 'all'; // Enable iframe interaction after loading
-      iframe.contentWindow.addEventListener('blur', () => {
+      /*iframe.contentWindow.addEventListener('blur', () => {
 	console.log('Iframe lost focus');
         controls.enabled = true; // Re-enable the controls when iframe loses focus
-      });
+      });*/
 	    
     });
 	  // Show loading spinner
