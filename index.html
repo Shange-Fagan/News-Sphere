@@ -698,12 +698,12 @@ function checkTexturesLoaded() {
 const textureLoader = new THREE.TextureLoader();
 
 // Background Texture
-    /*const loader = new THREE.TextureLoader();
-loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (texture) {
+    const loader = new THREE.TextureLoader();
+loader.load('textures/TCom_Aerials0006_3_L.jpg', function (texture) {
   const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
   rt.fromEquirectangularTexture(renderer, texture);
-  scene.background = rt.texture;
-});*/
+  //scene.background = rt.texture;
+});
 	  // Load the Cube Map
       const cubeTextureLoader = new THREE.CubeTextureLoader();
 	  const isMobile = /Mobi/i.test(navigator.userAgent);
@@ -838,7 +838,8 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
         //scene.background = dayCubeMap;
         // Set a solid blue color for the background
         //scene.background = new THREE.Color(0x87CEEB); // Light sky blue
-	scene.background = daybackgroundTexture;
+	//scene.background = daybackgroundTexture;
+	scene.background = rt.texture;;
 	//scene.remove(starField); // Remove stars in the day
         //scene.add(cloudMesh); // Add clouds back for day
         markerMaterial.color.set(daymarkerMaterial);
