@@ -651,37 +651,7 @@ const markerMaterial = new THREE.MeshBasicMaterial({
     },
   });
   markerMaterial.defines = { USE_UV: '' };
-	  const starGeometry = new THREE.BufferGeometry();
-const starVertices = [];
-const starCount = 5000;  // Reduce star count for fewer stars
-
-for (let i = 0; i < starCount; i++) {
-  starVertices.push(
-    (Math.random() * 2000) - 1000, // x
-    (Math.random() * 2000) - 1000, // y
-    (Math.random() * 2000) - 1000  // z
-  );
-}
-
-starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
-
-const starMaterial = new THREE.PointsMaterial({
-  color: 0xaaaaaa,   // Dimmer stars (light gray)
-  size: 1,           // Smaller star size for subtle effect
-  sizeAttenuation: true,  // Stars get smaller with distance
-  transparent: true,
-  opacity: 0.7,      // Make stars slightly translucent
-  blending: THREE.AdditiveBlending, // Softer blend effect
-  depthWrite: false,  // Keep stars visible
-});
-
-// Add circular stars
-starMaterial.map = null;
-starMaterial.sizeAttenuation = true;
-
-const starField = new THREE.Points(starGeometry, starMaterial);
-//scene.add(starField);
-
+	  
 
     // Track loaded textures
 let texturesLoaded = 0;
