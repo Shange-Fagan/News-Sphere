@@ -1310,10 +1310,6 @@ window.addEventListener('pointerdown', (event) => {
     //const loadingIcon = document.getElementById('loadingIcon');
     //loadingIcon.style.display = 'block';
 	  
-    // Stop the globe's autorotation and disable OrbitControls
-    controls.autoRotate = false;
-    controls.enabled = false; // Disable the controls while interacting with the iframe
-
     // Add a listener to detect when the iframe loses focus and re-enable the controls
     console.log(iframe); // Check if the iframe element is being correctly selected
 	  
@@ -1334,6 +1330,9 @@ document.addEventListener('click', function(event) {
     controls.enabled = true;
   }
 }, { once: true });
+	    // Stop the globe's autorotation and disable OrbitControls
+    controls.autoRotate = false;
+    controls.enabled = false; // Disable the controls while interacting with the iframe
 
   }
 }
