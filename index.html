@@ -1294,30 +1294,34 @@ window.addEventListener('pointerdown', (event) => {
 
     // Add a listener to detect when the iframe loses focus and re-enable the controls
     const iframe = labelDiv.querySelector('iframe');
+    const loadingIcon = contentDiv.querySelector('.loading-spinner');
     console.log(iframe); // Check if the iframe element is being correctly selected
+	  
     iframe.addEventListener('load', () => {
 	console.log('Iframe loaded');
-	    // Hide loading spinner when iframe finishes loading
+	    
+	// Hide loading spinner when iframe finishes loading
       loadingIcon.style.display = 'none';
+	    
       iframe.contentWindow.addEventListener('blur', () => {
 	console.log('Iframe lost focus');
         controls.enabled = true; // Re-enable the controls when iframe loses focus
       });
+	    
     });
     
 // Show Label
 labelDiv.classList.add('active');
 // Close iframe when clicking outside of it
 	  
+    // Close iframe when clicking outside of it
     document.addEventListener('click', function(event) {
       if (!labelDiv.contains(event.target)) {
         labelDiv.classList.remove('active');
         controls.autoRotate = true;
         controls.enabled = true;
       }
-    }, { once: true }); // Ensure this only runs once after the iframe opens
-
-
+    }, { once: true });
   }
 });
 	  // Loading spinner functionality
