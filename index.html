@@ -662,16 +662,20 @@ for (let i = 0; i < 10000; i++) {
 }
 starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
 
-// Material for the stars
+const starTexture = new THREE.TextureLoader().load('path-to-star-texture.png'); // Circular star texture
+
 const starMaterial = new THREE.PointsMaterial({
-  color: 0x888888,
-  size: 1,
-  sizeAttenuation: true
+  color: 0xffffff,   // White stars
+  size: 1.5,         // Star size
+  map: starTexture,  // Use star texture for round stars
+  transparent: true,
+  depthWrite: false, // Ensure stars remain visible
+  sizeAttenuation: true,
 });
 
-// Create the particle system for stars
 const starField = new THREE.Points(starGeometry, starMaterial);
-//scene.add(starField);
+scene.add(starField);
+
     // Track loaded textures
 let texturesLoaded = 0;
 const totalTextures = 4; // Update this if you have more or fewer textures
