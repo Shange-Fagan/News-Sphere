@@ -1378,7 +1378,7 @@ window.addEventListener('pointerdown', (event) => {
     // Check if the iframe is related to the marker (specific iframe)
     if (!contentDiv.querySelector('iframe')) {
       contentDiv.innerHTML = `
-        <div class="loading-spinner"></div>
+        <div class="loading-spinner"style=" pointer-events:none;"></div>
         <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
       `;
 
