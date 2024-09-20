@@ -1275,13 +1275,11 @@ window.addEventListener('pointerdown', (event) => {
   if (intersects.length > 0) {
     const instanceId = intersects[0].instanceId;
     const data = markersData[instanceId];
-	  // Show loading spinner
-    const loadingIcon = document.getElementById('loadingIcon');
-    loadingIcon.style.display = 'block';
 	  
-    // Update Label Content
+	  // Update Label Content
     const labelDiv = document.getElementById(`label-${data.id}`);
     const contentDiv = labelDiv.querySelector('.content');
+	  
 	  // Check if the iframe is related to the marker (specific iframe)
     if (!contentDiv.querySelector('iframe')) {
 	  // Add loading spinner inside the content div
@@ -1289,16 +1287,14 @@ window.addEventListener('pointerdown', (event) => {
     <div class="loading-spinner"></div>
     <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
     `;
-    // Stop the globe's autorotation and disable OrbitControls
-    controls.autoRotate = false;
-    controls.enabled = false; // Disable the controls while interacting with the iframe
 
-    // Add a listener to detect when the iframe loses focus and re-enable the controls
     const iframe = labelDiv.querySelector('iframe');
     const spinner = contentDiv.querySelector('.loading-spinner');
-    console.log(iframe); // Check if the iframe element is being correctly selected
-	  
-    iframe.addEventListener('load', () => {
+	   
+	    // Show Label
+    labelDiv.classList.add('active');
+	    
+	    iframe.addEventListener('load', () => {
 	console.log('Iframe loaded');
 	    
 	// Hide loading spinner when iframe finishes loading
@@ -1310,9 +1306,18 @@ window.addEventListener('pointerdown', (event) => {
       });
 	    
     });
-    
-// Show Label
-labelDiv.classList.add('active');
+	  // Show loading spinner
+    //const loadingIcon = document.getElementById('loadingIcon');
+    //loadingIcon.style.display = 'block';
+	  
+    // Stop the globe's autorotation and disable OrbitControls
+    controls.autoRotate = false;
+    controls.enabled = false; // Disable the controls while interacting with the iframe
+
+    // Add a listener to detect when the iframe loses focus and re-enable the controls
+    console.log(iframe); // Check if the iframe element is being correctly selected
+	  
+	    
 // Close iframe when clicking outside of it
 	  
     // Close iframe when clicking outside of it
