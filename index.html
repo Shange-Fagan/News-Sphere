@@ -919,13 +919,13 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
                      gl_FragColor = vec4(0.3, 0.6, 1.0, 1.0) * intensity;
                     }
                     `,
-	    transparent: false, 
+	    transparent: true, 
       blending: THREE.AdditiveBlending,
       side: THREE.BackSide,
     })
   );
 	  
-	atmosphere.scale.set(1, 1, 1);	
+	atmosphere.scale.set(1.1, 1.1, 1.1);	
 	  
   const material2 = new THREE.MeshPhongMaterial({
   specular: 0x111111,
