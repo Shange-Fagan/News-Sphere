@@ -709,9 +709,11 @@ loader.load('textures/TCom_Aerials0006_3_L.jpg', function (texture) {
 loader.load('textures/TCom_Aerials0006_3_L.jpg', function (texture) {
   rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
   rt.fromEquirectangularTexture(renderer, texture);
+  console.log(rt); // Check if `rt` is loaded properly
 }, undefined, function (error) {
   console.error('Error loading texture:', error);
 });
+
 	  // Load the Cube Map
       const cubeTextureLoader = new THREE.CubeTextureLoader();
 	  const isMobile = /Mobi/i.test(navigator.userAgent);
