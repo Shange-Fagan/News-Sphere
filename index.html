@@ -1263,7 +1263,7 @@ markersData.forEach((data) => {
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 	  
-let activeLabel = null; // Keep track of the currently open iframe
+/*let activeLabel = null; // Keep track of the currently open iframe
 	  
 window.addEventListener('pointerdown', (event) => {
   pointer.x = (event.clientX / innerWidth) * 2 - 1;
@@ -1302,10 +1302,10 @@ window.addEventListener('pointerdown', (event) => {
 	// Hide loading spinner when iframe finishes loading
       spinner.style.display = 'none';
       iframe.style.pointerEvents = 'all'; // Enable iframe interaction after loading
-      /*iframe.contentWindow.addEventListener('blur', () => {
+      */ /*iframe.contentWindow.addEventListener('blur', () => {
 	console.log('Iframe lost focus');
         controls.enabled = true; // Re-enable the controls when iframe loses focus
-      });*/
+      });*/ /*
 		    // Close any previously active label
       if (activeLabel && activeLabel !== labelDiv) {
         activeLabel.classList.remove('active');
@@ -1321,7 +1321,7 @@ window.addEventListener('pointerdown', (event) => {
     // Add a listener to detect when the iframe loses focus and re-enable the controls
     console.log(iframe); // Check if the iframe element is being correctly selected
 	  
-	    
+	*/    
 // Close iframe when clicking outside of it
 	  
     // Close iframe when clicking outside of it
@@ -1339,9 +1339,9 @@ window.addEventListener('pointerdown', (event) => {
       controls.enabled = false;
     }
   }
-});*/
-	    document.addEventListener('pointerdown', function(event) {
-        if (!labelDiv.contains(event.target)) {
+});*/    
+/*        document.addEventListener('pointerdown', function(event) {
+          if (!labelDiv.contains(event.target)) {
           labelDiv.classList.remove('active');
           controls.autoRotate = true;
           controls.enabled = true;
@@ -1355,7 +1355,70 @@ window.addEventListener('pointerdown', (event) => {
 
   }
 }
+});*/
+	  let activeLabel = null; // Keep track of the currently open iframe
+
+window.addEventListener('pointerdown', (event) => {
+  pointer.x = (event.clientX / innerWidth) * 2 - 1;
+  pointer.y = -(event.clientY / innerHeight) * 2 + 1;
+  raycaster.setFromCamera(pointer, camera);
+
+  const intersects = raycaster.intersectObject(markers).filter((m) => {
+    return m.uv.subScalar(0.5).length() * 2 < 0.25;
+  });
+
+  if (intersects.length > 0) {
+    const instanceId = intersects[0].instanceId;
+    const data = markersData[instanceId];
+
+    // Update Label Content
+    const labelDiv = document.getElementById(`label-${data.id}`);
+    const contentDiv = labelDiv.querySelector('.content');
+
+    // Check if the iframe is related to the marker (specific iframe)
+    if (!contentDiv.querySelector('iframe')) {
+      contentDiv.innerHTML = `
+        <div class="loading-spinner" style="pointer-events:none;"></div>
+        <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
+      `;
+
+      const iframe = labelDiv.querySelector('iframe');
+      const spinner = contentDiv.querySelector('.loading-spinner');
+
+      labelDiv.classList.add('active');
+
+      iframe.addEventListener('load', () => {
+        spinner.style.display = 'none';
+        iframe.style.pointerEvents = 'all'; // Enable iframe interaction after loading
+
+        // Close any previously active label
+        if (activeLabel && activeLabel !== labelDiv) {
+          activeLabel.classList.remove('active');
+        }
+
+        // Set the new active label
+        activeLabel = labelDiv;
+      });
+
+      // Remove previous `pointerdown` listeners if any
+      document.removeEventListener('pointerdown', closeIframe);
+
+      // Add event listener to close iframe when clicking outside
+      document.addEventListener('pointerdown', closeIframe);
+    }
+  }
 });
+
+// Function to close the active iframe if clicked outside
+function closeIframe(event) {
+  if (activeLabel && !activeLabel.contains(event.target)) {
+    activeLabel.classList.remove('active');
+    controls.autoRotate = true;
+    controls.enabled = true;
+    activeLabel = null;
+  }
+}
+
 	  // Loading spinner functionality
 /*document.getElementById('labels-container').addEventListener('click', function() {
   const loadingIcon = document.getElementById('loadingIcon');
