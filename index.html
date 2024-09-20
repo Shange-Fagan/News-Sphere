@@ -769,7 +769,7 @@ context2.fillRect(0, 0, canvas2.width, canvas2.height);
 // Create a texture from the canvas
 const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
 	// Set the background of the scene
-	 // scene.add(cloudMesh);
+	  scene.add(cloudMesh);
 	scene.background = daybackgroundTexture;
 // Toggle between Day/Night Textures and Cube Map
     function toggleDayNight() {
