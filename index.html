@@ -653,7 +653,7 @@ const markerMaterial = new THREE.MeshBasicMaterial({
   markerMaterial.defines = { USE_UV: '' };
 	  const starGeometry = new THREE.BufferGeometry();
 const starVertices = [];
-const starCount = 20000;  // Increase the number of stars for a dense night sky
+const starCount = 5000;  // Reduce star count for fewer stars
 
 for (let i = 0; i < starCount; i++) {
   starVertices.push(
@@ -666,19 +666,18 @@ for (let i = 0; i < starCount; i++) {
 starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
 
 const starMaterial = new THREE.PointsMaterial({
-  color: 0xffffff,   // White stars
-  size: 1.5,         // Star size, can be adjusted
-  sizeAttenuation: true,  // Makes stars smaller when they are further away
+  color: 0xaaaaaa,   // Dimmer stars (light gray)
+  size: 1,           // Smaller star size for subtle effect
+  sizeAttenuation: true,  // Stars get smaller with distance
   transparent: true,
-  opacity: 1.0,
-  blending: THREE.AdditiveBlending, // Make stars blend more naturally
+  opacity: 0.7,      // Make stars slightly translucent
+  blending: THREE.AdditiveBlending, // Softer blend effect
+  depthWrite: false,  // Keep stars visible
 });
 
-// Use round points
+// Add circular stars
 starMaterial.map = null;
-starMaterial.depthWrite = false;  // Ensure stars are rendered correctly
 starMaterial.sizeAttenuation = true;
-starMaterial.vertexColors = false;
 
 const starField = new THREE.Points(starGeometry, starMaterial);
 //scene.add(starField);
