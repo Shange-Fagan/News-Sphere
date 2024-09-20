@@ -978,7 +978,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
   map: dayTexture, // Start with day texture
   specularMap: textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png"),
   bumpMap: dayBumpMap, // Start with day bump map
-  bumpScale: 0.05,
+  bumpScale: 0,
   blending: THREE.AdditiveBlending,
 });
 	  let globe = new THREE.Mesh(geometry2, material);
@@ -999,7 +999,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     }
   );
 
-  /*setTimeout(() => {
+  setTimeout(() => {
     // wait for scene to be populated (asynchronously)
     var dl = new THREE.DirectionalLight(0xffffff, 1);
     dl.position.set(1, 1, 1);
@@ -1020,11 +1020,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 
   var light = new THREE.DirectionalLight(0xf0f0f0, 1);
   light.position.set(5, 3, 5);
-  scene.add(light);*/
-	  const ambientLight = new THREE.AmbientLight(0x404040); // Ambient light
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // Sunlight
-directionalLight.position.set(5, 5, 5);
-scene.add(ambientLight, directionalLight);
+  scene.add(light);
 
 
     // Markers Data
