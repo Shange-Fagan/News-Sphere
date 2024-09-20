@@ -1323,9 +1323,15 @@ window.addEventListener('pointerdown', (event) => {
     // Close iframe when clicking outside of it
     document.addEventListener('click', function(event) {
       if (!labelDiv.contains(event.target)) {
-        labelDiv.classList.remove('active');
-        controls.autoRotate = true;
-        controls.enabled = true;
+	      console.log('clicked away from iframe'); // Check if this appears in the console
+    event.stopPropagation(); // Stop the event from propagating up the DOM
+    labelDiv.classList.remove('active');
+    
+    // Resume globe autorotation when the label is closed
+    controls.autoRotate = true;
+    
+    // Re-enable the OrbitControls
+    controls.enabled = true;
       }
     }, { once: false });
   }
