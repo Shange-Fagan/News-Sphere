@@ -1287,7 +1287,7 @@ window.addEventListener('pointerdown', (event) => {
 	  // Add loading spinner inside the content div
     contentDiv.innerHTML = `
     <div class="loading-spinner" style="pointer-events:none;"></div>
-    <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager" style="pointer-events:none;"></iframe>
+    <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
     `;
 
     const iframe = labelDiv.querySelector('iframe');
