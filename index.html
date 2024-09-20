@@ -540,6 +540,7 @@ iframe::-webkit-scrollbar {
 }
 	  //let dayTexture, nightTexture;
     let isDay = true; // Track whether it's currently day or night
+	  let rt;
 
 /*document.getElementById('newsButton').addEventListener('click', function() {
   if (isDay) {
@@ -831,6 +832,8 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
         document.getElementById("dayTicker").style.display = "none";
         document.getElementById("nightTicker").style.display = "block";
       } else {
+	      // Ensure 'rt' is defined before accessing it
+        if (rt) {
 	// Set the transition to day
         new TWEEN.Tween(shaderMaterial2.uniforms.transition)
         .to({ value: 0 }, 7000)  // Smooth transition over 2 seconds
@@ -847,6 +850,9 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
         document.getElementById("toggleButton").textContent = "Switch to Night";
         document.getElementById("dayTicker").style.display = "block";
         document.getElementById("nightTicker").style.display = "none";
+		} else {
+      console.error('rt is not loaded yet');
+    }
       }
       globe2.material.needsUpdate = true;
       isDay = !isDay;
