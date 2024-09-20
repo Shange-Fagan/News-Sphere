@@ -808,7 +808,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 });
 
 	// Set the background of the scene
-        scene.add(cloudMesh);
+        //scene.add(cloudMesh);
 	scene.background = daybackgroundTexture;
 // Toggle between Day/Night Textures and Cube Map
     function toggleDayNight() {
@@ -823,7 +823,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
         //scene.background = new THREE.Color(0x000033); // Dark blue
 	scene.background = nightbackgroundTexture;
 	//scene.add(starField); // Add stars for the night
-        scene.remove(cloudMesh); // Remove clouds for night
+        //scene.remove(cloudMesh); // Remove clouds for night
         markerMaterial.color.set(nightmarkerMaterial);
         document.getElementById("toggleButton").textContent = "Switch to Day";
         document.getElementById("dayTicker").style.display = "none";
@@ -839,7 +839,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
         //scene.background = new THREE.Color(0x87CEEB); // Light sky blue
 	scene.background = daybackgroundTexture;
 	//scene.remove(starField); // Remove stars in the day
-        scene.add(cloudMesh); // Add clouds back for day
+        //scene.add(cloudMesh); // Add clouds back for day
         markerMaterial.color.set(daymarkerMaterial);
         document.getElementById("toggleButton").textContent = "Switch to Night";
         document.getElementById("dayTicker").style.display = "block";
