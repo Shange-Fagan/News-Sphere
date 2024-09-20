@@ -802,6 +802,10 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
 // Toggle between Day/Night Textures and Cube Map
     function toggleDayNight() {
       if (isDay) {
+        // Set the transition to night
+        new TWEEN.Tween(shaderMaterial2.uniforms.transition)
+        .to({ value: 1 }, 2000)  // Smooth transition over 2 seconds
+        .start();
         globe2.material.map = nightTexture;
         //scene.background = nightCubeMap;
         // Set a dark blue color for the night theme background
@@ -814,6 +818,10 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
         document.getElementById("dayTicker").style.display = "none";
         document.getElementById("nightTicker").style.display = "block";
       } else {
+	// Set the transition to day
+        new TWEEN.Tween(shaderMaterial2.uniforms.transition)
+        .to({ value: 0 }, 2000)  // Smooth transition over 2 seconds
+        .start();
         globe2.material.map = dayTexture;
         //scene.background = dayCubeMap;
         // Set a solid blue color for the background
