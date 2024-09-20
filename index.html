@@ -1279,7 +1279,7 @@ const clock = new THREE.Clock();
 
 function animate() {
   requestAnimationFrame(animate);
-
+  TWEEN.update(); // Required to make the transition work
   // Update time uniform
   globalUniforms.time.value = clock.getElapsedTime();
 
