@@ -540,7 +540,7 @@ iframe::-webkit-scrollbar {
 	  //let dayTexture, nightTexture;
     let isDay = true; // Track whether it's currently day or night
 
-document.getElementById('newsButton').addEventListener('click', function() {
+/*document.getElementById('newsButton').addEventListener('click', function() {
   if (isDay) {
     const newsOverlaynighttheme = document.getElementById('newsOverlaynighttheme');  
     const newsOverlay = document.getElementById('newsOverlay');
@@ -565,6 +565,25 @@ document.getElementById('newsButton').addEventListener('click', function() {
   // Toggle day/night mode
   isDay = !isDay;
 }); // This closes the addEventListener function correctly
+*/
+	  document.getElementById('newsButton').addEventListener('click', function() {
+  const newsOverlayDay = document.getElementById('newsOverlay');
+  const newsOverlayNight = document.getElementById('newsOverlaynighttheme');
+  const closeNewsButton = document.getElementById('closeNewsButton');
+
+  if (isDay) {
+    // Show day theme news overlay
+    newsOverlayDay.style.display = 'flex';
+    newsOverlayNight.style.display = 'none';
+  } else {
+    // Show night theme news overlay
+    newsOverlayNight.style.display = 'flex';
+    newsOverlayDay.style.display = 'none';
+  }
+
+  // Display the close button in both cases
+  closeNewsButton.style.display = 'flex';
+});
 
 
 	 /* document.getElementById('newsButton').addEventListener('click', function() {
