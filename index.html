@@ -489,8 +489,8 @@ iframe::-webkit-scrollbar {
   // Scene Setup
   const scene = new THREE.Scene();
   /*const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 2000);*/
-  /*const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
-  camera.position.set(20, 0.5, 15).setLength(16);*/
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
+  camera.position.set(20, 0.5, 15).setLength(16);
 	  
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   //renderer.setSize(innerWidth, innerHeight);
