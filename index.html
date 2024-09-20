@@ -1262,7 +1262,9 @@ markersData.forEach((data) => {
 // Raycaster for Interaction
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
-
+	  
+let activeLabel = null; // Keep track of the currently open iframe
+	  
 window.addEventListener('pointerdown', (event) => {
   pointer.x = (event.clientX / innerWidth) * 2 - 1;
   pointer.y = -(event.clientY / innerHeight) * 2 + 1;
@@ -1304,6 +1306,12 @@ window.addEventListener('pointerdown', (event) => {
 	console.log('Iframe lost focus');
         controls.enabled = true; // Re-enable the controls when iframe loses focus
       });*/
+		    // Close any previously active label
+      if (activeLabel && activeLabel !== labelDiv) {
+        activeLabel.classList.remove('active');
+      }
+		    // Set the new active label
+      activeLabel = labelDiv;
 	    
     });
 	  // Show loading spinner
@@ -1317,7 +1325,7 @@ window.addEventListener('pointerdown', (event) => {
 // Close iframe when clicking outside of it
 	  
     // Close iframe when clicking outside of it
-    document.addEventListener('click', function(event) {
+    /*document.addEventListener('click', function(event) {
   if (!labelDiv.contains(event.target)) {
     // Check if the label is already active, toggle it off
     if (labelDiv.classList.contains('active')) {
@@ -1331,7 +1339,15 @@ window.addEventListener('pointerdown', (event) => {
       controls.enabled = false;
     }
   }
-});
+});*/
+	    document.addEventListener('click', function(event) {
+        if (!labelDiv.contains(event.target)) {
+          labelDiv.classList.remove('active');
+          controls.autoRotate = true;
+          controls.enabled = true;
+          activeLabel = null; // No active label after close
+        }
+      }, { once: true });
 
 	    // Stop the globe's autorotation and disable OrbitControls
     controls.autoRotate = false;
