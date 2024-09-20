@@ -1304,7 +1304,15 @@ window.addEventListener('pointerdown', (event) => {
     
 // Show Label
 labelDiv.classList.add('active');
-
+// Close iframe when clicking outside of it
+	  
+    document.addEventListener('click', function(event) {
+      if (!labelDiv.contains(event.target)) {
+        labelDiv.classList.remove('active');
+        controls.autoRotate = true;
+        controls.enabled = true;
+      }
+    }, { once: true }); // Ensure this only runs once after the iframe opens
 
 
   }
