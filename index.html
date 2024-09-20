@@ -670,7 +670,7 @@ const starMaterial = new THREE.PointsMaterial({
 
 // Create the particle system for stars
 const starField = new THREE.Points(starGeometry, starMaterial);
-scene.add(starField);
+//scene.add(starField);
     // Track loaded textures
 let texturesLoaded = 0;
 const totalTextures = 4; // Update this if you have more or fewer textures
@@ -780,6 +780,7 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
         //scene.background = new THREE.Color(0x000033); // Dark blue
 	scene.background = nightbackgroundTexture;
 	//scene.remove(cloudMesh);
+	      scene.add(starField);
         markerMaterial.color.set(nightmarkerMaterial);
         document.getElementById("toggleButton").textContent = "Switch to Day";
         document.getElementById("dayTicker").style.display = "none";
