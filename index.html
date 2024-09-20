@@ -1276,8 +1276,8 @@ window.addEventListener('pointerdown', (event) => {
     const instanceId = intersects[0].instanceId;
     const data = markersData[instanceId];
 	  // Show loading spinner
-    //const loadingIcon = document.getElementById('loadingIcon');
-    //loadingIcon.style.display = 'block';
+    const loadingIcon = document.getElementById('loadingIcon');
+    loadingIcon.style.display = 'block';
 	  
     // Update Label Content
     const labelDiv = document.getElementById(`label-${data.id}`);
@@ -1293,14 +1293,14 @@ window.addEventListener('pointerdown', (event) => {
 
     // Add a listener to detect when the iframe loses focus and re-enable the controls
     const iframe = labelDiv.querySelector('iframe');
-    const loadingIcon = contentDiv.querySelector('.loading-spinner');
+    const spinner = contentDiv.querySelector('.loading-spinner');
     console.log(iframe); // Check if the iframe element is being correctly selected
 	  
     iframe.addEventListener('load', () => {
 	console.log('Iframe loaded');
 	    
 	// Hide loading spinner when iframe finishes loading
-      loadingIcon.style.display = 'none';
+      spinner.style.display = 'none';
 	    
       iframe.contentWindow.addEventListener('blur', () => {
 	console.log('Iframe lost focus');
