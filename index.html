@@ -650,7 +650,27 @@ const markerMaterial = new THREE.MeshBasicMaterial({
     },
   });
   markerMaterial.defines = { USE_UV: '' };
-	  
+	  const starGeometry = new THREE.BufferGeometry();
+const starVertices = [];
+for (let i = 0; i < 10000; i++) {
+  starVertices.push(
+    (Math.random() * 2000) - 1000, // x
+    (Math.random() * 2000) - 1000, // y
+    (Math.random() * 2000) - 1000  // z
+  );
+}
+starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+
+// Material for the stars
+const starMaterial = new THREE.PointsMaterial({
+  color: 0x888888,
+  size: 1,
+  sizeAttenuation: true
+});
+
+// Create the particle system for stars
+const starField = new THREE.Points(starGeometry, starMaterial);
+scene.add(starField);
     // Track loaded textures
 let texturesLoaded = 0;
 const totalTextures = 4; // Update this if you have more or fewer textures
