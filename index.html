@@ -822,8 +822,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 
 	// Set the background of the scene
         //scene.add(cloudMesh);
-	//scene.background = daybackgroundTexture;
-	scene.background = dayCubeMap2;
+	scene.background = daybackgroundTexture;
 // Toggle between Day/Night Textures and Cube Map
     function toggleDayNight() {
       if (isDay) {
@@ -851,8 +850,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
         //scene.background = dayCubeMap;
         // Set a solid blue color for the background
         //scene.background = new THREE.Color(0x87CEEB); // Light sky blue
-	//scene.background = daybackgroundTexture;
-	scene.background = dayCubeMap2;
+	scene.background = daybackgroundTexture;
 	//scene.remove(starField); // Remove stars in the day
         //scene.add(cloudMesh); // Add clouds back for day
         markerMaterial.color.set(daymarkerMaterial);
