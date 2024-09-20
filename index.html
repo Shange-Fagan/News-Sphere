@@ -1340,7 +1340,7 @@ window.addEventListener('pointerdown', (event) => {
     }
   }
 });*/
-	    document.addEventListener('click', function(event) {
+	    document.addEventListener('pointerdown', function(event) {
         if (!labelDiv.contains(event.target)) {
           labelDiv.classList.remove('active');
           controls.autoRotate = true;
