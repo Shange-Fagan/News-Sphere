@@ -770,6 +770,32 @@ context2.fillRect(0, 0, canvas2.width, canvas2.height);
 
 // Create a texture from the canvas
 const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
+	  const shaderMaterial2 = new THREE.ShaderMaterial({
+  uniforms: {
+    dayTexture: { type: 't', value: dayTexture },
+    nightTexture: { type: 't', value: nightTexture },
+    transition: { value: 0 } // 0 for day, 1 for night
+  },
+  vertexShader: `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: `
+    uniform sampler2D dayTexture;
+    uniform sampler2D nightTexture;
+    uniform float transition; // Smooth transition factor
+    varying vec2 vUv;
+    void main() {
+      vec4 day = texture2D(dayTexture, vUv);
+      vec4 night = texture2D(nightTexture, vUv);
+      gl_FragColor = mix(day, night, transition);
+    }
+  `,
+});
+
 	// Set the background of the scene
 	  scene.add(cloudMesh);
 	scene.background = daybackgroundTexture;
