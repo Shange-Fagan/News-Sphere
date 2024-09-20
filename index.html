@@ -840,7 +840,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
         document.getElementById("nightTicker").style.display = "block";
       } else {
 	      // Ensure 'rt' is defined before accessing it
-        if (rt) {
+        if (rt && rt.texture) {
 	// Set the transition to day
         new TWEEN.Tween(shaderMaterial2.uniforms.transition)
         .to({ value: 0 }, 7000)  // Smooth transition over 2 seconds
