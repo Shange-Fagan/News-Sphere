@@ -1283,8 +1283,11 @@ window.addEventListener('pointerdown', (event) => {
     // Update Label Content
     const labelDiv = document.getElementById(`label-${data.id}`);
     const contentDiv = labelDiv.querySelector('.content');
-    contentDiv.innerHTML = `<iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>`;
-
+	  // Add loading spinner inside the content div
+    contentDiv.innerHTML = `
+    <div class="loading-spinner"></div>
+    <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
+    `;
     // Stop the globe's autorotation and disable OrbitControls
     controls.autoRotate = false;
     controls.enabled = false; // Disable the controls while interacting with the iframe
