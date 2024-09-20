@@ -817,7 +817,7 @@ const dayBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth
 const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
   
   // Globe Material
-	const sphereWidth = 5.1;
+	const sphereWidth = 10.1;
   const sphereHeight = 256;
   const sphereDepth = 256;
   const geometry = new THREE.SphereGeometry(
@@ -826,7 +826,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     sphereDepth
   );
 
-  const sphereWidth2 = 5.0999;
+  const sphereWidth2 = 10.0999;
   const sphereHeight2 = 256;
   const sphereDepth2 = 256;
   const geometry2 = new THREE.SphereGeometry(
@@ -900,7 +900,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
   });
 
   const atmosphere = new THREE.Mesh(
-    new THREE.SphereGeometry(5.0999, 256, 256),
+    new THREE.SphereGeometry(10.0999, 256, 256),
     new THREE.ShaderMaterial({
       vertexShader: `
                 varying vec3 vertexNormal;
