@@ -761,7 +761,7 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
         // Set a dark blue color for the night theme background
         //scene.background = new THREE.Color(0x000033); // Dark blue
 	scene.background = nightbackgroundTexture;
-	scene.add(starField); // Add stars for the night
+	//scene.add(starField); // Add stars for the night
         scene.remove(cloudMesh); // Remove clouds for night
         markerMaterial.color.set(nightmarkerMaterial);
         document.getElementById("toggleButton").textContent = "Switch to Day";
@@ -773,7 +773,7 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
         // Set a solid blue color for the background
         //scene.background = new THREE.Color(0x87CEEB); // Light sky blue
 	scene.background = daybackgroundTexture;
-	scene.remove(starField); // Remove stars in the day
+	//scene.remove(starField); // Remove stars in the day
         scene.add(cloudMesh); // Add clouds back for day
         markerMaterial.color.set(daymarkerMaterial);
         document.getElementById("toggleButton").textContent = "Switch to Night";
