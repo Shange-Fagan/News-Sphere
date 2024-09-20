@@ -1282,6 +1282,8 @@ window.addEventListener('pointerdown', (event) => {
     // Update Label Content
     const labelDiv = document.getElementById(`label-${data.id}`);
     const contentDiv = labelDiv.querySelector('.content');
+	  // Check if the iframe is related to the marker (specific iframe)
+    if (!contentDiv.querySelector('iframe')) {
 	  // Add loading spinner inside the content div
     contentDiv.innerHTML = `
     <div class="loading-spinner"></div>
@@ -1322,6 +1324,7 @@ labelDiv.classList.add('active');
       }
     }, { once: true });
   }
+}
 });
 	  // Loading spinner functionality
 /*document.getElementById('labels-container').addEventListener('click', function() {
