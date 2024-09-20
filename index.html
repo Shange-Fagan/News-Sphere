@@ -512,7 +512,7 @@ iframe::-webkit-scrollbar {
   controls.minDistance = 15;
   controls.maxDistance = 25;
   controls.autoRotate = true;
-  controls.autoRotateSpeed = 0.5;
+  controls.autoRotateSpeed = 0.25;
 
 
    // Lighting - Reduced intensity to reduce glare
@@ -669,7 +669,10 @@ function checkTexturesLoaded() {
     } else {
         camera.position.set(20, 0.5, 15).setLength(16);    // Default z position for desktop or larger screens
     }
-
+	  
+if (window.innerWidth <= 768) {  // This checks for mobile devices based on screen width
+        scene.remove(cloudMesh); // Remove clouds for night
+    }
     //let dayTexture, nightTexture;
     //let isDay = true; // Track whether it's currently day or night
 
