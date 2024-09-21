@@ -1101,14 +1101,15 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 	atmosphere.scale.set(1, 1, 1);	
 	  
   const material2 = new THREE.MeshPhongMaterial({
-  specular: 0x111111,
+  //specular: 0x111111,
   //shininess: 5,
-  shininess: 10,
+  shininess: 50,
   map: dayTexture, // Start with day texture
   specularMap: textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png"),
   bumpMap: dayBumpMap, // Start with day bump map
   bumpScale: 0,
   blending: THREE.AdditiveBlending,
+  specular: 0x222222,
 });
 	  let globe = new THREE.Mesh(geometry2, material);
   let globe2 = new THREE.Mesh(geometry, material2);
