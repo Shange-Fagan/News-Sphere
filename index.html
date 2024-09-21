@@ -665,7 +665,34 @@ document.getElementById('closeNewsButton').addEventListener('click', function() 
 document.getElementById('newsOverlaynighttheme').style.display = 'none';
 document.getElementById('closeNewsButton').style.display = 'none';  // Close the news iframe
 });
-	  
+
+	  // Function to close the news overlay when clicking outside the iframe
+function closeNewsOverlayOnClick(event) {
+  const newsOverlay = document.getElementById('newsOverlay');
+  const newsIframe = document.getElementById('newsIframe');
+
+  // Check if the click was outside the news overlay iframe
+  if (newsOverlay.style.display === 'block' && !newsIframe.contains(event.target)) {
+    newsOverlay.style.display = 'none'; // Hide the overlay
+  }
+}
+
+// Function to close the night theme overlay
+function closeNewsOverlayNightOnClick(event) {
+  const newsOverlayNight = document.getElementById('newsOverlaynighttheme');
+  const newsIframeNight = document.getElementById('newsIframenighttheme');
+
+  // Check if the click was outside the night theme overlay iframe
+  if (newsOverlayNight.style.display === 'block' && !newsIframeNight.contains(event.target)) {
+    newsOverlayNight.style.display = 'none'; // Hide the night theme overlay
+  }
+}
+
+// Add event listeners to close overlays when clicking outside
+document.addEventListener('click', closeNewsOverlayOnClick);
+document.addEventListener('click', closeNewsOverlayNightOnClick);
+
+
 const cloudTexture = new THREE.TextureLoader().load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png')
   const cloudMaterial = new THREE.ShaderMaterial({
   uniforms: {
