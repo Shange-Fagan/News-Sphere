@@ -897,7 +897,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 	    document.getElementById("mobileTicker").style.display = "block";
 	    // Set the transition to night
         new TWEEN.Tween(shaderMaterial2.uniforms.transition)
-        .to({ value: 1 }, 7000)  // Smooth transition over 2 seconds
+        .to({ value: 1 }, 20000)  // Smooth transition over 2 seconds
         .start();
         globe2.material.map = nightTexture;
         //scene.background = nightCubeMap;
@@ -911,7 +911,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     } else {
         // Set the transition to night
         new TWEEN.Tween(shaderMaterial2.uniforms.transition)
-        .to({ value: 1 }, 7000)  // Smooth transition over 2 seconds
+        .to({ value: 1 }, 20000)  // Smooth transition over 2 seconds
         .start();
         globe2.material.map = nightTexture;
         //scene.background = nightCubeMap;
@@ -934,7 +934,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 	    document.getElementById("mobileTicker").style.display = "block";
 	    // Set the transition to day
         new TWEEN.Tween(shaderMaterial2.uniforms.transition)
-        .to({ value: 0 }, 7000)  // Smooth transition over 2 seconds
+        .to({ value: 0 }, 20000)  // Smooth transition over 2 seconds
         .start();
         globe2.material.map = dayTexture;
         //scene.background = dayCubeMap;
@@ -948,7 +948,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     } else {
 	// Set the transition to day
         new TWEEN.Tween(shaderMaterial2.uniforms.transition)
-        .to({ value: 0 }, 7000)  // Smooth transition over 2 seconds
+        .to({ value: 0 }, 20000)  // Smooth transition over 2 seconds
         .start();
         globe2.material.map = dayTexture;
         //scene.background = dayCubeMap;
