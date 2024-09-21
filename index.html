@@ -666,7 +666,7 @@ document.getElementById('newsOverlaynighttheme').style.display = 'none';
 document.getElementById('closeNewsButton').style.display = 'none';  // Close the news iframe
 });
 	  
-/*const cloudTexture = new THREE.TextureLoader().load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png')
+const cloudTexture = new THREE.TextureLoader().load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png')
   const cloudMaterial = new THREE.ShaderMaterial({
   uniforms: {
     cloudTexture: { type: 't', value: cloudTexture }
@@ -698,7 +698,7 @@ const cloudMesh = new THREE.Mesh(cloudGeo, cloudMaterial);
 //cloudMesh.position.set(-100, -100, -500);// Add clouds after texture is loaded
 //cloudMesh.position.set(-200, -100, -700);// Add clouds after texture is loaded
   cloudMesh.position.set(-300, -100, -1000);// Add clouds after texture is loaded
-  //scene.add(cloudMesh);*/
+  //scene.add(cloudMesh);
 	  const daymarkerMaterial = '#ff3232';
   const nightmarkerMaterial = '#FE8C02'
 const markerMaterial = new THREE.MeshBasicMaterial({
@@ -885,7 +885,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 });
 
 	// Set the background of the scene
-        //scene.add(cloudMesh);
+        scene.add(cloudMesh);
 	scene.background = daybackgroundTexture;
 // Toggle between Day/Night Textures and Cube Map
     function toggleDayNight() {
@@ -905,7 +905,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
         //scene.background = new THREE.Color(0x000033); // Dark blue
 	scene.background = nightbackgroundTexture;
 	//scene.add(starField); // Add stars for the night
-        //scene.remove(cloudMesh); // Remove clouds for night
+        scene.remove(cloudMesh); // Remove clouds for night
         markerMaterial.color.set(nightmarkerMaterial);
         document.getElementById("toggleButton").textContent = "Switch to Day";
     } else {
@@ -919,7 +919,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
         //scene.background = new THREE.Color(0x000033); // Dark blue
 	scene.background = nightbackgroundTexture;
 	//scene.add(starField); // Add stars for the night
-        //scene.remove(cloudMesh); // Remove clouds for night
+        scene.remove(cloudMesh); // Remove clouds for night
         markerMaterial.color.set(nightmarkerMaterial);
         document.getElementById("toggleButton").textContent = "Switch to Day";
         document.getElementById("dayTicker").style.display = "none";
@@ -942,7 +942,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
         //scene.background = new THREE.Color(0x87CEEB); // Light sky blue
 	scene.background = daybackgroundTexture;
 	//scene.remove(starField); // Remove stars in the day
-        //scene.add(cloudMesh); // Add clouds back for day
+        scene.add(cloudMesh); // Add clouds back for day
         markerMaterial.color.set(daymarkerMaterial);
         document.getElementById("toggleButton").textContent = "Switch to Night";
     } else {
@@ -956,7 +956,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
         //scene.background = new THREE.Color(0x87CEEB); // Light sky blue
 	scene.background = daybackgroundTexture;
 	//scene.remove(starField); // Remove stars in the day
-        //scene.add(cloudMesh); // Add clouds back for day
+        scene.add(cloudMesh); // Add clouds back for day
         markerMaterial.color.set(daymarkerMaterial);
         document.getElementById("toggleButton").textContent = "Switch to Night";
         document.getElementById("dayTicker").style.display = "block";
