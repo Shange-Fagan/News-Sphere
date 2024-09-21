@@ -890,6 +890,12 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 // Toggle between Day/Night Textures and Cube Map
     function toggleDayNight() {
       if (isDay) {
+	        // Check if the user is on a mobile device
+    if (window.innerWidth <= 768) {  // This checks for mobile devices based on screen width
+        document.getElementById("nightTicker").style.display = "none;
+	    document.getElementById("dayTicker").style.display = "none";
+	    document.getElementById("mobileTicker").style.display = "block";
+    } else {
         // Set the transition to night
         new TWEEN.Tween(shaderMaterial2.uniforms.transition)
         .to({ value: 1 }, 7000)  // Smooth transition over 2 seconds
@@ -905,7 +911,15 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
         document.getElementById("toggleButton").textContent = "Switch to Day";
         document.getElementById("dayTicker").style.display = "none";
         document.getElementById("nightTicker").style.display = "block";
+    }
+        
       } else {
+	      // Check if the user is on a mobile device
+    if (window.innerWidth <= 768) {  // This checks for mobile devices based on screen width
+        document.getElementById("nightTicker").style.display = "none;
+	    document.getElementById("dayTicker").style.display = "none";
+	    document.getElementById("mobileTicker").style.display = "block";
+    } else {
 	// Set the transition to day
         new TWEEN.Tween(shaderMaterial2.uniforms.transition)
         .to({ value: 0 }, 7000)  // Smooth transition over 2 seconds
@@ -922,6 +936,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
         document.getElementById("dayTicker").style.display = "block";
         document.getElementById("nightTicker").style.display = "none";
 		}
+      }
       globe2.material.needsUpdate = true;
       isDay = !isDay;
     }
