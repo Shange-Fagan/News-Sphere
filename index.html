@@ -63,6 +63,17 @@ a, button, input, select, iframe {
       z-index: 9999;
     
 }
+	  #mobileTicker {
+  display: none; /* Show day ticker by default */
+      position: fixed;
+      top: 0vh;
+      color: teal;
+      width: 100%;
+      font-family: Monospace;
+       text-align: center;
+      z-index: 9999;
+    
+}
 	  /* Responsive Ticker for Mobile */
     /*@media (max-width: 768px) {
       #dayTicker, #nightTicker {
@@ -395,11 +406,11 @@ iframe::-webkit-scrollbar {
         top: 55px;
       }
 
-      #dayTicker, #nightTicker {
-        height: 60px; /* Reduce height for mobile */
-        font-size: 12px;
+      /*#dayTicker, #nightTicker {
+        height: 60px;*/ /* Reduce height for mobile */
+        /*font-size: 12px;
 	width: 100vw;
-      }
+      }/*
 	    #mobileTicker {
         height: 60px; /* Reduce height for mobile */
         font-size: 12px;
