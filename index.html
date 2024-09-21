@@ -1470,7 +1470,7 @@ window.addEventListener('pointerdown', (event) => {
     // Check if the iframe is related to the marker (specific iframe)
     if (!contentDiv.querySelector('iframe')) {
       contentDiv.innerHTML = `
-        <div class="loading-spinner"style=" pointer-events:none;"></div>
+        <div class="loading-spinner" style="pointer-events:none;"></div>
         <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
       `;
 
@@ -1492,10 +1492,8 @@ window.addEventListener('pointerdown', (event) => {
         activeLabel = labelDiv;
       });
 
-      // Remove previous `pointerdown` listeners if any
+      // Ensure the close event is correctly managed
       document.removeEventListener('pointerdown', closeIframe);
-
-      // Add event listener to close iframe when clicking outside
       document.addEventListener('pointerdown', closeIframe);
     }
   }
@@ -1503,13 +1501,14 @@ window.addEventListener('pointerdown', (event) => {
 
 // Function to close the active iframe if clicked outside
 function closeIframe(event) {
-  if (activeLabel && !activeLabel.contains(event.target)) {
+  if (activeLabel && !activeLabel.contains(event.target) && !event.target.classList.contains('close-button')) {
     activeLabel.classList.remove('active');
     controls.autoRotate = true;
     controls.enabled = true;
-   // activeLabel = null;
+    activeLabel = null; // Clear the active label
   }
 }
+
 
 	  // Loading spinner functionality
 /*document.getElementById('labels-container').addEventListener('click', function() {
