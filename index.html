@@ -931,6 +931,8 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
         document.getElementById("toggleButton").textContent = "Switch to Day";
         document.getElementById("dayTicker").style.display = "none";
         document.getElementById("nightTicker").style.display = "block";
+	    	document.getElementById("mobileTicker").style.display = "none";
+
     }
         
       } else {
@@ -968,6 +970,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
         document.getElementById("toggleButton").textContent = "Switch to Night";
         document.getElementById("dayTicker").style.display = "block";
         document.getElementById("nightTicker").style.display = "none";
+	document.getElementById("mobileTicker").style.display = "none";
 		}
       }
       globe2.material.needsUpdate = true;
