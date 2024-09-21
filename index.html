@@ -86,6 +86,14 @@ a, button, input, select, iframe {
       #mobileTicker {
         display: none;
       }
+		  @media (max-width: 768px) {
+      #mobileTicker {
+        font-size: 10px;
+	width: 60px;
+        height: 60px;
+        top: 0;
+      }
+    }
     }
 /* Marker Labels */
 /*.marker-label {
@@ -388,6 +396,11 @@ iframe::-webkit-scrollbar {
       }
 
       #dayTicker, #nightTicker {
+        height: 60px; /* Reduce height for mobile */
+        font-size: 12px;
+	width: 100vw;
+      }
+	    #mobileTicker {
         height: 60px; /* Reduce height for mobile */
         font-size: 12px;
 	width: 100vw;
