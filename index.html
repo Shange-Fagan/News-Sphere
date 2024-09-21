@@ -1480,6 +1480,9 @@ window.addEventListener('pointerdown', (event) => {
       labelDiv.classList.add('active');
       controls.autoRotate = false; // Disable globe rotation
       controls.enabled = false; // Disable globe controls while iframe is active
+	  
+	  // Disable OrbitControls temporarily to prevent the globe from "sticking" to the mouse
+      renderer.domElement.style.pointerEvents = 'none';
 
       iframe.addEventListener('load', () => {
         spinner.style.display = 'none';
@@ -1494,8 +1497,10 @@ window.addEventListener('pointerdown', (event) => {
         activeLabel = labelDiv;
       });
 
-      // Ensure the close event is correctly managed
+      // Remove previous `pointerdown` listeners if any
       document.removeEventListener('pointerdown', closeIframe);
+
+      // Add event listener to close iframe when clicking outside
       document.addEventListener('pointerdown', closeIframe);
     }
   }
@@ -1507,9 +1512,11 @@ function closeIframe(event) {
     activeLabel.classList.remove('active');
     controls.autoRotate = true; // Re-enable globe auto-rotation
     controls.enabled = true; // Re-enable globe controls
+    renderer.domElement.style.pointerEvents = 'all'; // Re-enable interaction with the globe
     activeLabel = null; // Clear the active label
   }
 }
+
 
 
 	  // Loading spinner functionality
