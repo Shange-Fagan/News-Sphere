@@ -989,7 +989,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     sphereDepth
   );
 
-  const sphereWidth2 = 5.099;
+  const sphereWidth2 = 5;
   const sphereHeight2 = 32.1;
   const sphereDepth2 = 32.1;
   const geometry2 = new THREE.SphereGeometry(
@@ -1063,7 +1063,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
   });
 
   const atmosphere = new THREE.Mesh(
-    new THREE.SphereGeometry(5, 32.1, 32.1),
+    new THREE.SphereGeometry(5.1, 32.1, 32.1),
     new THREE.ShaderMaterial({
       vertexShader: `
                 varying vec3 vertexNormal;
@@ -1082,13 +1082,13 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
                      gl_FragColor = vec4(0.3, 0.6, 1.0, 1.0) * intensity;
                     }
                     `,
-	    transparent: true, 
+	    //transparent: true, 
       blending: THREE.AdditiveBlending,
       side: THREE.BackSide,
     })
   );
 	  
-	atmosphere.scale.set(1.025, 1.025, 1.025);	
+	atmosphere.scale.set(1.1, 1.1, 1.1);	
 	  
   const material2 = new THREE.MeshPhongMaterial({
   specular: 0x111111,
