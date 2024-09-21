@@ -1478,6 +1478,8 @@ window.addEventListener('pointerdown', (event) => {
       const spinner = contentDiv.querySelector('.loading-spinner');
 
       labelDiv.classList.add('active');
+      controls.autoRotate = false; // Disable globe rotation
+      controls.enabled = false; // Disable globe controls while iframe is active
 
       iframe.addEventListener('load', () => {
         spinner.style.display = 'none';
@@ -1503,8 +1505,8 @@ window.addEventListener('pointerdown', (event) => {
 function closeIframe(event) {
   if (activeLabel && !activeLabel.contains(event.target) && !event.target.classList.contains('close-button')) {
     activeLabel.classList.remove('active');
-    controls.autoRotate = true;
-    controls.enabled = true;
+    controls.autoRotate = true; // Re-enable globe auto-rotation
+    controls.enabled = true; // Re-enable globe controls
     activeLabel = null; // Clear the active label
   }
 }
